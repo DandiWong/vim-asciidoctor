@@ -1,0 +1,138 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+<Plug>(AsciidoctorFold)	ftplugin/asciidoctor.vim	/^nnoremap <silent><buffer> <Plug>(AsciidoctorFold) :<C-u>call <sid>asciidoctor_fold(v:count)<CR>$/;"	kind:m	line:148
+<Plug>(AsciidoctorSectionDemote)	ftplugin/asciidoctor.vim	/^nnoremap <silent><buffer> <Plug>(AsciidoctorSectionDemote) :<C-u>call asciidoctor#demote_section()<CR>$/;"	kind:m	line:152
+<Plug>(AsciidoctorSectionPromote)	ftplugin/asciidoctor.vim	/^nnoremap <silent><buffer> <Plug>(AsciidoctorSectionPromote) :<C-u>call asciidoctor#promote_section()<CR>$/;"	kind:m	line:151
+AsciidoctorFold	ftplugin/asciidoctor.vim	/^    function! AsciidoctorFold() "{{{$/;"	kind:f	line:177
+AsciidoctorOpenDOCX	ftplugin/asciidoctor.vim	/^command! -buffer AsciidoctorOpenDOCX call asciidoctor#open_file(s:get_fname(".docx"))$/;"	kind:c	line:99
+AsciidoctorOpenHTML	ftplugin/asciidoctor.vim	/^command! -buffer AsciidoctorOpenHTML call asciidoctor#open_file(s:get_fname(".html"))$/;"	kind:c	line:98
+AsciidoctorOpenMARKDOWN	ftplugin/asciidoctor.vim	/^command! -buffer AsciidoctorOpenMARKDOWN call asciidoctor#open_file(s:get_fname(".md"))$/;"	kind:c	line:100
+AsciidoctorOpenPDF	ftplugin/asciidoctor.vim	/^command! -buffer AsciidoctorOpenPDF  call asciidoctor#open_file(s:get_fname(".pdf"))$/;"	kind:c	line:97
+AsciidoctorOpenRAW	ftplugin/asciidoctor.vim	/^command! -buffer AsciidoctorOpenRAW  call asciidoctor#open_file(s:get_fname())$/;"	kind:c	line:96
+AsciidoctorPasteImage	ftplugin/asciidoctor.vim	/^command! -buffer AsciidoctorPasteImage :call asciidoctor#pasteImage()$/;"	kind:c	line:102
+[[	ftplugin/asciidoctor.vim	/^nnoremap <silent><buffer> [[ :<c-u>call <sid>section(1, v:count1)<CR>$/;"	kind:m	line:110
+]]	ftplugin/asciidoctor.vim	/^nnoremap <silent><buffer> ]] :<c-u>call <sid>section(0, v:count1)<CR>$/;"	kind:m	line:109
+ah	ftplugin/asciidoctor.vim	/^onoremap <silent><buffer>ah :<C-u>call asciidoctor#header_textobj(v:false)<CR>$/;"	kind:m	line:116
+al	ftplugin/asciidoctor.vim	/^onoremap <silent><buffer>al :<C-u>call asciidoctor#delimited_block_textobj(v:false)<CR>$/;"	kind:m	line:122
+asciidoctor#complete_bibliography	autoload/asciidoctor.vim	/^func! asciidoctor#complete_bibliography(findstart, base)$/;"	kind:f	line:136
+asciidoctor#delimited_block_textobj	autoload/asciidoctor.vim	/^func! asciidoctor#delimited_block_textobj(inner) abort$/;"	kind:f	line:228
+asciidoctor#demote_section	autoload/asciidoctor.vim	/^func! asciidoctor#demote_section() abort$/;"	kind:f	line:367
+asciidoctor#detect_pdf_theme	autoload/asciidoctor.vim	/^func! asciidoctor#detect_pdf_theme()$/;"	kind:f	line:182
+asciidoctor#detect_source_language	autoload/asciidoctor.vim	/^func! asciidoctor#detect_source_language()$/;"	kind:f	line:109
+asciidoctor#header_textobj	autoload/asciidoctor.vim	/^func! asciidoctor#header_textobj(inner) abort$/;"	kind:f	line:203
+asciidoctor#open_file	autoload/asciidoctor.vim	/^func! asciidoctor#open_file(filename)$/;"	kind:f	line:266
+asciidoctor#open_url	autoload/asciidoctor.vim	/^func! asciidoctor#open_url(...) abort$/;"	kind:f	line:281
+asciidoctor#pasteImage	autoload/asciidoctor.vim	/^func! asciidoctor#pasteImage() abort$/;"	kind:f	line:84
+asciidoctor#promote_section	autoload/asciidoctor.vim	/^func! asciidoctor#promote_section() abort$/;"	kind:f	line:339
+asciidoctor#refresh_source_language_hl	autoload/asciidoctor.vim	/^func! asciidoctor#refresh_source_language_hl()$/;"	kind:f	line:125
+asciidoctorExtractIndex	autoload/asciidoctor.vim	/^func! s:asciidoctorExtractIndex(filename)$/;"	kind:f	line:57
+asciidoctorGenerateImageName	autoload/asciidoctor.vim	/^func! s:asciidoctorGenerateImageName(path)$/;"	kind:f	line:74
+asciidoctorImagesDir	autoload/asciidoctor.vim	/^func! s:asciidoctorImagesDir()$/;"	kind:f	line:22
+asciidoctorImagesPath	autoload/asciidoctor.vim	/^func! s:asciidoctorImagesPath()$/;"	kind:f	line:34
+asciidoctorListImages	autoload/asciidoctor.vim	/^func! s:asciidoctorListImages(path)$/;"	kind:f	line:46
+asciidoctor_fold	ftplugin/asciidoctor.vim	/^func! s:asciidoctor_fold(count) abort$/;"	kind:f	line:136
+asciidoctor_source_language	ftplugin/asciidoctor.vim	/^augroup asciidoctor_source_language$/;"	kind:a	line:284
+b:commentary_startofline	ftplugin/asciidoctor.vim	/^let b:commentary_startofline = 1$/;"	kind:v	line:57
+b:current_syntax	syntax/asciidoctor.vim	/^let b:current_syntax = "asciidoctor"$/;"	kind:v	line:315
+b:did_ftplugin	ftplugin/asciidoctor.vim	/^let b:did_ftplugin = 1$/;"	kind:v	line:10
+b:did_indent	indent/asciidoctor.vim	/^let b:did_indent = 1$/;"	kind:v	line:4
+b:undo_ftplugin	ftplugin/asciidoctor.vim	/^    let b:undo_ftplugin .= "|" . s:undo_opts . s:undo_cmds . s:undo_maps . s:undo_vars$/;"	kind:v	line:43
+b:undo_ftplugin	ftplugin/asciidoctor.vim	/^    let b:undo_ftplugin = s:undo_opts . s:undo_cmds . s:undo_maps . s:undo_vars$/;"	kind:v	line:45
+b:undo_indent	indent/asciidoctor.vim	/^    let b:undo_indent .= "|" . s:undo_opts$/;"	kind:v	line:9
+b:undo_indent	indent/asciidoctor.vim	/^    let b:undo_indent = s:undo_opts$/;"	kind:v	line:11
+current_compiler	compiler/asciidoctor2docx.vim	/^let current_compiler = "Asciidoctor2DOCX"$/;"	kind:v	line:9
+current_compiler	compiler/asciidoctor2html.vim	/^let current_compiler = "Asciidoctor2HTML"$/;"	kind:v	line:9
+current_compiler	compiler/asciidoctor2markdown.vim	/^let current_compiler = "Asciidoctor2MARKDOWN"$/;"	kind:v	line:9
+current_compiler	compiler/asciidoctor2md.vim	/^let current_compiler = "Asciidoctor2Markdown"$/;"	kind:v	line:9
+current_compiler	compiler/asciidoctor2pdf.vim	/^let current_compiler = "Asciidoctor2PDF"$/;"	kind:v	line:9
+data_dir_param	compiler/asciidoctor2docx.vim	/^    let data_dir_param = " --data-dir=" . shellescape(fnamemodify(s:asciidoctor_pandoc_data_dir, ':p:h'))$/;"	kind:v	line:25
+data_dir_param	compiler/asciidoctor2docx.vim	/^    let data_dir_param = ''$/;"	kind:v	line:27
+file_name	compiler/asciidoctor2docx.vim	/^    let file_name = theme_name . '-reference.docx'$/;"	kind:v	line:38
+full_path	compiler/asciidoctor2docx.vim	/^    let full_path = expand(s:asciidoctor_pandoc_data_dir . '\/' . file_name, 1)$/;"	kind:v	line:39
+g:asciidoctor_fenced_languages	syntax/asciidoctor.vim	/^    let g:asciidoctor_fenced_languages = []$/;"	kind:v	line:18
+g:asciidoctor_img_paste_command	ftplugin/asciidoctor.vim	/^        let g:asciidoctor_img_paste_command = 'gm convert clipboard: %s%s'$/;"	kind:v	line:261
+g:asciidoctor_img_paste_command	ftplugin/asciidoctor.vim	/^        let g:asciidoctor_img_paste_command = 'gm convert clipboard: %s%s'$/;"	kind:v	line:265
+g:asciidoctor_img_paste_command	ftplugin/asciidoctor.vim	/^        let g:asciidoctor_img_paste_command = 'pngpaste %s%s'$/;"	kind:v	line:263
+g:asciidoctor_img_paste_pattern	ftplugin/asciidoctor.vim	/^    let g:asciidoctor_img_paste_pattern = 'img_%s_%s.png'$/;"	kind:v	line:274
+g:asciidoctor_opener	ftplugin/asciidoctor.vim	/^            let g:asciidoctor_opener = ':silent !start ""'$/;"	kind:v	line:162
+g:asciidoctor_opener	ftplugin/asciidoctor.vim	/^            let g:asciidoctor_opener = ':silent !start'$/;"	kind:v	line:164
+g:asciidoctor_opener	ftplugin/asciidoctor.vim	/^        let g:asciidoctor_opener = ":!open"$/;"	kind:v	line:167
+g:asciidoctor_opener	ftplugin/asciidoctor.vim	/^        let g:asciidoctor_opener = ":!xdg-open"$/;"	kind:v	line:171
+g:asciidoctor_opener	ftplugin/asciidoctor.vim	/^        let g:asciidoctor_opener = ":silent !cmd.exe \/C start"$/;"	kind:v	line:169
+g:loaded_asciidoctor_autoload	autoload/asciidoctor.vim	/^let g:loaded_asciidoctor_autoload = 1$/;"	kind:v	line:7
+get_fname	ftplugin/asciidoctor.vim	/^func! s:get_fname(...)$/;"	kind:f	line:294
+gf	ftplugin/asciidoctor.vim	/^nnoremap <silent><buffer> gf :<c-u>call asciidoctor#open_url("edit")<CR>$/;"	kind:m	line:127
+gx	ftplugin/asciidoctor.vim	/^nnoremap <silent><buffer> gx :<c-u>call asciidoctor#open_url()<CR>$/;"	kind:m	line:126
+ih	ftplugin/asciidoctor.vim	/^onoremap <silent><buffer>ih :<C-u>call asciidoctor#header_textobj(v:true)<CR>$/;"	kind:m	line:115
+il	ftplugin/asciidoctor.vim	/^onoremap <silent><buffer>il :<C-u>call asciidoctor#delimited_block_textobj(v:true)<CR>$/;"	kind:m	line:121
+main_syntax	syntax/asciidoctor.vim	/^    let main_syntax = 'asciidoctor'$/;"	kind:v	line:14
+other_params	compiler/asciidoctor2docx.vim	/^    let other_params = ' ' . s:asciidoctor_pandoc_other_params$/;"	kind:v	line:51
+other_params	compiler/asciidoctor2docx.vim	/^    let other_params = ''$/;"	kind:v	line:53
+read_all_bibtex	autoload/asciidoctor.vim	/^func! s:read_all_bibtex()$/;"	kind:f	line:170
+read_bibtex	autoload/asciidoctor.vim	/^func! s:read_bibtex(file)$/;"	kind:f	line:158
+reference_doc_param	compiler/asciidoctor2docx.vim	/^        let reference_doc_param = ' --reference-doc=' . shellescape(full_path)$/;"	kind:v	line:42
+reference_doc_param	compiler/asciidoctor2docx.vim	/^        let reference_doc_param = ''$/;"	kind:v	line:44
+reference_doc_param	compiler/asciidoctor2docx.vim	/^    let reference_doc_param = ' --reference-doc=' . s:asciidoctor_pandoc_reference_doc$/;"	kind:v	line:32
+s:asciidoctor_executable	compiler/asciidoctor2docx.vim	/^let s:asciidoctor_executable = get(g:, 'asciidoctor_executable', 'asciidoctor')$/;"	kind:v	line:19
+s:asciidoctor_executable	compiler/asciidoctor2html.vim	/^let s:asciidoctor_executable = get(g:, 'asciidoctor_executable', 'asciidoctor')$/;"	kind:v	line:31
+s:asciidoctor_executable	compiler/asciidoctor2markdown.vim	/^let s:asciidoctor_executable = get(g:, 'asciidoctor_executable', 'asciidoctor')$/;"	kind:v	line:19
+s:asciidoctor_executable	compiler/asciidoctor2md.vim	/^let s:asciidoctor_executable = get(g:, 'asciidoctor_executable', 'asciidoctor')$/;"	kind:v	line:19
+s:asciidoctor_fold_options	ftplugin/asciidoctor.vim	/^    let s:asciidoctor_fold_options = get(g:, 'asciidoctor_fold_options', 0)$/;"	kind:v	line:253
+s:asciidoctor_pandoc_data_dir	compiler/asciidoctor2docx.vim	/^let s:asciidoctor_pandoc_data_dir = get(g:, 'asciidoctor_pandoc_data_dir', '')$/;"	kind:v	line:23
+s:asciidoctor_pandoc_executable	compiler/asciidoctor2docx.vim	/^let s:asciidoctor_pandoc_executable = get(g:, 'asciidoctor_pandoc_executable', 'pandoc')$/;"	kind:v	line:21
+s:asciidoctor_pandoc_executable	compiler/asciidoctor2markdown.vim	/^let s:asciidoctor_pandoc_executable = get(g:, 'asciidoctor_pandoc_executable', 'pandoc')$/;"	kind:v	line:21
+s:asciidoctor_pandoc_executable	compiler/asciidoctor2md.vim	/^let s:asciidoctor_pandoc_executable = get(g:, 'asciidoctor_pandoc_executable', 'pandoc')$/;"	kind:v	line:21
+s:asciidoctor_pandoc_other_params	compiler/asciidoctor2docx.vim	/^let s:asciidoctor_pandoc_other_params = get(g:, 'asciidoctor_pandoc_other_params', '')$/;"	kind:v	line:49
+s:asciidoctor_pandoc_reference_doc	compiler/asciidoctor2docx.vim	/^let s:asciidoctor_pandoc_reference_doc = get(g:, 'asciidoctor_pandoc_reference_doc', '')$/;"	kind:v	line:30
+s:asciidoctor_pdf_executable	compiler/asciidoctor2pdf.vim	/^let s:asciidoctor_pdf_executable = get(g:, 'asciidoctor_pdf_executable', 'asciidoctor-pdf')$/;"	kind:v	line:45
+s:cd	compiler/asciidoctor2docx.vim	/^let s:cd = "cd ".shellescape(expand("%:p:h"))$/;"	kind:v	line:70
+s:cd	compiler/asciidoctor2markdown.vim	/^let s:cd = "cd ".shellescape(expand("%:p:h"))$/;"	kind:v	line:67
+s:cd	compiler/asciidoctor2md.vim	/^let s:cd = "cd ".shellescape(expand("%:p:h"))$/;"	kind:v	line:70
+s:css_name	compiler/asciidoctor2html.vim	/^    let s:css_name = ""$/;"	kind:v	line:26
+s:css_name	compiler/asciidoctor2html.vim	/^    let s:css_name = '-a stylesheet='.shellescape(g:asciidoctor_css)$/;"	kind:v	line:28
+s:css_path	compiler/asciidoctor2html.vim	/^    let s:css_path = ""$/;"	kind:v	line:20
+s:css_path	compiler/asciidoctor2html.vim	/^    let s:css_path = '-a stylesdir='.shellescape(fnamemodify(g:asciidoctor_css_path, ":p:h"))$/;"	kind:v	line:22
+s:extensions	compiler/asciidoctor2docx.vim	/^    let s:extensions = ""$/;"	kind:v	line:14
+s:extensions	compiler/asciidoctor2docx.vim	/^    let s:extensions = "-r ".join(g:asciidoctor_extensions, ' -r ')$/;"	kind:v	line:16
+s:extensions	compiler/asciidoctor2html.vim	/^    let s:extensions = ""$/;"	kind:v	line:14
+s:extensions	compiler/asciidoctor2html.vim	/^    let s:extensions = "-r ".join(g:asciidoctor_extensions, ' -r ')$/;"	kind:v	line:16
+s:extensions	compiler/asciidoctor2markdown.vim	/^    let s:extensions = ""$/;"	kind:v	line:14
+s:extensions	compiler/asciidoctor2markdown.vim	/^    let s:extensions = "-r ".join(g:asciidoctor_extensions, ' -r ')$/;"	kind:v	line:16
+s:extensions	compiler/asciidoctor2md.vim	/^    let s:extensions = ""$/;"	kind:v	line:14
+s:extensions	compiler/asciidoctor2md.vim	/^    let s:extensions = "-r ".join(g:asciidoctor_extensions, ' -r ')$/;"	kind:v	line:16
+s:extensions	compiler/asciidoctor2pdf.vim	/^    let s:extensions = ""$/;"	kind:v	line:40
+s:extensions	compiler/asciidoctor2pdf.vim	/^    let s:extensions = "-r ".join(g:asciidoctor_pdf_extensions, ' -r ')$/;"	kind:v	line:42
+s:filename	compiler/asciidoctor2html.vim	/^let s:filename = shellescape(get(g:, 'asciidoctor_use_fullpath', v:true) ? expand("%:p") : expand("%:t"))$/;"	kind:v	line:33
+s:filename	compiler/asciidoctor2pdf.vim	/^let s:filename = shellescape(get(g:, 'asciidoctor_use_fullpath', v:true) ? expand("%:p") : expand("%:t"))$/;"	kind:v	line:47
+s:keepcpo	compiler/asciidoctor2docx.vim	/^let s:keepcpo= &cpo$/;"	kind:v	line:10
+s:keepcpo	compiler/asciidoctor2html.vim	/^let s:keepcpo= &cpo$/;"	kind:v	line:10
+s:keepcpo	compiler/asciidoctor2markdown.vim	/^let s:keepcpo= &cpo$/;"	kind:v	line:10
+s:keepcpo	compiler/asciidoctor2md.vim	/^let s:keepcpo= &cpo$/;"	kind:v	line:10
+s:keepcpo	compiler/asciidoctor2pdf.vim	/^let s:keepcpo= &cpo$/;"	kind:v	line:10
+s:make	ftplugin/asciidoctor.vim	/^    let s:make = ':Make'$/;"	kind:v	line:86
+s:make	ftplugin/asciidoctor.vim	/^    let s:make = ':make'$/;"	kind:v	line:88
+s:make_docbook	compiler/asciidoctor2docx.vim	/^let s:make_docbook = s:asciidoctor_executable . " " . s:extensions$/;"	kind:v	line:56
+s:make_docbook	compiler/asciidoctor2markdown.vim	/^let s:make_docbook = s:asciidoctor_executable . " " . s:extensions$/;"	kind:v	line:56
+s:make_docbook	compiler/asciidoctor2md.vim	/^let s:make_docbook = s:asciidoctor_executable . " " . s:extensions$/;"	kind:v	line:56
+s:make_docx	compiler/asciidoctor2docx.vim	/^let s:make_docx = s:asciidoctor_pandoc_executable$/;"	kind:v	line:62
+s:make_markdown	compiler/asciidoctor2markdown.vim	/^let s:make_markdown = s:asciidoctor_pandoc_executable$/;"	kind:v	line:62
+s:make_markdown	compiler/asciidoctor2md.vim	/^let s:make_markdown = s:asciidoctor_pandoc_executable$/;"	kind:v	line:62
+s:pdf_fonts_path	compiler/asciidoctor2pdf.vim	/^    let s:pdf_fonts_path = ""$/;"	kind:v	line:34
+s:pdf_fonts_path	compiler/asciidoctor2pdf.vim	/^    let s:pdf_fonts_path = '-a pdf-fontsdir='.shellescape(fnamemodify(g:asciidoctor_pdf_fonts_path, ':p:h'))$/;"	kind:v	line:36
+s:pdf_themes_path	compiler/asciidoctor2pdf.vim	/^    let s:pdf_themes_path = ""$/;"	kind:v	line:28
+s:pdf_themes_path	compiler/asciidoctor2pdf.vim	/^    let s:pdf_themes_path = '-a pdf-themesdir='.shellescape(fnamemodify(g:asciidoctor_pdf_themes_path, ':p:h'))$/;"	kind:v	line:30
+s:undo_cmds	ftplugin/asciidoctor.vim	/^let s:undo_cmds = "| delcommand Asciidoctor2PDF"$/;"	kind:v	line:13
+s:undo_maps	ftplugin/asciidoctor.vim	/^let s:undo_maps = "| execute 'nunmap <buffer> ]]'"$/;"	kind:v	line:23
+s:undo_opts	ftplugin/asciidoctor.vim	/^let s:undo_opts = "setl cms< com< fo< flp< inex< efm< cfu< fde< fdm<"$/;"	kind:v	line:12
+s:undo_opts	indent/asciidoctor.vim	/^let s:undo_opts = "setl inde<"$/;"	kind:v	line:6
+s:undo_vars	ftplugin/asciidoctor.vim	/^let s:undo_vars = "| unlet! b:commentary_startofline"$/;"	kind:v	line:40
+s:use_pdf_paths	compiler/asciidoctor2pdf.vim	/^        let s:use_pdf_paths = 1$/;"	kind:v	line:22
+s:use_pdf_paths	compiler/asciidoctor2pdf.vim	/^let s:use_pdf_paths = 0$/;"	kind:v	line:16
+section	ftplugin/asciidoctor.vim	/^func! s:section(back, cnt)$/;"	kind:f	line:305
+theme_name	compiler/asciidoctor2docx.vim	/^    let theme_name = asciidoctor#detect_pdf_theme()$/;"	kind:v	line:37
+trim	autoload/asciidoctor.vim	/^func! s:trim(str) abort$/;"	kind:f	line:13
+wsl_to_windows_path	autoload/asciidoctor.vim	/^func! s:wsl_to_windows_path(path) abort$/;"	kind:f	line:248

@@ -1,6 +1,6 @@
 " Vim filetype plugin
 " Language:   asciidoctor
-" Maintainer: Maxim Kim <habamax@gmail.com>
+" Maintainer: Dandi Wong <DandiToCoach@gmail.com>
 " Filenames:  *.adoc
 " vim: et sw=4
 
@@ -13,10 +13,12 @@ let s:undo_opts = "setl cms< com< fo< flp< inex< efm< cfu< fde< fdm<"
 let s:undo_cmds = "| delcommand Asciidoctor2PDF"
       \. "| delcommand Asciidoctor2HTML"
       \. "| delcommand Asciidoctor2DOCX"
+      \. "| delcommand Asciidoctor2MARKDOWN"
       \. "| delcommand AsciidoctorOpenRAW"
       \. "| delcommand AsciidoctorOpenPDF"
       \. "| delcommand AsciidoctorOpenHTML"
       \. "| delcommand AsciidoctorOpenDOCX"
+      \. "| delcommand AsciidoctorOpenMARKDOWN"
       \. "| delcommand AsciidoctorPasteImage"
 let s:undo_maps = "| execute 'nunmap <buffer> ]]'"
       \. "| execute 'nunmap <buffer> [['"
@@ -89,11 +91,13 @@ endif
 exe 'command! -buffer Asciidoctor2PDF :compiler asciidoctor2pdf | '   . s:make
 exe 'command! -buffer Asciidoctor2HTML :compiler asciidoctor2html | ' . s:make
 exe 'command! -buffer Asciidoctor2DOCX :compiler asciidoctor2docx | ' . s:make
+exe 'command! -buffer Asciidoctor2MARKDOWN :compiler asciidoctor2markdown | ' . s:make
 
 command! -buffer AsciidoctorOpenRAW  call asciidoctor#open_file(s:get_fname())
 command! -buffer AsciidoctorOpenPDF  call asciidoctor#open_file(s:get_fname(".pdf"))
 command! -buffer AsciidoctorOpenHTML call asciidoctor#open_file(s:get_fname(".html"))
 command! -buffer AsciidoctorOpenDOCX call asciidoctor#open_file(s:get_fname(".docx"))
+command! -buffer AsciidoctorOpenMARKDOWN call asciidoctor#open_file(s:get_fname(".md"))
 
 command! -buffer AsciidoctorPasteImage :call asciidoctor#pasteImage()
 

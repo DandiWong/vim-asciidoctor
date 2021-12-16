@@ -1,0 +1,733 @@
+# AsciiDoc snippets for the UltiSnips plug-in
+# Copyright (C) 2021 Dandi Wong
+
+# Home Page:   https://github.com/DandiWong/vim-snippets
+# Last Change: 2021-12-16 17:02
+
+#
+# References:
+#
+#   [1] https://github.com/jhradilek/vim-snippets
+
+priority -50
+
+global !p
+whitespace = re.compile('[\s_-]*\{nbsp\}[\s_-]*|[\s_-]+')
+macros     = re.compile('\\bbtn:\[|\\bkbd:\[|\\bmenu:\\b|\[[^\]]*\][\*_`#]|\{[^\}]*\}[\s_]*')
+disallowed = re.compile('[^\w\d.-]')
+
+def compose_id(string):
+	'''Converts an AsciiDoc string to a valid block ID.'''
+	temp = whitespace.sub('-', string)
+	temp = macros.sub('', temp)
+	temp = disallowed.sub('', temp)
+
+	return temp.lower()
+endglobal
+
+let $author_name = 'Dandi Wong'
+let $author_email = 'DandiToCoach@gmail.com'
+
+# -------------------------------------------------------------------------
+#                           Docs header
+# -------------------------------------------------------------------------
+
+snippet version "Document header version string"
+v1.0, `!v strftime('%Y-%m-%d', localtime())`:${1: Revision remark}
+endsnippet
+
+snippet author "Document header author string"
+`!v g:username` <`!v g:email`>
+endsnippet
+
+# snippet header "Document  Blockheader"
+# ${1:`!v expand('%:t:r')`}
+# `!p snip.rv="=" * len(t[1])`
+# `!v g:username` <`!v g:email`>
+# v1.0, `!v strftime('%Y-%m-%d', localtime())`:${2: Revision remark}
+# endsnippet
+
+snippet header "Document Blockheader"
+:encoding: utf-8
+:experimental:
+:scripts: cjk
+:icons: font
+:stem: latexmath
+:source-highlighter: pygments
+:source-linenums-option: enable
+:toc:
+:toc-title: 目录
+:toclevels: 3
+:sectnums:
+:sectnumlevels: 3
+:chapter-signifier!:
+:sectanchors:
+:idseparator: -
+:imagesdir: images
+:title-logo-image: logo.png
+:figure-caption: 图
+:table-caption: 表格
+:author: `!v $author_name`
+:email: `!v $author_email`
+:pdf-theme: book
+:doctype: book
+:revnumber: 1.0
+:revdate: `!v strftime('%Y-%m-%d %H:%M:%S', localtime())`
+:revremark: Initial
+= `!v expand('%')`
+endsnippet
+
+
+# -------------------------------------------------------------------------
+#                           Titles and Sections
+# -------------------------------------------------------------------------
+
+# Level 0 section:
+snippet = "Document Title (Level 0)" !b
+= ${VISUAL}${1:Document title}
+
+$0
+endsnippet
+
+# Level 0 section - alternative version:
+snippet =0 "Document Title (Level 0)" !b
+= ${VISUAL}${1:Document title}
+
+$0
+endsnippet
+
+# Level 0 section - alternative version:
+snippet =1 "Document Part (Level 0)" !b
+= ${VISUAL}${1:Document title}
+
+$0
+endsnippet
+
+# Level 0 section with a custom ID:
+snippet =[ "Document Title (Level 0) with Custom ID" !b
+[id="${2:`!p snip.rv = compose_id(t[1])`}${3:-\{context\}}"]
+= ${VISUAL}${1:Document title}
+
+$0
+endsnippet
+
+# Level 0 section with a custom ID - alternative version:
+snippet =0[ "Document Title (Level 0) with Custom ID" !b
+[id="${2:`!p snip.rv = compose_id(t[1])`}${3:-\{context\}}"]
+= ${VISUAL}${1:Document title}
+
+$0
+endsnippet
+
+# Level 0 section with a custom ID - alternative version:
+snippet =1[ "Document Part (Level 0) with Custom ID" !b
+[id="${2:`!p snip.rv = compose_id(t[1])`}${3:-\{context\}}"]
+= ${VISUAL}${1:Document title}
+
+$0
+endsnippet
+
+# Level 1 section:
+snippet == "Level 1 Section Title" !b
+== ${VISUAL}${1:Section title}
+
+$0
+endsnippet
+
+# Level 1 section - alternative version:
+snippet =2 "Level 1 Section Title" !b
+== ${VISUAL}${1:Section title}
+
+$0
+endsnippet
+
+# Level 1 section with a custom ID:
+snippet ==[ "Level 1 Section Title with Custom ID" !b
+[id="${2:`!p snip.rv = compose_id(t[1])`}${3:-\{context\}}"]
+== ${VISUAL}${1:Section title}
+
+$0
+endsnippet
+
+# Level 1 section with a custom ID - alternative version:
+snippet =2[ "Level 1 Section Title with Custom ID" !b
+[id="${2:`!p snip.rv = compose_id(t[1])`}${3:-\{context\}}"]
+== ${VISUAL}${1:Section title}
+
+$0
+endsnippet
+
+# Level 2 section:
+snippet === "Level 2 Section Title" !b
+=== ${VISUAL}${1:Section title}
+
+$0
+endsnippet
+
+# Level 2 section - alternative version:
+snippet =3 "Level 2 Section Title" !b
+=== ${VISUAL}${1:Section title}
+
+$0
+endsnippet
+
+# Level 2 section with a custom ID:
+snippet ===[ "Level 2 Section Title with Custom ID" !b
+[id="${2:`!p snip.rv = compose_id(t[1])`}${3:-\{context\}}"]
+=== ${VISUAL}${1:Section title}
+
+$0
+endsnippet
+
+# Level 2 section with a custom ID - alternative version:
+snippet =3[ "Level 2 Section Title with Custom ID" !b
+[id="${2:`!p snip.rv = compose_id(t[1])`}${3:-\{context\}}"]
+=== ${VISUAL}${1:Section title}
+
+$0
+endsnippet
+
+
+# Level 3 section:
+snippet ==== "Level 3 Section Title" !b
+==== ${VISUAL}${1:Section title}
+
+$0
+endsnippet
+
+# Level 3 section - alternative version:
+snippet =4 "Level 3 Section Title" !b
+==== ${VISUAL}${1:Section title}
+
+$0
+endsnippet
+
+# Level 3 section with a custom ID:
+snippet ====[ "Level 3 Section Title with Custom ID" !b
+[id="${2:`!p snip.rv = compose_id(t[1])`}${3:-\{context\}}"]
+==== ${VISUAL}${1:Section title}
+
+$0
+endsnippet
+
+# Level 3 section with a custom ID - alternative version:
+snippet =4[ "Level 3 Section Title with Custom ID" !b
+[id="${2:`!p snip.rv = compose_id(t[1])`}${3:-\{context\}}"]
+==== ${VISUAL}${1:Section title}
+
+$0
+endsnippet
+
+# Level 4 section:
+snippet ===== "Level 4 Section Title" !b
+===== ${VISUAL}${1:Section title}
+
+$0
+endsnippet
+
+# Level 4 section - alternative version:
+snippet =5 "Level 4 Section Title" !b
+===== ${VISUAL}${1:Section title}
+
+$0
+endsnippet
+
+# Level 4 section with a custom ID:
+snippet =====[ "Level 4 Section Title with Custom ID" !b
+[id="${2:`!p snip.rv = compose_id(t[1])`}${3:-\{context\}}"]
+===== ${VISUAL}${1:Section title}
+
+$0
+endsnippet
+
+# Level 4 section with a custom ID - alternative version:
+snippet =5[ "Level 4 Section Title with Custom ID" !b
+[id="${2:`!p snip.rv = compose_id(t[1])`}${3:-\{context\}}"]
+===== ${VISUAL}${1:Section title}
+
+$0
+endsnippet
+
+# Level 5 section:
+snippet ====== "Level 5 Section Title" !b
+====== ${VISUAL}${1:Section title}
+
+$0
+endsnippet
+
+# Level 5 section - alternative version:
+snippet =6 "Level 5 Section Title" !b
+====== ${VISUAL}${1:Section title}
+
+$0
+endsnippet
+
+# Level 5 section with a custom ID:
+snippet ======[ "Level 5 Section Title with Custom ID" !b
+[id="${2:`!p snip.rv = compose_id(t[1])`}${3:-\{context\}}"]
+====== ${VISUAL}${1:Section title}
+
+$0
+endsnippet
+
+# Level 5 section with a custom ID - alternative version:
+snippet =6[ "Level 5 Section Title with Custom ID" !b
+[id="${2:`!p snip.rv = compose_id(t[1])`}${3:-\{context\}}"]
+====== ${VISUAL}${1:Section title}
+
+$0
+endsnippet
+
+
+# -------------------------------------------------------------------------
+#                             Block Elements
+# -------------------------------------------------------------------------
+
+# Quote block:
+snippet ____ "Quote Block" !b
+[quote,${1:author},${2:source}]
+____
+${VISUAL}$1
+____
+$0
+endsnippet
+
+snippet quote "Quote Block" !b
+[quote,${1:author},${2:source}]
+____
+${VISUAL}$3
+____
+$0
+endsnippet
+
+snippet verse "Verse Block" b
+[verse,${1:author},${2:source}]
+____
+${VISUAL}$3
+____
+$0
+endsnippet
+
+snippet example "Example Block" b
+====
+$0
+====
+endsnippet
+
+# Comment block:
+snippet //// "Comment Block" !b
+////
+${VISUAL}$1
+////
+$0
+endsnippet
+
+# Listing block:
+snippet ---- "Listing Block" !b
+----
+${VISUAL}$1
+----
+$0
+endsnippet
+
+# Open block:
+snippet -- "Open Block" !b
+--
+${VISUAL}$1
+--
+$0
+endsnippet
+
+# Passthrough block:
+snippet ++++ "Passthrough Block" !b
+++++
+${VISUAL}$1
+++++
+$0
+endsnippet
+
+snippet passthrough "Passthrough Block" !b
+++++
+${VISUAL}$1
+++++
+$0
+endsnippet
+
+snippet sidebar "Sidebar Block" !b
+****
+${VISUAL}$1
+$0
+****
+endsnippet
+
+# Sidebar block:
+snippet **** "Sidebar Block" !b
+****
+${VISUAL}$1
+****
+$0
+endsnippet
+
+snippet footnote "Footnote"
+footnote:[${1:text}]
+endsnippet
+
+# Literal block with quotes substitutions:
+snippet literal "Literal Block with Quotes Substitutions" !b
+[literal,subs="${1:+quotes}"]
+....
+${VISUAL}$2
+....
+$0
+endsnippet
+
+# Literal block:
+snippet .... "Literal Block" !b
+[literal,subs="${1:+quotes}"]
+....
+${VISUAL}$2
+....
+$0
+endsnippet
+
+# Source code block:
+snippet code "Source Code Block" !b
+[[app-listing]]
+[source,${1:python},linenums]
+.${2:Title}
+----
+${VISUAL}$3 // <1>
+----
+<1> quote
+$0
+endsnippet
+
+# Admonition - caution:
+snippet caution "Admonition: Caution" !b
+[CAUTION]
+.${1:Title}
+====
+${VISUAL}$2
+====
+$0
+endsnippet
+
+# Admonition - important:
+snippet important "Admonition: Important" !b
+[IMPORTANT]
+.${1:Title}
+====
+${VISUAL}$2
+====
+$0
+endsnippet
+
+# Admonition - note:
+snippet note "Admonition: Note" !b
+[NOTE]
+.${1:Title}
+====
+${VISUAL}$2
+====
+$0
+endsnippet
+
+# Admonition - tip:
+snippet tip "Admonition: Tip" !b
+[TIP]
+.${1:Title}
+====
+${VISUAL}$2
+====
+$0
+endsnippet
+
+# Admonition - warning:
+snippet warning "Admonition: Warning" !b
+[WARNING]
+.${1:Title}
+====
+${VISUAL}$2
+====
+$0
+endsnippet
+
+
+# -------------------------------------------------------------------------
+#                          User Interface Macros
+# -------------------------------------------------------------------------
+
+# Button:
+snippet btn "Button" !w
+btn:[${1:${VISUAL}}]$0
+endsnippet
+
+# Keyboard shortcut:
+snippet kbd "Keyboard Shortcut" !w
+kbd:[${1:${VISUAL}}]$0
+endsnippet
+
+# Menu selection:
+snippet menu "Menu Selection" !w
+menu:${1:${VISUAL}}[$2]$0
+endsnippet
+
+
+# -------------------------------------------------------------------------
+#                            Links and Images
+# -------------------------------------------------------------------------
+
+# Link:
+snippet link "Link" !w
+link:$1[${2:${VISUAL}}]$0
+endsnippet
+
+# Email:
+snippet mailto "Email" !w
+mailto:$1[${2:${VISUAL}}]$0
+endsnippet
+
+# inline image:
+snippet imagei "Inline Image"
+image:${1:target}[${2:alt="$3"}]
+endsnippet
+
+# Block image:
+snippet imageb "Block Image" !b
+image::$1[${2:${VISUAL}}]$0
+endsnippet
+
+# Video:
+snippet video "Video" !b
+video::$1[${2:${VISUAL}}]$0
+endsnippet
+
+snippet anchor "Hypertext link target"
+anchor:${1:id}[${2:label}]
+endsnippet
+
+snippet xref "Link to hypertext anchor"
+xref:${1:id}[${2:caption}]
+endsnippet
+
+# -------------------------------------------------------------------------
+#                               Directives
+# -------------------------------------------------------------------------
+
+# Include directive:
+snippet include "Include Directive" !b
+include::${VISUAL}$1[${2:leveloffset=+1}]$0
+endsnippet
+
+# ifdef directive:
+snippet ifdef "ifdef Directive" !b
+ifdef::$1[]
+${VISUAL}$2
+endif::[]
+$0
+endsnippet
+
+# ifndef directive:
+snippet ifndef "ifndef Directive" !b
+ifndef::$1[]
+${VISUAL}$2
+endif::[]
+$0
+endsnippet
+
+# ifeval directive:
+snippet ifeval "ifeval Directive" !b
+ifeval::[$1]
+${VISUAL}$2
+endif::[]
+$0
+endsnippet
+
+
+# -------------------------------------------------------------------------
+#                             Text Formatting
+# -------------------------------------------------------------------------
+
+# Bold text:
+snippet * "Bold Text" !w
+*${1:${VISUAL}}*$0
+endsnippet
+
+# Bold text - unconstrained:
+snippet ** "Bold Text (Unconstrained)" !i
+**${1:${VISUAL}}**$0
+endsnippet
+
+# Italic text:
+snippet _ "Italic Text" !w
+_${1:${VISUAL}}_$0
+endsnippet
+
+# Italic text - unconstrained:
+snippet __ "Italic Text (Unconstrained)" !i
+__${1:${VISUAL}}__$0
+endsnippet
+
+# Monospace text:
+snippet ` "Monospace Text" !w
+\`${1:${VISUAL}}\`$0
+endsnippet
+
+# Monospace text - unconstrained:
+snippet `` "Monospace Text (Unconstrained)" !i
+\`\`${1:${VISUAL}}\`\`$0
+endsnippet
+
+# Superscript text:
+snippet ^ "Superscript Text" !i
+^${1:${VISUAL}}^$0
+endsnippet
+
+# Subscript text:
+snippet ~ "Superscript Text" !i
+~${1:${VISUAL}}~$0
+endsnippet
+
+# Single curved quotes:
+snippet '` "Single Curved Quotes" !w
+'\`${1:${VISUAL}}\`'$0
+endsnippet
+
+# Double curved quotes:
+snippet "` "Double Curved Quotes" !w
+"\`${1:${VISUAL}}\`"$0
+endsnippet
+
+
+# -------------------------------------------------------------------------
+#                             Semantic Markup
+# -------------------------------------------------------------------------
+
+# Application name:
+snippet application "Application Name" !w
+[application]\`${VISUAL}$1\`$0
+endsnippet
+
+# Application name - alternative version:
+snippet app "Application Name" !w
+[application]\`${VISUAL}$1\`$0
+endsnippet
+
+# Cited work title:
+snippet citetitle "Cited Work Title" !w
+[citetitle]\`${VISUAL}$1\`$0
+endsnippet
+
+# Cited work title - alternative version:
+snippet cite "Cited Work Title" !w
+[citetitle]\`${VISUAL}$1\`$0
+endsnippet
+
+# Command:
+snippet command "Command" !w
+[command]\`${VISUAL}$1\`$0
+endsnippet
+
+# Command - alternative version:
+snippet cmd "Command" !w
+[command]\`${VISUAL}$1\`$0
+endsnippet
+
+# File name:
+snippet filename "File Name" !w
+[filename]\`${VISUAL}$1\`$0
+endsnippet
+
+# File name - alternative version:
+snippet file "File Name" !w
+[filename]\`${VISUAL}$1\`$0
+endsnippet
+
+# Directory name - for convenience:
+snippet directory "Directory Name" !w
+[filename]\`${VISUAL}$1\`$0
+endsnippet
+
+# Directory name - alternative version:
+snippet dir "Directory Name" !w
+[filename]\`${VISUAL}$1\`$0
+endsnippet
+
+# Function name:
+snippet function "Function Name" !w
+[function]\`${VISUAL}$1\`$0
+endsnippet
+
+# Function name - alternative version:
+snippet func "Function Name" !w
+[function]\`${VISUAL}$1\`$0
+endsnippet
+
+# GUI element name:
+snippet gui "GUI Element Name" !w
+[gui]\`${VISUAL}$1\`$0
+endsnippet
+
+# Option name:
+snippet option "Option Name" !w
+[option]\`${VISUAL}$1\`$0
+endsnippet
+
+# Option name - alternative version:
+snippet opt "Option Name" !w
+[option]\`${VISUAL}$1\`$0
+endsnippet
+
+# Package name:
+snippet package "Package Name" !w
+[package]\`${VISUAL}$1\`$0
+endsnippet
+
+# Package name - alternative version:
+snippet pkg "Package Name" !w
+[package]\`${VISUAL}$1\`$0
+endsnippet
+
+# Parameter name:
+snippet parameter "Parameter Name" !w
+[parameter]\`${VISUAL}$1\`$0
+endsnippet
+
+# Parameter name - alternative version:
+snippet param "Parameter Name" !w
+[parameter]\`${VISUAL}$1\`$0
+endsnippet
+
+# System item:
+snippet systemitem "System Item" !w
+[systemitem]\`${VISUAL}$1\`$0
+endsnippet
+
+# System item - alternative version:
+snippet sys "System Item" !w
+[systemitem]\`${VISUAL}$1\`$0
+endsnippet
+
+# -------------------------------------------------------------------------
+#                             Table
+# -------------------------------------------------------------------------
+
+snippet csv "CSV Table" b
+.${1:Title}
+[frame=none,grid=rows,width="80%",role=center,cols="3*^",options="header,footer,autowidth,unbreakable"]
+,===
+$0
+,===
+endsnippet
+
+snippet table "Full Table" b
+.${1:Title}
+[frame=all,grid=all,width=100%,role=center,cols="3*^",options="header,footer,autowidth,unbreakable"]
+|===
+^.^| $0 ^.^| C2 ^.^| C3 
+<| C1R1 2+| C2R1
+>m| C1R2 .2+^.^| C2R2 h| C3R2
+s| C1R3 e| C3R3
+|===
+endsnippet
+

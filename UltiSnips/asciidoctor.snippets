@@ -25,8 +25,8 @@ def compose_id(string):
 	return temp.lower()
 endglobal
 
-let $author_name = 'Dandi Wong'
-let $author_email = 'DandiToCoach@gmail.com'
+# let $author_name = 'Dandi Wong'
+# let $author_email = 'DandiToCoach@gmail.com'
 
 # -------------------------------------------------------------------------
 #                           Docs header
@@ -74,7 +74,9 @@ snippet header "Document Blockheader"
 :revnumber: 1.0
 :revdate: `!v strftime('%Y-%m-%d %H:%M:%S', localtime())`
 :revremark: Initial
-= `!v expand('%')`
+= ${1:`!v expand('%:r')`}
+
+$0
 endsnippet
 
 

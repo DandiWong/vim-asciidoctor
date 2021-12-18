@@ -45,51 +45,113 @@
 * 日常工作有大量的文本编辑与格式化输出的需要，比如产品经理、文档整理员、博客与书籍作者等。
 * 掌握 vim/neovim 和终端命令行的基本使用如进入退出 vim 和编辑文件、使用命令行复制粘贴 clone 代码库等基本操作即可。
 
-== 安装基础依赖
+== 环境安装
 
-* 安装 neovim 和 coc.nvim 的基础依赖
+=== 基础依赖
 
-  $ brew install neovim node
+. 安装各种包和依赖
 
-* 安装 neovim 的 python3 支持
+  git nodejs(version >= 12) ruby ruby-dev gcc make neovim
+
+. 安装 neovim 的 python3 支持
 
  $ python3 -m pip install neovim pynvim
 
-* 安装 asciidoctor 与 pdf/docx 转换器、语法高亮依赖、neovim 支持
+. 安装 asciidoctor 与 pdf/docx 转换器、语法高亮依赖、neovim 支持
 
  $ gem install asciidoctor asciidoctor-pdf pygments.rb neovim
 
+=== 推荐： 基于 SpaceVim
+
+. 安装 SpaceVim： 
+
+  $ curl -sLf https://spacevim.org/cn/install.sh | bash
+
+. kbd:[Space + f + v + d] 打开 `init.toml` 文件，启用以下配置：
+
+```toml
+[options]
+autocomplete_method = "coc"
+snippet_engine = "neosnippet"
+[[layers]]
+name = 'autocomplete'
+auto_completion_return_key_behavior = "complete"
+auto_completion_tab_key_behavior = "cycle"
+auto-completion-delay = 100
+auto-completion-enable-snippets-in-popup = true
+[[custom_plugins]]
+repo = "neoclide/coc.nvim"
+merged = false
+[[custom_plugins]]
+repo = "DandiWong/vim-asciidoctor"
+merged = false
+```
+
+[start=3]
+. 启动 nvim 后将自动安装
+
+=== 不推荐：手动安装
+
 * 安装 coc.nvim
 
-见 link:https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim[https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim]
+  $ mkdir -p ~/.local/share/nvim/site/pack/coc/start && cd ~/.local/share/nvim/site/pack/coc/start && git clone --branch release https://github.com/neoclide/coc.nvim.git --depth=1
 
 * 安装本插件
 
- $ git clone https://github.com/DandiWong/vim-asciidoctor.git ~/.vim/bundle/vim-asciidoctor
+ $ mkdir -p ~/.local/share/nvim/site/pack/DandiWong/start && cd ~/.local/share/nvim/site/pack/DandiWong/start && git clone https://github.com/DandiWong/vim-asciidoctor.git --depth=1
 
-== 必要的配置
+== 环境配置
 
 === neovim 配置
+
+如果您使用的是 SpaceVim，那么配置文件为 `~/.SpaceVim/init.vim`，如果您使用的是原生 neovim，那么配置文件为 `~/.config/nvim/init.vim`，木有的话请自行创建。
 
 [source%linenums,vim]
 .init.vim
 ----
-let g:username = 'Dandi Wong'
-let g:email = 'DandiToCoach@gmail.com'
+let g:username = 'Your name'
+let g:email = 'Your email'
 let g:current_time = strftime('%Y-%m-%d %H:%M:%S', localtime())
 
+let g:python3_host_prog = '/path/to/your/python3'
 let g:asciidoctor_executable = 'asciidoctor'
 let g:asciidoctor_extensions = ['asciidoctor-diagram']
 let g:asciidoctor_pdf_executable = 'asciidoctor-pdf'
 let g:asciidoctor_pdf_extensions = ['asciidoctor-diagram']
 " let g:asciidoctor_css_path = '~/docs/AsciiDocThemes'
-let g:asciidoctor_pdf_themes_path = '~/.vim/bundle/vim-asciidoctor/themes'
-let g:asciidoctor_pdf_fonts_path = '~/.vim/bundle/vim-asciidoctor/fonts'
-let g:asciidoctor_pandoc_data_dir = '~/.vim/bundle/vim-asciidoctor/reference'
+let g:asciidoctor_pdf_themes_path = '/path/to/your/asciidoctor-pdf/themes'
+let g:asciidoctor_pdf_fonts_path = '/path/to/your/asciidoctor-pdf/fonts'
+let g:asciidoctor_pandoc_data_dir = '/path/to/your/asciidoctor-pdf/reference'
 let g:asciidoctor_pandoc_executable = 'pandoc'
 let g:asciidoctor_pandoc_other_params = '--toc --quiet'
 let g:asciidoctor_fenced_languages = ['python', 'c', 'javascript', 'cpp', 'go', 'java', 'ruby', 'sh', 'typescript', 'markdown', 'html', 'css', 'rust', 'arduino', 'asciidoc']
 let g:coc_global_extensions = ['coc-snippets']
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 ----
 
 === coc.nvim 配置
@@ -189,8 +251,9 @@ asciidoc 格式为：
 ,===
 ```
 
-使用本人提供的 snippets 只需要输入
+使用本插件提供的 snippets 只需要输入 csv 即可触发片段输入版式，剩下的只需要填一下表格内容（再调整一下必要的参数如 `4*^` 这里的数字应当为你表格的真实列数）就好了，很方便吧。
 
+image::snippets-csv.png[snippets-csv.png]
 
 === 复杂格式表格
 
@@ -203,7 +266,11 @@ asciidoc 格式为：
 s| C1R3 e| C3R3
 |===
 
-说起来搞笑，markdown 对于复杂表格的处理屎一样的表现促使我转向了 asciidoc，比如上面这种输出样式在 markdown （目前见到过的扩展）中是无法实现的，要是
+说起来搞笑，当初转向 asciidoc 最大的原因其实就是 markdown 处理复杂表格时屎一样的表现，比如上面这种输出样式在 markdown （目前见到过的扩展）中是无法实现的，而好巧不巧作为一个产品经理平时做需求规划项目管理等等时的文档就经常遇到各种合并单元格的情况，asciidoc 复杂表格的版式看似很乱实际每个属性用一遍之后就很自然而然记住了，甩 markdown 八条街。
+
+同样，有了 snippets 的加持，你也不需要记住那么复杂的版式，直接输入 table 等一个触发就好了。
+
+image::snippets-table.png[snippets-table.png]
 
 ```asciidoc
 .复杂表格
@@ -218,9 +285,11 @@ s| C1R3 e| C3R3
 
 == 多种格式输出
 
+`asciidoctor` 只是一个 asciidoc 的底层运行时，还需要搭配其他工具来进行格式化输出（如 word/pdf/markdown/html 等格式），在这里我们主要用到的是 `asciidoctor-pdf` 和 Chrome 浏览器插件 `Asciidoctor.js Live Preview`。
+
 === pdf 输出
 
-=== workd 输出
+=== word 输出
 
 === markdown 输出
 

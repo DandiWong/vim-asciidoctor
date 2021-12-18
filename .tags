@@ -38,12 +38,14 @@ asciidoctor_fold	ftplugin/asciidoctor.vim	/^func! s:asciidoctor_fold(count) abor
 asciidoctor_source_language	ftplugin/asciidoctor.vim	/^augroup asciidoctor_source_language$/;"	kind:a	line:284
 b:commentary_startofline	ftplugin/asciidoctor.vim	/^let b:commentary_startofline = 1$/;"	kind:v	line:57
 b:current_syntax	syntax/asciidoctor.vim	/^let b:current_syntax = "asciidoctor"$/;"	kind:v	line:315
+b:current_syntax	syntax/plantuml.vim	/^let b:current_syntax = 'plantuml'$/;"	kind:v	line:17
 b:did_ftplugin	ftplugin/asciidoctor.vim	/^let b:did_ftplugin = 1$/;"	kind:v	line:10
 b:did_indent	indent/asciidoctor.vim	/^let b:did_indent = 1$/;"	kind:v	line:4
 b:undo_ftplugin	ftplugin/asciidoctor.vim	/^    let b:undo_ftplugin .= "|" . s:undo_opts . s:undo_cmds . s:undo_maps . s:undo_vars$/;"	kind:v	line:43
 b:undo_ftplugin	ftplugin/asciidoctor.vim	/^    let b:undo_ftplugin = s:undo_opts . s:undo_cmds . s:undo_maps . s:undo_vars$/;"	kind:v	line:45
 b:undo_indent	indent/asciidoctor.vim	/^    let b:undo_indent .= "|" . s:undo_opts$/;"	kind:v	line:9
 b:undo_indent	indent/asciidoctor.vim	/^    let b:undo_indent = s:undo_opts$/;"	kind:v	line:11
+contained	syntax/plantuml.vim	/^let contained = []$/;"	kind:v	line:158
 current_compiler	compiler/asciidoctor2docx.vim	/^let current_compiler = "Asciidoctor2DOCX"$/;"	kind:v	line:9
 current_compiler	compiler/asciidoctor2html.vim	/^let current_compiler = "Asciidoctor2HTML"$/;"	kind:v	line:9
 current_compiler	compiler/asciidoctor2markdown.vim	/^let current_compiler = "Asciidoctor2MARKDOWN"$/;"	kind:v	line:9
@@ -66,6 +68,8 @@ g:loaded_asciidoctor_autoload	autoload/asciidoctor.vim	/^let g:loaded_asciidocto
 get_fname	ftplugin/asciidoctor.vim	/^func! s:get_fname(...)$/;"	kind:f	line:294
 gf	ftplugin/asciidoctor.vim	/^nnoremap <silent><buffer> gf :<c-u>call asciidoctor#open_url("edit")<CR>$/;"	kind:m	line:127
 gx	ftplugin/asciidoctor.vim	/^nnoremap <silent><buffer> gx :<c-u>call asciidoctor#open_url()<CR>$/;"	kind:m	line:126
+i	syntax/plantuml.vim	/^  let i = i + 1$/;"	kind:v	line:164
+i	syntax/plantuml.vim	/^let i = 1$/;"	kind:v	line:157
 ih	ftplugin/asciidoctor.vim	/^onoremap <silent><buffer>ih :<C-u>call asciidoctor#header_textobj(v:true)<CR>$/;"	kind:m	line:115
 il	ftplugin/asciidoctor.vim	/^onoremap <silent><buffer>il :<C-u>call asciidoctor#delimited_block_textobj(v:true)<CR>$/;"	kind:m	line:121
 main_syntax	syntax/asciidoctor.vim	/^    let main_syntax = 'asciidoctor'$/;"	kind:v	line:14
@@ -88,6 +92,7 @@ s:asciidoctor_pandoc_reference_doc	compiler/asciidoctor2docx.vim	/^let s:asciido
 s:asciidoctor_pdf_executable	compiler/asciidoctor2pdf.vim	/^let s:asciidoctor_pdf_executable = get(g:, 'asciidoctor_pdf_executable', 'asciidoctor-pdf')$/;"	kind:v	line:45
 s:cd	compiler/asciidoctor2docx.vim	/^let s:cd = "cd ".shellescape(expand("%:p:h"))$/;"	kind:v	line:70
 s:cd	compiler/asciidoctor2markdown.vim	/^let s:cd = "cd ".shellescape(expand("%:p:h"))$/;"	kind:v	line:34
+s:cpo_orig	syntax/plantuml.vim	/^let s:cpo_orig=&cpoptions$/;"	kind:v	line:14
 s:css_name	compiler/asciidoctor2html.vim	/^    let s:css_name = ""$/;"	kind:v	line:26
 s:css_name	compiler/asciidoctor2html.vim	/^    let s:css_name = '-a stylesheet='.shellescape(g:asciidoctor_css)$/;"	kind:v	line:28
 s:css_path	compiler/asciidoctor2html.vim	/^    let s:css_path = ""$/;"	kind:v	line:20
@@ -112,6 +117,7 @@ s:make_docbook	compiler/asciidoctor2docx.vim	/^let s:make_docbook = s:asciidocto
 s:make_docbook	compiler/asciidoctor2markdown.vim	/^let s:make_docbook = s:asciidoctor_executable . " " . s:extensions$/;"	kind:v	line:23
 s:make_docx	compiler/asciidoctor2docx.vim	/^let s:make_docx = s:asciidoctor_pandoc_executable$/;"	kind:v	line:62
 s:make_markdown	compiler/asciidoctor2markdown.vim	/^let s:make_markdown = s:asciidoctor_pandoc_executable$/;"	kind:v	line:29
+s:mindmapHilightLinks	syntax/plantuml.vim	/^let s:mindmapHilightLinks = [$/;"	kind:v	line:151
 s:pdf_fonts_path	compiler/asciidoctor2pdf.vim	/^    let s:pdf_fonts_path = ""$/;"	kind:v	line:34
 s:pdf_fonts_path	compiler/asciidoctor2pdf.vim	/^    let s:pdf_fonts_path = '-a pdf-fontsdir='.shellescape(fnamemodify(g:asciidoctor_pdf_fonts_path, ':p:h'))$/;"	kind:v	line:36
 s:pdf_themes_path	compiler/asciidoctor2pdf.vim	/^    let s:pdf_themes_path = ""$/;"	kind:v	line:28

@@ -25,9 +25,6 @@ def compose_id(string):
 	return temp.lower()
 endglobal
 
-# let $author_name = 'Dandi Wong'
-# let $author_email = 'DandiToCoach@gmail.com'
-
 # -------------------------------------------------------------------------
 #                           Docs header
 # -------------------------------------------------------------------------
@@ -54,8 +51,14 @@ snippet header "Document Blockheader"
 :icons: font
 :stem: latexmath
 :source-highlighter: pygments
-:source-linenums-option: enable
-:toc:
+:pygments-css: class
+:pygments-style: material
+:pygments-linenums-mode: inline
+:sourcedir: src
+:includedir: includes
+:imagesdir: images
+:title-logo-image: {imagesdir}/logo.png
+:toc: left
 :toc-title: 目录
 :toclevels: 3
 :sectnums:
@@ -63,22 +66,19 @@ snippet header "Document Blockheader"
 :chapter-signifier!:
 :sectanchors:
 :idseparator: -
-:imagesdir: images
-:title-logo-image: logo.png
 :figure-caption: 图
 :table-caption: 表格
-:author: `!v $author_name`
-:email: `!v $author_email`
-:pdf-theme: book
-:doctype: book
+:author: `!v g:username`
+:email: `!v g:email`
+:pdf-theme: default
+:doctype: article
 :revnumber: 1.0
-:revdate: `!v strftime('%Y-%m-%d %H:%M:%S', localtime())`
+:revdate: `!v g:current_time`
 :revremark: Initial
 = ${1:`!v expand('%:r')`}
 
 $0
 endsnippet
-
 
 # -------------------------------------------------------------------------
 #                           Titles and Sections
@@ -394,14 +394,26 @@ endsnippet
 
 # Source code block:
 snippet code "Source Code Block" !b
-[[app-listing]]
-[source,${1:python},linenums]
+[source%linenums,${1:python}]
 .${2:Title}
 ----
-${VISUAL}$3 // <1>
+${VISUAL}$0 // <1>
 ----
 <1> quote
-$0
+endsnippet
+
+# Source code block:
+snippet codem "Source Code Block in markdown style" !b
+\`\`\`${1:python}
+${VISUAL}$0
+\`\`\`
+endsnippet
+
+# Source code block:
+snippet c` "Source Code Block in markdown style" !b
+\`\`\`${1:python}
+${VISUAL}$0
+\`\`\`
 endsnippet
 
 # Admonition - caution:
@@ -518,7 +530,11 @@ endsnippet
 
 # Include directive:
 snippet include "Include Directive" !b
-include::${VISUAL}$1[${2:leveloffset=+1}]$0
+include::${VISUAL}${0:filename}[${1:leveloffset=+1,lines=5;12..15,indent=2}]
+endsnippet
+
+snippet file "Link to file section"
+xref:${1:filename}[${2:#section-id[Section Title]}]
 endsnippet
 
 # ifdef directive:
@@ -716,7 +732,7 @@ endsnippet
 
 snippet csv "CSV Table" b
 .${1:Title}
-[frame=none,grid=rows,width="80%",role=center,cols="3*^",options="header,footer,autowidth,unbreakable"]
+[frame=none,grid=rows,width="80%",role=center,cols="${2}*^",options="header,autowidth,unbreakable"]
 ,===
 $0
 ,===
@@ -724,7 +740,7 @@ endsnippet
 
 snippet table "Full Table" b
 .${1:Title}
-[frame=all,grid=all,width=100%,role=center,cols="3*^",options="header,footer,autowidth,unbreakable"]
+[frame=all,grid=all,width=100%,role=center,cols="3*^",options="header,autowidth,unbreakable"]
 |===
 ^.^| $0 ^.^| C2 ^.^| C3 
 <| C1R1 2+| C2R1
@@ -733,3 +749,24 @@ s| C1R3 e| C3R3
 |===
 endsnippet
 
+# -------------------------------------------------------------------------
+#                      References & LICENSE & bibtex & bibliography
+# -------------------------------------------------------------------------
+
+# System item - alternative version:
+snippet license "LICENSE" !b
+<<<
+== LICENSE
+$0
+${VISUAL}${1:License name}
+endsnippet
+
+
+# -------------------------------------------------------------------------
+#                      Description List
+# -------------------------------------------------------------------------
+
+snippet horiz "Horizontal Description list" b
+[horizontal]
+${1:Item}::${2:description}
+endsnippet

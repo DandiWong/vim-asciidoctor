@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?asciidoc-toc maxdepth="3"?>
+<?asciidoc-numbered maxdepth="3"?>
+< xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
+<info>
+<title>Vim Asciidoctor 改进</title>
+<subtitle>打造文档工具链</subtitle>
+<date>2021-12-19</date>
+<author>
+<personname>
+<firstname>Dandi</firstname>
+<surname>Wong</surname>
+</personname>
+<email>DandiToCoach@gmail.com</email>
+</author>
+<authorinitials>DW</authorinitials>
+<revhistory>
+<revision>
+<revnumber>1.0</revnumber>
+<date>2021-12-19</date>
+<authorinitials>DW</authorinitials>
+<revremark>Initial</revremark>
+</revision>
+</revhistory>
+</info>
+<section xml:id="_介绍">
+<title>介绍</title>
+<simpara>此插件是在 <link xl:href="https://github.com/habamax/vim-asciidoctor">Vim-Asciidoctor</link> 项目基础上 fork 而来，原版介绍看 <link xl:href="README_Origin.xml">README_Origin.xml</link>，本项目改进如下：</simpara>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; 新增 asciidoc 向 markdown 转换方法 <literal>:Asciidoctor2MARKDOWN</literal>。</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; 新增使用系统默认程序打开转换后的 markdown 方法 <literal>:AsciidoctorOpenMARKDOWN</literal>。</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; 新增 UltiSnips 格式的 snippets，辅助进行快速插入各种版式。</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; 搭配作者本人配置的 asciidoctor-pdf 主题+字体，可直接生成论文与书籍，开箱即用。</simpara>
+</listitem>
+<listitem>
+<simpara>&#10063; 给 pygments 搞一套 asciidoc 语法高亮的配置文件。</simpara>
+</listitem>
+</itemizedlist>
+</section>
+<section xml:id="_面向人群">
+<title>面向人群</title>
+<itemizedlist>
+<listitem>
+<simpara>日常工作有大量文本编辑与格式化输出需要的角色，比如产品经理、文档整理员、博客与书籍作者等。</simpara>
+</listitem>
+<listitem>
+<simpara>掌握 vim/neovim 和终端命令行的基本使用。如进入退出 vim 和编辑文件、使用命令行复制粘贴、clone 代码库等基本操作。</simpara>
+</listitem>
+</itemizedlist>
+</section>
+<section xml:id="_环境安装">
+<title>环境安装</title>
+<section xml:id="_基础依赖">
+<title>基础依赖</title>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>安装各种包和依赖</simpara>
+<literallayout class="monospaced">git nodejs(version &gt;= 12) ruby ruby-dev gcc make neovim</literallayout>
+</listitem>
+<listitem>
+<simpara>安装 neovim 的 python3 支持</simpara>
+<literallayout class="monospaced">$ python3 -m pip install neovim pynvim</literallayout>
+</listitem>
+<listitem>
+<simpara>安装 asciidoctor 与 pdf/docx 转换器、语法高亮依赖、neovim 支持</simpara>
+<literallayout class="monospaced">$ gem install asciidoctor asciidoctor-pdf asciidoctor-diagram pygments.rb neovim</literallayout>
+</listitem>
+</orderedlist>
+</section>
+<section xml:id="_推荐基于-spacevim">
+<title>推荐：基于 SpaceVim</title>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>安装 SpaceVim：</simpara>
+<literallayout class="monospaced">$ curl -sLf https://spacevim.org/cn/install.sh | bash</literallayout>
+</listitem>
+<listitem>
+<simpara>kbd:[Space + f + v + d] 打开 <literal>init.toml</literal> 文件，启用以下配置：</simpara>
+</listitem>
+</orderedlist>
+<programlisting language="toml" linenumbering="unnumbered">[options]
+autocomplete_method = "coc"
+snippet_engine = "neosnippet"
+[[layers]]
+name = 'autocomplete'
+auto_completion_return_key_behavior = "complete"
+auto_completion_tab_key_behavior = "cycle"
+auto-completion-delay = 100
+auto-completion-enable-snippets-in-popup = true
+[[custom_plugins]]
+repo = "neoclide/coc.nvim"
+merged = false
+[[custom_plugins]]
+repo = "DandiWong/vim-asciidoctor"
+merged = false</programlisting>
+<orderedlist numeration="arabic" startingnumber="3">
+<listitem>
+<simpara>启动 nvim 后将自动安装</simpara>
+</listitem>
+</orderedlist>
+</section>
+<section xml:id="_不推荐手动安装">
+<title>不推荐：手动安装</title>
+<itemizedlist>
+<listitem>
+<simpara>安装 coc.nvim</simpara>
+<literallayout class="monospaced">$ mkdir -p ~/.local/share/nvim/site/pack/coc/start &amp;&amp; cd ~/.local/share/nvim/site/pack/coc/start &amp;&amp; git clone --branch release https://github.com/neoclide/coc.nvim.git --depth=1</literallayout>
+</listitem>
+<listitem>
+<simpara>安装本插件</simpara>
+<literallayout class="monospaced">$ mkdir -p ~/.local/share/nvim/site/pack/DandiWong/start &amp;&amp; cd ~/.local/share/nvim/site/pack/DandiWong/start &amp;&amp; git clone https://github.com/DandiWong/vim-asciidoctor.git --depth=1</literallayout>
+</listitem>
+</itemizedlist>
+</section>
+</section>
+<section xml:id="_环境配置">
+<title>环境配置</title>
+<section xml:id="_asciidoctor-pdf-主题配置">
+<title>asciidoctor-pdf 主题配置</title>
+<simpara>完成环境安装部分后，在使用 Vim 编辑 asciidoc 文件时可以通过 <literal>:Asciidoctor2PDF</literal>/<literal>:Asciidoctor2DOCX</literal>/<literal>:Asciidoctor2MARKDOWN</literal>/<literal>:Asciidoctor2HTML</literal> 这些 <literal>vim-asciidoctor</literal> 插件构建的命令来调用 <literal>asciidoctor-pdf</literal> 完成格式的转换。但是默认的主题与字体配置对多语种混排、CJK 字体、Nerd Fonts 的支持都很差，所以作者也自定义了一套配置，你可以直接使用：</simpara>
+<literallayout class="monospaced">$ mkdir -p ~/.config &amp;&amp; cd ~/.config/ &amp;&amp; git clone https://github.com/DandiWong/asciidoctor-pdf-config.git</literallayout>
+</section>
+<section xml:id="_neovim-配置">
+<title>neovim 配置</title>
+<simpara>如果您使用的是 SpaceVim，那么配置文件为 <literal>~/.SpaceVim/init.vim</literal>，如果您使用的是原生 neovim，那么配置文件为 <literal>~/.config/nvim/init.vim</literal>，木有的话请自行创建。</simpara>
+<formalpara>
+<title>init.vim</title>
+<para>
+<programlisting language="vim" linenumbering="numbered">let g:username = 'Your name'
+let g:email = 'Your email'
+let g:current_time = strftime('%Y-%m-%d %H:%M:%S', localtime())
+
+let g:python3_host_prog = '/usr/bin/python3'
+let g:asciidoctor_executable = 'asciidoctor'
+let g:asciidoctor_extensions = ['asciidoctor-diagram']
+let g:asciidoctor_pdf_executable = 'asciidoctor-pdf'
+let g:asciidoctor_pdf_extensions = ['asciidoctor-diagram']
+" let g:asciidoctor_css_path = '~/docs/AsciiDocThemes'
+let g:asciidoctor_pdf_themes_path = '~/.config/asciidoctor-pdf-config/themes'
+let g:asciidoctor_pdf_fonts_path = '~/.config/asciidoctor-pdf-config/fonts'
+let g:asciidoctor_pandoc_data_dir = '~/.config/asciidoctor-pdf-config/reference'
+let g:asciidoctor_pandoc_executable = 'pandoc'
+let g:asciidoctor_pandoc_other_params = '--toc --quiet'
+let g:asciidoctor_fenced_languages = ['python', 'c', 'javascript', 'cpp', 'go', 'java', 'ruby', 'sh', 'typescript', 'markdown', 'html', 'css', 'rust', 'arduino', 'asciidoc']
+let g:coc_global_extensions = ['coc-snippets']
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap &lt;tab&gt;' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap &lt;silent&gt;&lt;expr&gt; &lt;TAB&gt;
+      \ pumvisible() ? "\&lt;C-n&gt;" :
+      \ &lt;SID&gt;check_back_space() ? "\&lt;TAB&gt;" :
+      \ coc#refresh()
+inoremap &lt;expr&gt;&lt;S-TAB&gt; pumvisible() ? "\&lt;C-p&gt;" : "\&lt;C-h&gt;"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use &lt;c-space&gt; to trigger completion.
+if has('nvim')
+  inoremap &lt;silent&gt;&lt;expr&gt; &lt;c-space&gt; coc#refresh()
+else
+  inoremap &lt;silent&gt;&lt;expr&gt; &lt;c-@&gt; coc#refresh()
+endif
+
+" Make &lt;CR&gt; auto-select the first completion item and notify coc.nvim to
+" format on enter, &lt;cr&gt; could be remapped by other vim plugin
+inoremap &lt;silent&gt;&lt;expr&gt; &lt;cr&gt; pumvisible() ? coc#_select_confirm()
+                              \: "\&lt;C-g&gt;u\&lt;CR&gt;\&lt;c-r&gt;=coc#on_enter()\&lt;CR&gt;"</programlisting>
+</para>
+</formalpara>
+</section>
+<section xml:id="_coc-nvim-配置">
+<title>coc.nvim 配置</title>
+<simpara>安装 coc.nvim 后，启动 neovim 并在命令模式下 <literal>:CocConfig</literal> 打开配置文件，将下方配置项复制进去。</simpara>
+<formalpara>
+<title>coc-settings.json</title>
+<para>
+<programlisting language="json" linenumbering="numbered">{
+  "snippets.ultisnips.enable": true,
+  "snippets.priority": 90,
+  "suggest.snippetsSupport": true,
+  "snippets.enableStatusItem": true,
+  "snippets.autoTrigger": true,
+  "snippets.loadFromExtensions": true,
+  "snippets.trace": "error",
+  "snippets.ultisnips.directories": [
+      "UltiSnips"
+  ]
+}</programlisting>
+</para>
+</formalpara>
+</section>
+</section>
+<section xml:id="_用起来吧">
+<title>用起来吧！</title>
+<section xml:id="_快速输入格式">
+<title>快速输入格式</title>
+<simpara><literal>nvim test.adoc</literal> 创建一个 asciidoc 文件进入编辑模式，输入 head 如果看到 snippet 提示就是可用了，通过 tab 键选择并回车即可，如下图:</simpara>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/snippets-header.png"/>
+</imageobject>
+<textobject><phrase>snippets header</phrase></textobject>
+</mediaobject>
+</informalfigure>
+</section>
+</section>
+<section xml:id="_snippets-介绍">
+<title>snippets 介绍</title>
+<section xml:id="_标准文档头">
+<title>标准文档头</title>
+<simpara>作用见注释</simpara>
+<formalpara>
+<title>snippets-header</title>
+<para>
+<programlisting language="asciidoc" linenumbering="numbered">:encoding: utf-8 // 使用标准编码
+:experimental:
+:scripts: cjk // 支持中日韩文字与西文混排
+:icons: font
+:stem: latexmath
+:source-highlighter: pygments
+:pygments-css: class
+:pygments-style: material // 高亮样式，可以去 gygments 官网看看其他喜欢的样式
+:pygments-linenums-mode: inline // 文档中引用代码块时显示行号，但是浏览器预览时没展示，需要再调整
+:sourcedir: src // 代码目录
+:includedir:  // 引用文件目录
+:imagesdir: images // 图片目录
+:title-logo-image: logo.png
+:toc: left  // 浏览器插件查看效果时目录在一旁
+:toc-title: 目录
+:toclevels: 3
+:sectnums: // 启用章节编号
+:sectnumlevels: 3
+:chapter-signifier!: // 关闭章节自定义前缀
+:sectanchors:
+:idseparator: -
+:figure-caption: 图 // 图片名称前缀
+:table-caption: 表格 // 表格名称前缀
+:author: `!v g:username` // 使用 init.vim 中自定义的作者名
+:email: `!v g:email` // 同上
+:pdf-theme: custom // 自定义主题
+:doctype: book // book 比 article 多一些版式
+:revnumber: 1.0
+:revdate: `!v g:current_time` // 文档创建时间
+:revremark: Initial
+= ${1:`!v expand('%:r')`} // 使用去除路径和扩展的文件名作为标题</programlisting>
+</para>
+</formalpara>
+</section>
+<section xml:id="_csv-格式表格">
+<title>CSV 格式表格</title>
+<table role="center" frame="none" rowsep="1" colsep="0">
+<?dbfo keep-together="always"?>
+<title>csv 表格展示</title>
+<?dbhtml table-width="80%"?>
+<?dbfo table-width="80%"?>
+<?dblatex table-width="80%"?>
+<tgroup cols="4">
+<colspec colname="col_1" colwidth="85*"/>
+<colspec colname="col_2" colwidth="85*"/>
+<colspec colname="col_3" colwidth="85*"/>
+<colspec colname="col_4" colwidth="85*"/>
+<thead>
+<row>
+<entry align="center" valign="middle">姓名</entry>
+<entry align="center" valign="middle">性别</entry>
+<entry align="center" valign="middle">年龄</entry>
+<entry align="center" valign="middle">电话</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="center" valign="middle"><simpara>张三</simpara></entry>
+<entry align="center" valign="middle"><simpara>男</simpara></entry>
+<entry align="center" valign="middle"><simpara>38</simpara></entry>
+<entry align="center" valign="middle"><simpara>13800000000</simpara></entry>
+</row>
+<row>
+<entry align="center" valign="middle"><simpara>李四</simpara></entry>
+<entry align="center" valign="middle"><simpara>男</simpara></entry>
+<entry align="center" valign="middle"><simpara>38</simpara></entry>
+<entry align="center" valign="middle"><simpara>13800000000</simpara></entry>
+</row>
+<row>
+<entry align="center" valign="middle"><simpara>王五</simpara></entry>
+<entry align="center" valign="middle"><simpara>男</simpara></entry>
+<entry align="center" valign="middle"><simpara>38</simpara></entry>
+<entry align="center" valign="middle"><simpara>13800000000</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+<simpara>asciidoc 源格式为：</simpara>
+<programlisting language="asciidoc" linenumbering="unnumbered">.csv表格展示
+[frame=none,grid=rows,width="80%",role=center,cols="4*^.^",options="header,autowidth,unbreakable"]
+,===
+姓名,性别,年龄,电话
+张三,男,38,13800000000
+李四,男,38,13800000000
+王五,男,38,13800000000
+,===</programlisting>
+<simpara>注意：这个版式在 html 中会根据当前使用的渲染引擎的不一样而导致效果不一，比如 github 默认的渲染和本地浏览器插件查看效果就是不一样的，而输出到 pdf 与 word 文档中时就比较符合平常写论文时候要求的版式了,</simpara>
+<simpara>使用本插件提供的 snippets 只需要输入 csv 即可触发片段输入版式，剩下的只需要填一下表格内容（再调整一下必要的参数如 <literal>4*^</literal> 这里的数字应当为你表格的真实列数）就好了，很方便吧。</simpara>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/snippets-csv.png"/>
+</imageobject>
+<textobject><phrase>snippets-csv.png</phrase></textobject>
+</mediaobject>
+</informalfigure>
+</section>
+<section xml:id="_复杂格式表格">
+<title>复杂格式表格</title>
+<table role="center" frame="all" rowsep="1" colsep="1">
+<?dbfo keep-together="always"?>
+<title>复杂表格</title>
+<?dbhtml table-width="100%"?>
+<?dbfo table-width="100%"?>
+<?dblatex table-width="100%"?>
+<tgroup cols="3">
+<colspec colname="col_1" colwidth="141.6665*"/>
+<colspec colname="col_2" colwidth="141.6665*"/>
+<colspec colname="col_3" colwidth="141.6669*"/>
+<thead>
+<row>
+<entry align="center" valign="middle">C1</entry>
+<entry align="center" valign="middle">C2</entry>
+<entry align="center" valign="middle">C3</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="middle"><simpara>C1R1</simpara></entry>
+<entry align="center" valign="middle" namest="col_2" nameend="col_3"><simpara>C2R1</simpara></entry>
+</row>
+<row>
+<entry align="right" valign="middle"><simpara><literal>C1R2</literal></simpara></entry>
+<entry align="center" valign="middle" morerows="1"><simpara>C2R2</simpara></entry>
+<entry align="center" valign="middle"><simpara>C3R2</simpara></entry>
+</row>
+<row>
+<entry align="center" valign="middle"><simpara><emphasis role="strong">C1R3</emphasis></simpara></entry>
+<entry align="center" valign="middle"><simpara><emphasis>C3R3</emphasis></simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+<simpara>说起来搞笑，当初转向 asciidoc 最大的原因其实就是 markdown 处理复杂表格时屎一样的表现，比如上面这种输出样式在 markdown （目前见到过的扩展）中是无法实现的，而好巧不巧作为一个产品经理平时做需求规划项目管理等等时的文档就经常遇到各种合并单元格的情况，asciidoc 复杂表格的版式看似很乱实际每个属性用一遍之后就很自然而然记住了，甩 markdown 八条街。</simpara>
+<simpara>同样，有了 snippets 的加持，你也不需要记住那么复杂的版式，直接输入 table 等一个触发就好了。</simpara>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="images/snippets-table.png"/>
+</imageobject>
+<textobject><phrase>snippets-table.png</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<programlisting language="asciidoc" linenumbering="unnumbered">.复杂表格
+[frame=all,grid=all,width=100%,role=center,cols="3*^.^",options="header,autowidth,unbreakable"]
+|===
+| C1 | C2 | C3
+&lt;| C1R1 2+| C2R1
+&gt;m| C1R2 .2+^.^| C2R2 | C3R2
+s| C1R3 e| C3R3
+|===</programlisting>
+</section>
+<section xml:id="_更多版式">
+<title>更多版式</title>
+<simpara>参看作者自定义主题项目的效果 <link xl:href="https://github.com/DandiWong/asciidoctor-pdf-config#readme">我的文档工具链: 基于 asciidoc 的文档编辑、排版与转换</link></simpara>
+</section>
+</section>
+<section xml:id="_多种格式输出">
+<title>多种格式输出</title>
+<simpara><literal>asciidoctor</literal> 只是一个 asciidoc 的底层运行时，还需要搭配其他工具来进行格式化输出（如 word/pdf/markdown/html 等格式），在这里我们主要用到的是 <literal>asciidoctor-pdf</literal> 和 Chrome 浏览器插件 <literal>Asciidoctor.js Live Preview</literal>。</simpara>
+<section xml:id="_pdf-输出">
+<title>pdf 输出</title>
+<simpara>在使用 neovim 编辑 asciidoc 文件时，在命令模式下使用 <literal>:Asciidoctor2PDF</literal> 即可在 asciidoc 文件同目录下生成同名 pdf 文档。根据 <literal>header</literal> 中的 <literal>:pdf-theme:</literal> 与 <literal>:doctype:</literal> 选项来决定版式。默认 <literal>:pdf-theme: custom</literal> 即作者提供的配置， <literal>:doctype:</literal> 为 <literal>book</literal> 时将使用书籍版式进行排版，而为空或者 <literal>article</literal> 时将使用常规版式进行排版。</simpara>
+</section>
+<section xml:id="_word-输出">
+<title>word 输出</title>
+<simpara>命令为 <literal>:Asciidoctor2DOCX</literal>，注意它的版式也是可以自定义的，版式文件从 <literal>asciidoctor-pdf-config/reference</literal> 中查找前缀为 <literal>:pdf-theme:</literal> 参数的文件，如 <literal>:pdf-theme: custom</literal> 则版式文件为 <literal>asciidoctor-pdf-config/reference/custom-reference.docx</literal>。</simpara>
+</section>
+<section xml:id="_markdown-输出">
+<title>markdown 输出</title>
+<simpara>命令为 <literal>:Asciidoctor2MARKDOWN</literal>，由于 asciidoc 支持的版式超过了 markdown，所以转换为 markdown 时会遇到一些版式丢失的情况。</simpara>
+</section>
+<section xml:id="_浏览器预览及-html-输出">
+<title>浏览器预览及 html 输出</title>
+<simpara>安装 Chrome 插件 <literal>Asciidoctor.js Live Preview</literal> 并在插件选项中设置为可读取本地文件，将 asciidoc 文件拖入浏览器（Mac 下可以在命令模式中使用 <literal>:!Google-Chrome -a %</literal>）即可看到实时预览。</simpara>
+<simpara>使用 <literal>:Asciidoctor2HTML</literal> 导出为 html 文件。</simpara>
+<simpara><?asciidoc-pagebreak?></simpara>
+</section>
+</section>
+<section xml:id="_license">
+<title>LICENSE</title>
+<simpara>MIT License</simpara>
+<simpara>Copyright (c) 2018 Maxim Kim &amp;<?asciidoc-br?>
+Copyright (c) 2021 Dandi Wong</simpara>
+<simpara>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</simpara>
+<simpara>The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.</simpara>
+<simpara>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</simpara>
+</section>
+</>

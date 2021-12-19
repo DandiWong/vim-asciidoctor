@@ -46,7 +46,6 @@ endsnippet
 
 snippet header "Document Blockheader"
 :encoding: utf-8
-:experimental:
 :scripts: cjk
 :icons: font
 :stem: latexmath
@@ -63,11 +62,11 @@ snippet header "Document Blockheader"
 :toclevels: 3
 :sectnums:
 :sectnumlevels: 3
-:chapter-signifier!:
 :sectanchors:
 :idseparator: -
 :figure-caption: 图
 :table-caption: 表格
+:chapter-label:
 :author: `!v g:username`
 :email: `!v g:email`
 :pdf-theme: default
@@ -731,18 +730,18 @@ endsnippet
 # -------------------------------------------------------------------------
 
 snippet csv "CSV Table" b
-.${1:Title}
-[frame=none,grid=rows,width="80%",role=center,cols="${2}*^",options="header,autowidth,unbreakable"]
+.${2:Title}
+[frame=none,grid=rows,width="80%",role=center,cols="${VISUAL}${1:columns}*^.^",options="header,autowidth,unbreakable"]
 ,===
 $0
 ,===
 endsnippet
 
 snippet table "Full Table" b
-.${1:Title}
-[frame=all,grid=all,width=100%,role=center,cols="3*^",options="header,autowidth,unbreakable"]
+.${2:Title}
+[frame=all,grid=all,width=100%,role=center,cols="${VISUAL}${1:columns}*^.^",options="header,autowidth,unbreakable"]
 |===
-^.^| $0 ^.^| C2 ^.^| C3 
+| C1 | C2 | C3 $0
 <| C1R1 2+| C2R1
 >m| C1R2 .2+^.^| C2R2 h| C3R2
 s| C1R3 e| C3R3

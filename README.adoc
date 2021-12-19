@@ -1,5 +1,4 @@
 :encoding: utf-8
-:experimental:
 :scripts: cjk
 :icons: font
 :stem: latexmath
@@ -16,34 +15,34 @@
 :toclevels: 3
 :sectnums:
 :sectnumlevels: 3
-:chapter-signifier!:
 :sectanchors:
 :idseparator: -
 :figure-caption: 图
 :table-caption: 表格
+:chapter-label:
 :author: Dandi Wong
 :email: DandiToCoach@gmail.com
-:pdf-theme: book_a4
-:doctype: article
+:pdf-theme: custom
+:doctype: 
 :revnumber: 1.0
-:revdate: 2021-12-17 10:57:51
+:revdate: 2021-12-19
 :revremark: Initial
-= Vim Asciidoctor 改进
+= Vim Asciidoctor 改进: 打造文档工具链
 
 == 介绍
 
-此插件是在 link:https://github.com/habamax/vim-asciidoctor[Vim-Asciidoctor] 项目基础上 fork 而来，原版介绍看 xref:README_Origin.adoc[]，本项目改进如下：
+此插件是在 link:https://github.com/habamax/vim-asciidoctor[Vim-Asciidoctor] 项目基础上 fork 而来，原版介绍看 xref:README_Origin.adoc[README_Origin]，本项目改进如下：
 
 * [x] 新增 asciidoc 向 markdown 转换方法 `:Asciidoctor2MARKDOWN`。
 * [x] 新增使用系统默认程序打开转换后的 markdown 方法 `:AsciidoctorOpenMARKDOWN`。
-* [x] 新增 UltiSnips 格式的 snippets。
-* [ ] 提供一套作者本人使用中的 asciidoctor-pdf 主题+字体，开箱即用。
+* [x] 新增 UltiSnips 格式的 snippets，辅助进行快速插入各种版式。
+* [x] 搭配作者本人配置的 asciidoctor-pdf 主题+字体，可直接生成论文与书籍，开箱即用。
 * [ ] 给 pygments 搞一套 asciidoc 语法高亮的配置文件。
 
 == 面向人群
 
-* 日常工作有大量的文本编辑与格式化输出的需要，比如产品经理、文档整理员、博客与书籍作者等。
-* 掌握 vim/neovim 和终端命令行的基本使用如进入退出 vim 和编辑文件、使用命令行复制粘贴 clone 代码库等基本操作即可。
+* 日常工作有大量文本编辑与格式化输出需要的角色，比如产品经理、文档整理员、博客与书籍作者等。
+* 掌握 vim/neovim 和终端命令行的基本使用。如进入退出 vim 和编辑文件、使用命令行复制粘贴、clone 代码库等基本操作。
 
 == 环境安装
 
@@ -59,9 +58,9 @@
 
 . 安装 asciidoctor 与 pdf/docx 转换器、语法高亮依赖、neovim 支持
 
- $ gem install asciidoctor asciidoctor-pdf pygments.rb neovim
+ $ gem install asciidoctor asciidoctor-pdf asciidoctor-diagram pygments.rb neovim
 
-=== 推荐： 基于 SpaceVim
+=== 推荐：基于 SpaceVim
 
 . 安装 SpaceVim： 
 
@@ -102,6 +101,12 @@ merged = false
 
 == 环境配置
 
+=== asciidoctor-pdf 主题配置
+
+完成环境安装部分后，在使用 Vim 编辑 asciidoc 文件时可以通过 `:Asciidoctor2PDF`/`:Asciidoctor2DOCX`/`:Asciidoctor2MARKDOWN`/`:Asciidoctor2HTML` 这些 `vim-asciidoctor` 插件构建的命令来调用 `asciidoctor-pdf` 完成格式的转换。但是默认的主题与字体配置对多语种混排、CJK 字体、Nerd Fonts 的支持都很差，所以作者也自定义了一套配置，你可以直接使用：
+
+  $ mkdir -p ~/.config && cd ~/.config/ && git clone https://github.com/DandiWong/asciidoctor-pdf-config.git
+
 === neovim 配置
 
 如果您使用的是 SpaceVim，那么配置文件为 `~/.SpaceVim/init.vim`，如果您使用的是原生 neovim，那么配置文件为 `~/.config/nvim/init.vim`，木有的话请自行创建。
@@ -113,15 +118,15 @@ let g:username = 'Your name'
 let g:email = 'Your email'
 let g:current_time = strftime('%Y-%m-%d %H:%M:%S', localtime())
 
-let g:python3_host_prog = '/path/to/your/python3'
+let g:python3_host_prog = '/usr/bin/python3'
 let g:asciidoctor_executable = 'asciidoctor'
 let g:asciidoctor_extensions = ['asciidoctor-diagram']
 let g:asciidoctor_pdf_executable = 'asciidoctor-pdf'
 let g:asciidoctor_pdf_extensions = ['asciidoctor-diagram']
 " let g:asciidoctor_css_path = '~/docs/AsciiDocThemes'
-let g:asciidoctor_pdf_themes_path = '/path/to/your/asciidoctor-pdf/themes'
-let g:asciidoctor_pdf_fonts_path = '/path/to/your/asciidoctor-pdf/fonts'
-let g:asciidoctor_pandoc_data_dir = '/path/to/your/asciidoctor-pdf/reference'
+let g:asciidoctor_pdf_themes_path = '~/.config/asciidoctor-pdf-config/themes'
+let g:asciidoctor_pdf_fonts_path = '~/.config/asciidoctor-pdf-config/fonts'
+let g:asciidoctor_pandoc_data_dir = '~/.config/asciidoctor-pdf-config/reference'
 let g:asciidoctor_pandoc_executable = 'pandoc'
 let g:asciidoctor_pandoc_other_params = '--toc --quiet'
 let g:asciidoctor_fenced_languages = ['python', 'c', 'javascript', 'cpp', 'go', 'java', 'ruby', 'sh', 'typescript', 'markdown', 'html', 'css', 'rust', 'arduino', 'asciidoc']
@@ -183,14 +188,14 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 
 image::snippets-header.png[]
 
-== snippet 介绍
+== snippets 介绍
 
 === 标准文档头
 
 作用见注释
 
 [source%linenums,asciidoc]
-.header
+.snippets-header
 ----
 :encoding: utf-8 // 使用标准编码
 :experimental:
@@ -228,7 +233,7 @@ image::snippets-header.png[]
 === CSV 格式表格
 
 .csv 表格展示
-[frame=none,grid=rows,width="80%",role=center,cols="4*^",options="header,autowidth,unbreakable"]
+[frame=none,grid=rows,width="80%",role=center,cols="4*^.^",options="header,autowidth,unbreakable"]
 ,===
 姓名,性别,年龄,电话
 张三,男,38,13800000000
@@ -240,7 +245,7 @@ asciidoc 源格式为：
 
 ```asciidoc
 .csv表格展示
-[frame=none,grid=rows,width="80%",role=center,cols="4*^",options="header,autowidth,unbreakable"]
+[frame=none,grid=rows,width="80%",role=center,cols="4*^.^",options="header,autowidth,unbreakable"]
 ,===
 姓名,性别,年龄,电话
 张三,男,38,13800000000
@@ -249,9 +254,7 @@ asciidoc 源格式为：
 ,===
 ```
 
-注意：这个版式在 html 中会根据当前使用的渲染引擎的不一样而导致效果不一，比如 github 默认的渲染和本地浏览器插件查看效果就是不一样的，而输出到 pdf 与 word 文档中时就比较符合平常写论文时候要求的版式了，效果如下：
-
-image::snippets-csv-pdf.png[snippets-csv-pdf.png]
+注意：这个版式在 html 中会根据当前使用的渲染引擎的不一样而导致效果不一，比如 github 默认的渲染和本地浏览器插件查看效果就是不一样的，而输出到 pdf 与 word 文档中时就比较符合平常写论文时候要求的版式了,
 
 使用本插件提供的 snippets 只需要输入 csv 即可触发片段输入版式，剩下的只需要填一下表格内容（再调整一下必要的参数如 `4*^` 这里的数字应当为你表格的真实列数）就好了，很方便吧。
 
@@ -260,11 +263,11 @@ image::snippets-csv.png[snippets-csv.png]
 === 复杂格式表格
 
 .复杂表格
-[frame=all,grid=all,width=100%,role=center,cols="3*^",options="header,autowidth,unbreakable"]
+[frame=all,grid=all,width=100%,role=center,cols="3*^.^",options="header,autowidth,unbreakable"]
 |===
-^.^| C1 ^.^| C2 ^.^| C3 
+| C1 | C2 | C3 
 <| C1R1 2+| C2R1
->m| C1R2 .2+^.^| C2R2 h| C3R2
+>m| C1R2 .2+^.^| C2R2 | C3R2
 s| C1R3 e| C3R3
 |===
 
@@ -276,14 +279,18 @@ image::snippets-table.png[snippets-table.png]
 
 ```asciidoc
 .复杂表格
-[frame=all,grid=all,width=100%,role=center,cols="3*^",options="header,autowidth,unbreakable"]
+[frame=all,grid=all,width=100%,role=center,cols="3*^.^",options="header,autowidth,unbreakable"]
 |===
-^.^| C1 ^.^| C2 ^.^| C3 
+| C1 | C2 | C3 
 <| C1R1 2+| C2R1
->m| C1R2 .2+^.^| C2R2 h| C3R2
+>m| C1R2 .2+^.^| C2R2 | C3R2
 s| C1R3 e| C3R3
 |===
 ```
+
+=== 更多版式
+
+参看作者自定义主题项目的效果 link:https://github.com/DandiWong/asciidoctor-pdf-config#readme[我的文档工具链: 基于 asciidoc 的文档编辑、排版与转换]
 
 == 多种格式输出
 
@@ -291,11 +298,21 @@ s| C1R3 e| C3R3
 
 === pdf 输出
 
+在使用 neovim 编辑 asciidoc 文件时，在命令模式下使用 `:Asciidoctor2PDF` 即可在 asciidoc 文件同目录下生成同名 pdf 文档。根据 `header` 中的 `:pdf-theme:` 与 `:doctype:` 选项来决定版式。默认 `:pdf-theme: custom` 即作者提供的配置， `:doctype:` 为 `book` 时将使用书籍版式进行排版，而为空或者 `article` 时将使用常规版式进行排版。
+
 === word 输出
+
+命令为 `:Asciidoctor2DOCX`，注意它的版式也是可以自定义的，版式文件从 `asciidoctor-pdf-config/reference` 中查找前缀为 `:pdf-theme:` 参数的文件，如 `:pdf-theme: custom` 则版式文件为 `asciidoctor-pdf-config/reference/custom-reference.docx`。
 
 === markdown 输出
 
+命令为 `:Asciidoctor2MARKDOWN`，由于 asciidoc 支持的版式超过了 markdown，所以转换为 markdown 时会遇到一些版式丢失的情况。
+
 === 浏览器预览及 html 输出
+
+安装 Chrome 插件 `Asciidoctor.js Live Preview` 并在插件选项中设置为可读取本地文件，将 asciidoc 文件拖入浏览器（Mac 下可以在命令模式中使用 `:!Google-Chrome -a %`）即可看到实时预览。
+
+使用 `:Asciidoctor2HTML` 导出为 html 文件。
 
 <<<
 == LICENSE

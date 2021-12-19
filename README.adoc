@@ -36,7 +36,7 @@
 * [x] 新增 asciidoc 向 markdown 转换方法 `:Asciidoctor2MARKDOWN`。
 * [x] 新增使用系统默认程序打开转换后的 markdown 方法 `:AsciidoctorOpenMARKDOWN`。
 * [x] 新增 UltiSnips 格式的 snippets，辅助进行快速插入各种版式。
-* [x] 搭配作者本人配置的 asciidoctor-pdf 主题+字体，可直接生成论文与书籍，开箱即用。
+* [x] 搭配作者本人配置的 asciidoctor-pdf 主题+字体，可直接生成论文与书籍，开箱即用。 详情见 link:https://github.com/DandiWong/asciidoctor-pdf-config#readme[我的文档工具链: 基于 asciidoc 的文档编辑、排版与转换]
 * [ ] 给 pygments 搞一套 asciidoc 语法高亮的配置文件。
 
 == 面向人群

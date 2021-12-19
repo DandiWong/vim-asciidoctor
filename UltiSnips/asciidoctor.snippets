@@ -69,11 +69,11 @@ snippet header "Document Blockheader"
 :chapter-label:
 :author: `!v g:username`
 :email: `!v g:email`
-:pdf-theme: default
+:pdf-theme: custom
 :doctype: article
 :revnumber: 1.0
 :revdate: `!v g:current_time`
-:revremark: Initial
+:revremark: Alpha
 = ${1:`!v expand('%:r')`}
 
 $0
@@ -768,4 +768,10 @@ endsnippet
 snippet horiz "Horizontal Description list" b
 [horizontal]
 ${1:Item}::${2:description}
+endsnippet
+
+# add checklist block 
+snippet checklist "Todo Check list" b
+* [ ] ${1:Item}
+$0
 endsnippet

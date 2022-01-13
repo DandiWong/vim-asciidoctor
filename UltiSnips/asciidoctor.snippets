@@ -74,7 +74,7 @@ snippet header "Document Blockheader"
 :revnumber: ${3:1.0}
 :revdate: `!v g:current_time`
 :revremark: ${4:Alpha}
-= ${VISUAL}${5:`!v expand('%:r')`}
+= ${VISUAL}${5:`!v expand('%:r:t')`}
 
 $0
 endsnippet

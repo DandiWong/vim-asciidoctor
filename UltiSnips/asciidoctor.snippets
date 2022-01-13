@@ -69,12 +69,12 @@ snippet header "Document Blockheader"
 :chapter-label:
 :author: `!v g:username`
 :email: `!v g:email`
-:pdf-theme: custom
-:doctype: article
-:revnumber: 1.0
+:pdf-theme: ${1:custom}
+:doctype: ${2:article}
+:revnumber: ${3:1.0}
 :revdate: `!v g:current_time`
-:revremark: Alpha
-= ${1:`!v expand('%:r')`}
+:revremark: ${4:Alpha}
+= ${VISUAL}${5:`!v expand('%:r')`}
 
 $0
 endsnippet
@@ -495,6 +495,13 @@ snippet link "Link" !w
 link:$1[${2:${VISUAL}}]$0
 endsnippet
 
+# include files
+snippet include "Description" b
+
+endsnippet
+\ainclude,include::file[],
+\auri,:asciidoctor-source: https://,
+
 # Email:
 snippet mailto "Email" !w
 mailto:$1[${2:${VISUAL}}]$0
@@ -615,6 +622,52 @@ snippet "` "Double Curved Quotes" !w
 "\`${1:${VISUAL}}\`"$0
 endsnippet
 
+snippet bug "highlight for bug" b
+ [red]#bug# $0
+endsnippet
+
+snippet optimize "highlight for optimize" b
+ [yellow]#optimize# $0
+endsnippet
+
+snippet feature "highlight for feature" b
+ [green]#feature# $0
+endsnippet
+
+snippet info "highlight for info" b
+ [blue]#info# $0
+endsnippet
+
+snippet br "hardbreaks" b
+
+[%hardbreaks]
+
+$0
+endsnippet
+
+snippet underline "underline text" b
+ [.underline]#${1:text}# $0
+endsnippet
+
+snippet line-through "line-through" b
+ [.line-through]#${1:text}# $0
+endsnippet
+
+snippet big "big text" b
+ [.big]##${1:text}## $0
+endsnippet
+
+snippet small "small text" b
+ [.small]#${1:text}# $0
+endsnippet
+
+snippet upper "upper letter" b
+ ^${1:text}^ $0
+endsnippet
+
+snippet lower "lower letter" b
+ ~${1:text}~ $0
+endsnippet
 
 # -------------------------------------------------------------------------
 #                             Semantic Markup
@@ -731,20 +784,18 @@ endsnippet
 
 snippet csv "CSV Table" b
 .${2:Title}
-[frame=none,grid=rows,width="80%",role=center,cols="${VISUAL}${1:columns}*^.^",options="header,autowidth,unbreakable"]
+[frame=none,grid=rows,width="80%",role=center,cols="${1:columns}*^.^",options="header,autowidth,unbreakable"]
 ,===
 $0
 ,===
 endsnippet
 
 snippet table "Full Table" b
-.${2:Title}
-[frame=all,grid=all,width=100%,role=center,cols="${VISUAL}${1:columns}*^.^",options="header,autowidth,unbreakable"]
+.${1:Title}
+[frame=all,grid=all,width=100%,role=center,cols="${1:columns}*^.^",options="header,autowidth,unbreakable"]
 |===
-| C1 | C2 | C3 $0
-<| C1R1 2+| C2R1
->m| C1R2 .2+^.^| C2R2 h| C3R2
-s| C1R3 e| C3R3
+^.^| ${3:C1} ^.^| ${4:C2} ^.^| ${5:C3}
+.2+.^| $0
 |===
 endsnippet
 
@@ -774,4 +825,215 @@ endsnippet
 snippet checklist "Todo Check list" b
 * [ ] ${1:Item}
 $0
+endsnippet
+
+# -------------------------------------------------------------------------
+#                      UML,Mermaid .etc
+# -------------------------------------------------------------------------
+
+snippet uc,usecase "PlantUML UseCase" b
+[plantuml]
+.${1:用例图}
+....
+!theme cerulean
+left to right direction
+
+actor "${1:医生/科研人员}" as a1
+
+package "${2:患者管理}" as p1 {
+  usecase "${3:患者建档}" as uc1
+  usecase "${4:患者随访}" as uc2
+}
+
+a1 -- uc1
+a1 -- uc2
+uc2 -> uc1 : include
+....
+
+$0
+endsnippet
+
+snippet seq,sequence "PlantUML Sequence Diagram" b
+[plantuml]
+.${1:时序图}
+....
+!theme cerulean
+autonumber
+skinparam responseMessageBelowArrow true
+
+participant ${1:组件} as p1
+actor ${2:身份} as a1
+boundary ${3:边界} as b1
+control ${4:控制器} as c1
+entity ${5:实体} as e1
+database ${6:数据库} as d1
+collections ${7:集合} as cc1
+queue ${8:队列} as q1
+
+p1 -> a1 : ${9:描述} 
+a1 -> b1 : $success(""success: hello B."")
+b1 -x c1 : $failure(""failure"")
+c1 ->> e1: $warning(""warning"")
+....
+
+$0
+endsnippet
+
+snippet gantt "PlantUML Gantt Diagram" b
+[plantuml,width=100%]
+.${1:项目计划}
+....
+saturday are closed
+sunday are closed
+
+Project starts ${2:2021-12-22}
+[${3:业务需求讨论}] as [t1] starts 2021-12-22 and ends 2022-01-12 and is 100% complete
+[${4:需求冻结}] happens at [t1]'s end
+....
+
+$0
+endsnippet
+
+snippet states "PlantUML States Diagram" b
+[plantuml]
+.${1:活动状态}
+....
+hide empty description
+
+state "${2:未上线}" as s0
+state "${3:初赛期}" as s1 {
+  state "${4:可报名期}" as s1.1
+  state "${5:不可报名期}" as s1.2
+}
+
+[*] -right-> s0
+s0 : 不可见
+
+s0 -right-> s1.1 : 2022/02/15
+s1.1 : 可见
+s1.1 : 审核通过后即参与初赛
+s1.1 : 可投票
+
+s1.1 -right-> s1.2 : 待定
+s1.2 : 不可报名
+s1.2 : 不可投票
+
+s1.2 --> [*]
+....
+endsnippet
+
+# -------------------------------------------------------------------------
+#                      PRD Template
+# -------------------------------------------------------------------------
+
+snippet tableForPRD "Table for PRD" b
+.${1:Title}
+[frame=all,grid=all,width=100%,role=center,cols="${2:2,4,2,4}",options="header,autowidth,unbreakable"]
+|===
+^.^| 版块 ^.^| 元素 ^.^| 内容 ^.^| 属性 ^.^| 交互 
+.2+.^| $0
+|===
+endsnippet
+
+snippet headerForPRD "Documents header for PRD" b
+:encoding: utf-8
+:scripts: cjk
+:icons: font
+:stem: latexmath
+:source-highlighter: pygments
+:pygments-css: class
+:pygments-style: material
+:pygments-linenums-mode: inline
+:sourcedir: src
+:includedir: includes
+:imagesdir: images
+:title-logo-image: {imagesdir}/logo.png
+:toc: left
+:toc-title: 目录
+:toclevels: 3
+:sectnums:
+:sectnumlevels: 3
+:sectanchors:
+:idseparator: -
+:figure-caption: 图
+:table-caption: 表格
+:chapter-label:
+:author: `!v g:username`
+:email: `!v g:email`
+:pdf-theme: ${1:custom}
+:doctype: ${2:article}
+:revnumber: ${3:1.0}
+:revdate: `!v g:current_time`
+:revremark: ${4:Alpha}
+= ${VISUAL}${5:`!v expand('%:r:t')`}
+
+== 项目信息
+
+=== 业务背景
+
+=== 业务目标
+
+=== 参与人员
+
+=== 项目规划
+$0
+== 业务建模
+
+=== 领域模型
+
+=== 业务用例
+
+=== 业务流程
+
+== 系统一
+
+=== 功能一
+
+== 附录
+
+=== 附录一： 图片资源
+
+=== 附录二：文本内容
+
+== 运营部署
+
+=== 运营计划
+
+== 质量管理
+
+=== 资源依赖
+
+.依赖清单
+[frame=all,grid=all,width=100%,role=center,cols="4,4,2,2",options="header,autowidth,unbreakable"]
+|===
+^.^| 功能 ^.^| 依赖资源 ^.^| 资源把控人 ^.^| 资源交付节点 
+|===
+
+=== 风险管控
+.风险管控
+[frame=all,grid=all,width=100%,role=center,cols="3*^.^",options="header,autowidth,unbreakable"]
+|===
+^.^| 风险点 ^.^| 影响程度 ^.^| 管控人 ^.^| 后备方案
+|===
+
+=== 性能指标
+.性能指标
+[frame=all,grid=all,width=100%,role=center,cols="3*^.^",options="header,autowidth,unbreakable"]
+|===
+^.^| 系统 ^.^| 评估点 ^.^| 指标要求 ^.^| 负责人
+|===
+
+=== 版本变更
+==== 20220112会议
+.变更内容
+[frame=all,grid=all,width=100%,role=center,cols="2,8a",options="header,autowidth,unbreakable"]
+|===
+^.^| 类型 ^.^| 事项 
+.^| 文案变更 | * [ ] 变更一
+* [ ] 变更二
+.^| 元素变更 | * [ ] 变更三
+* [ ] 变更四
+.^| 逻辑变更 | * [ ] 变更五
+* [ ] 变更六
+|===
 endsnippet

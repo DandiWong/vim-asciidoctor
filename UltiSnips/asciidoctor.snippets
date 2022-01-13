@@ -1047,17 +1047,17 @@ image::[]
 === 资源依赖
 
 .依赖清单
-[frame=all,grid=all,width=100%,role=center,cols="3,4,1,2",options=header]
+[frame=all,grid=all,width=100%,role=center,cols="1,3,3,2,1",options=header]
 |===
-^.^| 功能 ^.^| 依赖资源 ^.^| 资源把控人 ^.^| 资源交付节点 
+^.^| 编号 ^.^| 资源描述 ^.^| 支持功能 ^.^| 交付节点 ^.^| 管控人 
 |===
 
 === 风险管控
 .风险清单
-[frame=all,grid=all,width=100%,role=center,cols="1,3,1,1,3,1",options=header]
+[frame=all,grid=all,width=100%,role=center,cols="1,3,1,3,1,1",options=header]
 |===
-^.^| 风险点编号 ^.^| 风险点描述 ^.^| 影响程度 ^.^| 管控人 ^.^| 后备方案 ^.^| 跟进情况
-| S1-R1 | 标题有可能无法自定义 | 低 | Dandi | 用系统标题 | 跟进中
+^.^| 编号 ^.^| 风险描述 ^.^| 影响程度 ^.^| 后备方案 ^.^| 跟进情况 ^.^| 管控人 
+| S1-R1 | 标题有可能无法自定义 | 低 | 用系统标题 | 跟进中 | Dandi 
 |===
 
 === 性能指标
@@ -1070,7 +1070,7 @@ image::[]
 === 版本变更
 ==== 20220112会议
 .变更内容
-[frame=all,grid=all,width=100%,role=center,cols="1,2,7a",options=header]
+[frame=all,grid=all,width=100%,role=center,cols="1,2,6,1",options=header]
 |===
 ^.^| 编号 ^.^| 类型 ^.^| 事项 ^.^| 状态
 .^| C1 .^| 文案变更 | \`登陆\` -> \`登录\` | 已完成
@@ -1100,10 +1100,10 @@ endsnippet
 
 snippet prd_ResourceList,resource "Resource List" b
 .依赖清单
-[frame=all,grid=all,width=100%,role=center,cols="3,4,1,2",options=header]
+[frame=all,grid=all,width=100%,role=center,cols="1,3,3,2,1",options=header]
 |===
-^.^| 功能 ^.^| 依赖资源 ^.^| 资源把控人 ^.^| 资源交付节点 
-| $1 | $2 | $3 | $4 
+^.^| 编号 ^.^| 资源描述 ^.^| 支持功能 ^.^| 交付节点 ^.^| 管控人 
+| $1 | $2 | $3 | $4 | $5
 |===
 
 $0
@@ -1112,9 +1112,9 @@ endsnippet
 snippet prd_RiskManagement,risk "Risk Management List" b
 === 风险管控
 .风险清单
-[frame=all,grid=all,width=100%,role=center,cols="1,3,1,1,3,1",options=header]
+[frame=all,grid=all,width=100%,role=center,cols="1,3,1,3,1,1",options=header]
 |===
-^.^| 风险点编号 ^.^| 风险点描述 ^.^| 影响程度 ^.^| 管控人 ^.^| 后备方案 ^.^| 跟进情况
+^.^| 编号 ^.^| 风险描述 ^.^| 影响程度 ^.^| 后备方案 ^.^| 跟进情况 ^.^| 管控人 
 | $1 | $2 | $3 | $4 | $5 | $6
 |===
 
@@ -1124,7 +1124,7 @@ endsnippet
 snippet prd_ChangeManagement,change "Change List" b
 ==== `!v strftime('%Y-%m-%d', localtime())`
 .变更内容
-[frame=all,grid=all,width=100%,role=center,cols="1,2,7a",options=header]
+[frame=all,grid=all,width=100%,role=center,cols="1,2,6,1",options=header]
 |===
 ^.^| 编号 ^.^| 类型 ^.^| 事项 ^.^| 状态
 | $1 | $2 | $3 | $4

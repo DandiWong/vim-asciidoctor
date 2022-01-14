@@ -848,16 +848,18 @@ snippet uml_UseCase,usecase,uc "PlantUML UseCase" b
 !theme cerulean
 left to right direction
 
-actor "${2:医生/科研人员}" as a1
-
-package "${3:患者管理}" as p1 {
-  usecase "${4:患者建档}" as uc1
-  usecase "${5:患者随访}" as uc2
+actor "${2:产品经理}" as a1
+actor "${3:研发工程师}"
+package "${4:需求评审}" as p1 {
+  usecase "${5:画原型}" as uc1
+  usecase "${6:写文档}" as uc2
 }
 
-a1 -- uc1
-a1 -- uc2
+a1 --> uc1
+a1 --> uc2
 uc2 -> uc1 : include
+uc1 -> a2
+uc2 -> a2
 ....
 
 $0
@@ -927,7 +929,7 @@ state "${3:参与期}" as s1 {
 [*] -right-> s0
 s0 : ${6:不可见}
 
-s0 -right-> s1.1 : ${7:2022/02/15}
+s0 -right-> s1.1 : ${7:2022/01/10}
 ${8:s1.1 : 可见
 s1.1 : 审核通过后即可参与
 s1.1 : 可抽奖
@@ -1009,7 +1011,7 @@ ${21:[需求确认] as [t2] starts 2022-01-02 and ends 2022-01-06 and is 80% com
 [开发] as [t4] starts at [t2]'s end and ends 2022-01-20 and is 5% complete
 then [测试与修复缺陷] as [t5] lasts 12 days
 then [部署与发布] as [t6] lasts 1 day
-then [迭代一结束] happens}
+[迭代一结束] happens at [t6]'s end}
 ....
 
 == 业务建模

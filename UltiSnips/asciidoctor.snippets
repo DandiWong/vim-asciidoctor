@@ -845,21 +845,18 @@ snippet uml_UseCase,usecase,uc "PlantUML UseCase" b
 .${1:用例图}
 [plantuml]
 ....
-!theme cerulean
-left to right direction
-
 actor "${2:产品经理}" as a1
-actor "${3:研发工程师}"
+actor "${3:研发工程师}"as a2
 package "${4:需求评审}" as p1 {
   usecase "${5:画原型}" as uc1
   usecase "${6:写文档}" as uc2
 }
 
-a1 --> uc1
-a1 --> uc2
-uc2 -> uc1 : include
-uc1 -> a2
-uc2 -> a2
+a1 -right-> uc1
+a1 -right-> uc2
+uc2 -down-> uc1 : include
+uc1 -right-> a2
+uc2 -right-> a2
 ....
 
 $0
@@ -869,7 +866,6 @@ snippet uml_SequenceDiagram,sequence,seq "PlantUML Sequence Diagram" b
 .${1:时序图}
 [plantuml]
 ....
-!theme cerulean
 autonumber
 skinparam responseMessageBelowArrow true
 
@@ -973,7 +969,7 @@ snippet prd_FullTemplate "full PRD Template" b
 :author: `!v g:username`
 :email: `!v g:email`
 :pdf-theme: ${2:custom}
-:doctype: ${3:book}
+:doctype: ${3:article}
 :revnumber: ${4:1.0}
 :revdate: `!v g:current_time`
 :revremark: ${5:Alpha}
@@ -987,12 +983,12 @@ snippet prd_FullTemplate "full PRD Template" b
 
 === 参与人员
 [horizontal]
-项目经理:: $6
-业务经理:: $7
-产品经理:: $8
-设计师:: $9
-研发工程师:: $10
-测试工程师:: $11
+项目经理:: ${6:A}
+业务经理:: ${7:B}
+产品经理:: ${8:C}
+设计师:: ${9:D}
+研发工程师:: ${10:E}
+测试工程师:: ${11:F}
 
 === 项目规划
 .项目规划

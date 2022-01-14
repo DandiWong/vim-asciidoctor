@@ -841,7 +841,7 @@ endsnippet
 #                      UML,Mermaid .etc
 # -------------------------------------------------------------------------
 
-snippet uc,usecase "PlantUML UseCase" b
+snippet uml_UseCase,usecase,uc "PlantUML UseCase" b
 .${1:用例图}
 [plantuml]
 ....
@@ -863,7 +863,7 @@ uc2 -> uc1 : include
 $0
 endsnippet
 
-snippet seq,sequence "PlantUML Sequence Diagram" b
+snippet uml_SequenceDiagram,sequence,seq "PlantUML Sequence Diagram" b
 .${1:时序图}
 [plantuml]
 ....
@@ -889,7 +889,7 @@ c1 ->> e1: $warning(""warning"")
 $0
 endsnippet
 
-snippet gantt "PlantUML Gantt Diagram" b
+snippet uml_GanttDiagram,gantt "PlantUML Gantt Diagram" b
 .${1:项目规划}
 [plantuml,width=100%]
 ....
@@ -912,7 +912,7 @@ then [迭代一结束] happens}
 $0
 endsnippet
 
-snippet states "PlantUML States Diagram" b
+snippet uml_StatesDiagram,states "PlantUML States Diagram" b
 .${1:活动状态}
 [plantuml]
 ....
@@ -945,7 +945,7 @@ endsnippet
 #                      PRD Template
 # -------------------------------------------------------------------------
 
-snippet templateForPRD "full PRD Template" b
+snippet prd_FullTemplate "full PRD Template" b
 :encoding: utf-8
 :scripts: cjk
 :icons: font
@@ -1030,7 +1030,7 @@ then [迭代一结束] happens}
 image::$24[]
 
 .信息结构
-[frame=all,grid=all,width=100%,role=center,cols="1,2,2,5",options=header]
+[frame=all,grid=all,width=100%,role=center,cols="2,3,3,5",options=header]
 |===
 ^.^| 版块 ^.^| 控件 ^.^| 元素 ^.^| 属性 
 | B1 | ${24:NavigationBar} | \`${25:\$\{title_p1\}}\` | \`${26:页面标题}\`
@@ -1039,7 +1039,7 @@ image::$24[]
 |===
 
 .交互
-[frame=all,grid=all,width=100%,role=center,cols="3,2,5",options=header]
+[frame=all,grid=all,width=100%,role=center,cols="3,3,5",options=header]
 |===
 ^.^| 元素 ^.^| 行为 ^.^| 预期结果 
 | \`${33:\$\{btn_p1_submit\}}\` | ${34:click} | ${35:提交成功或失败}
@@ -1060,7 +1060,7 @@ image::$24[]
 === 资源依赖
 
 .依赖清单
-[frame=all,grid=all,width=100%,role=center,cols="1,3,3,2,1",options=header]
+[frame=all,grid=all,width=100%,role=center,cols="2,5,5,3,2",options=header]
 |===
 ^.^| 编号 ^.^| 资源描述 ^.^| 支持功能 ^.^| 交付节点 ^.^| 管控人 
 | $36 | $37 | $38 | $39 | $40
@@ -1068,7 +1068,7 @@ image::$24[]
 
 === 风险管控
 .风险清单
-[frame=all,grid=all,width=100%,role=center,cols="1,3,1,3,1,1",options=header]
+[frame=all,grid=all,width=100%,role=center,cols="2,6,3,5,3,3",options=header]
 |===
 ^.^| 编号 ^.^| 风险描述 ^.^| 影响程度 ^.^| 后备方案 ^.^| 跟进情况 ^.^| 管控人 
 | ${41:S1-R1} | ${42:标题有可能无法自定义} | ${43:低} | ${44:用系统标题} | ${45:跟进中} | ${46:Dandi} 
@@ -1076,7 +1076,7 @@ image::$24[]
 
 === 性能指标
 .性能指标
-[frame=all,grid=all,width=100%,role=center,cols="2,4,3,2",options=header]
+[frame=all,grid=all,width=100%,role=center,cols="2,3,5,2",options=header]
 |===
 ^.^| 系统 ^.^| 评估点 ^.^| 指标要求 ^.^| 负责人
 | $47 | $48 | $49 | $50
@@ -1085,7 +1085,7 @@ image::$24[]
 === 版本变更
 ==== ${51:20220112会议}
 .变更内容
-[frame=all,grid=all,width=100%,role=center,cols="1,2,6,1",options=header]
+[frame=all,grid=all,width=100%,role=center,cols="1,1,3,1",options=header]
 |===
 ^.^| 编号 ^.^| 类型 ^.^| 事项 ^.^| 状态
 .^| ${52:C1} .^| ${53:文案变更} | ${54:\`登陆\` -> \`登录\`} | ${55:已完成}
@@ -1127,7 +1127,7 @@ endsnippet
 snippet prd_RiskManagement,risk "Risk Management List" b
 === 风险管控
 .风险清单
-[frame=all,grid=all,width=100%,role=center,cols="1,3,1,3,1,1",options=header]
+[frame=all,grid=all,width=100%,role=center,cols="1,5,1,5,1,1",options=header]
 |===
 ^.^| 编号 ^.^| 风险描述 ^.^| 影响程度 ^.^| 后备方案 ^.^| 跟进情况 ^.^| 管控人 
 | $1 | $2 | $3 | $4 | $5 | $6
@@ -1139,7 +1139,7 @@ endsnippet
 snippet prd_ChangeManagement,change "Change List" b
 ==== `!v strftime('%Y-%m-%d', localtime())`
 .变更内容
-[frame=all,grid=all,width=100%,role=center,cols="1,2,6,1",options=header]
+[frame=all,grid=all,width=100%,role=center,cols="1,1,3,1",options=header]
 |===
 ^.^| 编号 ^.^| 类型 ^.^| 事项 ^.^| 状态
 | $1 | $2 | $3 | $4

@@ -63,18 +63,17 @@ snippet header "Document Blockheader"
 :sectnums:
 :sectnumlevels: 3
 :sectanchors:
-:idseparator: -
 :figure-caption: 图
 :table-caption: 表格
-:chapter-label:
+:chapter-signifier: 章节
+:pdf-theme: custom
+:doctype: ${1:article}
 :author: `!v g:username`
 :email: `!v g:email`
-:pdf-theme: ${1:custom}
-:doctype: ${2:article}
-:revnumber: ${3:1.0}
 :revdate: `!v g:current_time`
-:revremark: ${4:Alpha}
-= ${VISUAL}${5:`!v expand('%:r')`}
+:revnumber: 0.1
+:revremark: Alpha
+= ${VISUAL}${2:`!v expand('%:r')`}
 
 $0
 endsnippet
@@ -962,18 +961,17 @@ snippet prd_FullTemplate "full PRD Template" b
 :sectnums:
 :sectnumlevels: 3
 :sectanchors:
-:idseparator: -
 :figure-caption: 图
 :table-caption: 表格
-:chapter-label:
+:chapter-signifier: 章节
+:pdf-theme: custom
+:doctype: ${1:article}
 :author: `!v g:username`
 :email: `!v g:email`
-:pdf-theme: ${2:custom}
-:doctype: ${3:article}
-:revnumber: ${4:1.0}
 :revdate: `!v g:current_time`
-:revremark: ${5:Alpha}
-= ${1:`!v expand('%:r')`}
+:revnumber: 0.1
+:revremark: Alpha
+= ${2:`!v expand('%:r')`}
 
 == 项目信息
 
@@ -983,12 +981,12 @@ snippet prd_FullTemplate "full PRD Template" b
 
 === 参与人员
 [horizontal]
-项目经理:: ${6:A}
-业务经理:: ${7:B}
-产品经理:: ${8:C}
-设计师:: ${9:D}
-研发工程师:: ${10:E}
-测试工程师:: ${11:F}
+项目经理:: ${3:A}
+业务经理:: ${4:B}
+产品经理:: ${5:C}
+设计师:: ${6:D}
+研发工程师:: ${7:E}
+测试工程师:: ${8:F}
 
 === 项目规划
 .项目规划
@@ -996,12 +994,12 @@ snippet prd_FullTemplate "full PRD Template" b
 ....
 saturday are closed
 sunday are closed
-${12:2022-01-29} to ${13:2022-01-30} is open 
-${14:2022-01-31} to ${15:2022-02-06} are closed
+${9:2022-01-29} to ${10:2022-01-30} is open 
+${11:2022-01-31} to ${12:2022-02-06} are closed
 
-Project starts ${16:2022-01-01}
-[${17:业务需求讨论}] as [t1] starts ${18:2022-01-01} and ends ${19:2022-01-05} and is ${20:100}% complete
-${21:[需求确认] as [t2] starts 2022-01-02 and ends 2022-01-06 and is 80% complete
+Project starts ${13:2022-01-01}
+[${14:业务需求讨论}] as [t1] starts ${15:2022-01-01} and ends ${16:2022-01-05} and is ${17:100}% complete
+${18:[需求确认] as [t2] starts 2022-01-02 and ends 2022-01-06 and is 80% complete
 [需求冻结] happens at [t2]'s end
 [设计] as [t3] starts 2022-01-05 and ends 2022-01-10 and is 20% complete
 [开发] as [t4] starts at [t2]'s end and ends 2022-01-20 and is 5% complete
@@ -1010,11 +1008,12 @@ then [部署与发布] as [t6] lasts 1 day
 [迭代一结束] happens at [t6]'s end}
 ....
 
-== 业务建模
+[glossary]
+== 术语定义
+UML:: 统一建模语言（UML），目前版本为 2.5，本文档中的用例图、活动图、状态图、类图等，均以 UML 进行描述，符合国标 \`GB/T 28174-2011\`。
+等宽字体:: 文档中对具体文案、参数的描述所用的字体，如 \`${user_id}\`、\`登录失败，请稍后再试\`。
 
-=== 约束定义
-. 设计与开发时用到的文案、参数等将以等宽字符来呈现，如参数 \`${user_id}\`、标题 \`页面标题\`。
-. 用例图、活动图、状态图、类图等均以 \`统一建模语言（UML）\` 第 2.5 版本进行描述，符合国标 \`GB/T 28174-2011\`。
+== 业务建模
 
 === 领域模型
 
@@ -1022,25 +1021,23 @@ then [部署与发布] as [t6] lasts 1 day
 
 === 业务流程
 
-== S1-F1 ${22:系统1-功能1}
+== S1-F1 ${19:系统1-功能1}
 
-=== P1 ${23:页面1}
-image::$24[]
+=== P1 ${20:页面1}
+image::$21[]
 
 .信息结构
 [frame=all,grid=all,width=100%,role=center,cols="2,3,3,5",options=header]
 |===
 ^.^| 版块 ^.^| 控件 ^.^| 元素 ^.^| 属性 
-| B1 | ${25:NavigationBar} | \`${26:\$\{title_p1\}}\` | \`${27:页面标题}\`
-| B2 | ${28:BodyContext} | \`${29:\$\{text_p1\}}\` | \`${30:页面内容}\`
-| B3 | ${31:Button} | \`${32:\$\{btn_p1_submit\}}\` | \`${33:提交}\`
+| B1 | ${22:NavigationBar} | \`${23:\$\{title_p1\}}\` | \`${24:页面标题}\`
 |===
 
 .交互
 [frame=all,grid=all,width=100%,role=center,cols="3,3,5",options=header]
 |===
 ^.^| 元素 ^.^| 行为 ^.^| 预期结果 
-| \`${34:\$\{btn_p1_submit\}}\` | ${35:click} | ${36:提交成功或失败}
+| \`${25:\$\{btn_p1_submit\}}\` | ${26:click} | ${27:提交成功或失败}
 |===
 
 == 附录
@@ -1061,7 +1058,7 @@ image::$24[]
 [frame=all,grid=all,width=100%,role=center,cols="2,5,5,3,2",options=header]
 |===
 ^.^| 编号 ^.^| 资源描述 ^.^| 支持功能 ^.^| 交付节点 ^.^| 管控人 
-| $37 | $38 | $39 | $40 | $41
+| $28 | $29 | $30 | $31 | $32
 |===
 
 === 风险管控
@@ -1069,7 +1066,7 @@ image::$24[]
 [frame=all,grid=all,width=100%,role=center,cols="2,6,3,5,3,3",options=header]
 |===
 ^.^| 编号 ^.^| 风险描述 ^.^| 影响程度 ^.^| 后备方案 ^.^| 跟进情况 ^.^| 管控人 
-| ${42:S1-R1} | ${43:标题有可能无法自定义} | ${44:低} | ${45:用系统标题} | ${46:跟进中} | ${47:Dandi} 
+| ${33:S1-R1} | ${34:标题有可能无法自定义} | ${35:低} | ${36:用系统标题} | ${37:跟进中} | ${38:Dandi} 
 |===
 
 === 性能指标
@@ -1077,16 +1074,16 @@ image::$24[]
 [frame=all,grid=all,width=100%,role=center,cols="2,3,5,2",options=header]
 |===
 ^.^| 系统 ^.^| 评估点 ^.^| 指标要求 ^.^| 负责人
-| $48 | $49 | $50 | $51
+| $39 | $40 | $41 | $42
 |===
 
 === 版本变更
-==== ${52:20220112会议}
+==== ${43:20220112会议}
 .变更内容
 [frame=all,grid=all,width=100%,role=center,cols="1,1,3,1",options=header]
 |===
 ^.^| 编号 ^.^| 类型 ^.^| 事项 ^.^| 状态
-.^| ${53:C1} .^| ${54:文案变更} | ${55:\`登陆\` -> \`登录\`} | ${56:已完成}
+.^| ${44:C1} .^| ${45:文案变更} | ${46:\`登陆\` -> \`登录\`} | ${47:已完成}
 |===
 endsnippet
 

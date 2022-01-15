@@ -70,11 +70,11 @@ snippet header "Document Blockheader"
 :doctype: ${1:article}
 :author: `!v g:username`
 :email: `!v g:email`
-:organization: `!v g:organization`
+:organization: ${2:`!v g:organization`}
 :revdate: `!v g:current_time`
 :revnumber: 0.1
 :revremark: Alpha
-= ${VISUAL}${2:`!v expand('%:r')`}
+= ${VISUAL}${3:`!v expand('%:r')`}
 
 $0
 endsnippet
@@ -969,11 +969,11 @@ snippet prd_FullTemplate "full PRD Template" b
 :doctype: ${1:article}
 :author: `!v g:username`
 :email: `!v g:email`
-:organization: `!v g:organization`
+:organization: ${2:`!v g:organization`}
 :revdate: `!v g:current_time`
 :revnumber: 0.1
 :revremark: Alpha
-= ${2:`!v expand('%:r')`}
+= ${3:`!v expand('%:r')`}
 
 == 项目信息
 
@@ -983,12 +983,12 @@ snippet prd_FullTemplate "full PRD Template" b
 
 === 参与人员
 [horizontal]
-项目经理:: ${3:A}
-业务经理:: ${4:B}
-产品经理:: ${5:C}
-设计师:: ${6:D}
-研发工程师:: ${7:E}
-测试工程师:: ${8:F}
+项目经理:: ${4:A}
+业务经理:: ${5:B}
+产品经理:: ${6:C}
+设计师:: ${7:D}
+研发工程师:: ${8:E}
+测试工程师:: ${9:F}
 
 === 项目规划
 .项目规划
@@ -996,11 +996,11 @@ snippet prd_FullTemplate "full PRD Template" b
 ....
 saturday are closed
 sunday are closed
-${9:2022-01-29} to ${10:2022-01-30} is open 
-${11:2022-01-31} to ${12:2022-02-06} are closed
+${10:2022-01-29} to ${11:2022-01-30} is open 
+${12:2022-01-31} to ${13:2022-02-06} are closed
 
-Project starts ${13:2022-01-01}
-[${14:业务需求讨论}] as [t1] starts ${15:2022-01-01} and ends ${16:2022-01-05} and is ${17:100}% complete
+Project starts ${14:2022-01-01}
+[${15:业务需求讨论}] as [t1] starts ${14:2022-01-01} and ends ${16:2022-01-05} and is ${17:100}% complete
 ${18:[需求确认] as [t2] starts 2022-01-02 and ends 2022-01-06 and is 80% complete
 [需求冻结] happens at [t2]'s end
 [设计] as [t3] starts 2022-01-05 and ends 2022-01-10 and is 20% complete

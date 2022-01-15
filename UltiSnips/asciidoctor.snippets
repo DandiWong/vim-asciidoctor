@@ -960,7 +960,7 @@ snippet prd_FullTemplate "full PRD Template" b
 :toc-title: 目录
 :toclevels: 3
 :sectnums:
-:sectnumlevels: 3
+:sectnumlevels: 2
 :sectanchors:
 :figure-caption: 图
 :table-caption: 表格
@@ -974,21 +974,22 @@ snippet prd_FullTemplate "full PRD Template" b
 :revnumber: 0.1
 :revremark: Alpha
 = ${3:`!v expand('%:r')`}
-
+$0
 == 项目信息
+$4
 
-=== 业务背景
-
-=== 业务目标
+=== 业务信息
+业务背景:: $5
+业务目标:: $6
 
 === 参与人员
 [horizontal]
-项目经理:: ${4:A}
-业务经理:: ${5:B}
-产品经理:: ${6:C}
-设计师:: ${7:D}
-研发工程师:: ${8:E}
-测试工程师:: ${9:F}
+项目经理:: ${7:A}
+业务经理:: ${8:B}
+产品经理:: ${9:C}
+设计师:: ${10:D}
+研发工程师:: ${11:E}
+测试工程师:: ${12:F}
 
 === 项目规划
 .项目规划
@@ -996,12 +997,12 @@ snippet prd_FullTemplate "full PRD Template" b
 ....
 saturday are closed
 sunday are closed
-${10:2022-01-29} to ${11:2022-01-30} is open 
-${12:2022-01-31} to ${13:2022-02-06} are closed
+${13:2022-01-29} to ${14:2022-01-30} is open 
+${15:2022-01-31} to ${16:2022-02-06} are closed
 
-Project starts ${14:2022-01-01}
-[${15:业务需求讨论}] as [t1] starts ${14:2022-01-01} and ends ${16:2022-01-05} and is ${17:100}% complete
-${18:[需求确认] as [t2] starts 2022-01-02 and ends 2022-01-06 and is 80% complete
+Project starts ${17:2022-01-01}
+[${18:业务需求讨论}] as [t1] starts ${17:2022-01-01} and ends ${19:2022-01-05} and is ${20:100}% complete
+${21:[需求确认] as [t2] starts 2022-01-02 and ends 2022-01-06 and is 80% complete
 [需求冻结] happens at [t2]'s end
 [设计] as [t3] starts 2022-01-05 and ends 2022-01-10 and is 20% complete
 [开发] as [t4] starts at [t2]'s end and ends 2022-01-20 and is 5% complete
@@ -1010,60 +1011,60 @@ then [部署与发布] as [t6] lasts 1 day
 [迭代一结束] happens at [t6]'s end}
 ....
 
+=== WBS
+$22
+
 == 业务建模
 
+== 术语定义
+UML:: 统一建模语言（UML），目前版本为 2.5，本文档中的用例图、活动图、状态图、类图等，均以 UML 进行描述，符合国标 \`GB/T 28174-2011\`。
+等宽字体:: 文档中对具体文案、参数的描述所用的字体，如 \`${user_id}\`、\`登录失败，请稍后再试\`。
+
 === 领域模型
+$23
 
 === 业务用例
+$24
 
 === 业务流程
+$25
 
-== S1-F1 ${19:系统1-功能1}
+== ${26:S1F1:登录注册}
 
-=== P1 ${20:页面1}
-image::$21[]
+=== ${27:P1:注册}
+image::$28[]
 
-.信息结构
+.结构
 [frame=all,grid=all,width=100%,role=center,cols="2,3,3,5",options=header]
 |===
 ^.^| 版块 ^.^| 控件 ^.^| 元素 ^.^| 属性 
-| B1 | ${22:NavigationBar} | \`${23:\$\{title_p1\}}\` | \`${24:页面标题}\`
+| B1 | ${29:NavigationBar} | \`${30:\$\{title_p1\}}\` | \`${31:页面标题}\`
+$32
 |===
 
 .交互
 [frame=all,grid=all,width=100%,role=center,cols="3,3,5",options=header]
 |===
 ^.^| 元素 ^.^| 行为 ^.^| 预期结果 
-| \`${25:\$\{btn_p1_submit\}}\` | ${26:click} | ${27:提交成功或失败}
+| \`${33:\$\{btn_p1_submit\}}\` | ${34:click} | ${35:提交成功或失败}
+$36
 |===
-
-== 附录
-
-=== 附录一：图片资源
-
-=== 附录二：文本内容
 
 == 运营部署
 
 === 运营计划
+$37
 
 == 质量管理
 
-=== 资源依赖
+=== 资源管控
 
-.依赖清单
+.资源清单
 [frame=all,grid=all,width=100%,role=center,cols="2,5,5,3,2",options=header]
 |===
 ^.^| 编号 ^.^| 资源描述 ^.^| 支持功能 ^.^| 交付节点 ^.^| 管控人 
-| $28 | $29 | $30 | $31 | $32
-|===
-
-=== 风险管控
-.风险清单
-[frame=all,grid=all,width=100%,role=center,cols="2,6,3,5,3,3",options=header]
-|===
-^.^| 编号 ^.^| 风险描述 ^.^| 影响程度 ^.^| 后备方案 ^.^| 跟进情况 ^.^| 管控人 
-| ${33:S1-R1} | ${34:标题有可能无法自定义} | ${35:低} | ${36:用系统标题} | ${37:跟进中} | ${38:Dandi} 
+| $38 | $39 | $40 | $41 | $42
+$43
 |===
 
 === 性能指标
@@ -1071,22 +1072,32 @@ image::$21[]
 [frame=all,grid=all,width=100%,role=center,cols="2,3,5,2",options=header]
 |===
 ^.^| 系统 ^.^| 评估点 ^.^| 指标要求 ^.^| 负责人
-| $39 | $40 | $41 | $42
+| $44 | $45 | $46 | $47
+$48
+|===
+
+=== 风险管控
+.风险清单
+[frame=all,grid=all,width=100%,role=center,cols="2,6,3,5,3,3",options=header]
+|===
+^.^| 编号 ^.^| 风险描述 ^.^| 影响程度 ^.^| 后备方案 ^.^| 跟进情况 ^.^| 管控人 
+| ${49:S1-R1} | ${50:标题有可能无法自定义} | ${51:低} | ${52:用系统标题} | ${53:跟进中} | ${54:Dandi} 
+$55
 |===
 
 === 版本变更
-==== ${43:20220112会议}
+==== ${56:20220112会议}
 .变更内容
 [frame=all,grid=all,width=100%,role=center,cols="1,1,3,1",options=header]
 |===
 ^.^| 编号 ^.^| 类型 ^.^| 事项 ^.^| 状态
-.^| ${44:C1} .^| ${45:文案变更} | ${46:\`登陆\` -> \`登录\`} | ${47:已完成}
+.^| ${57:C1} .^| ${58:文案变更} | ${59:\`登陆\` -> \`登录\`} | ${60:已完成}
+$61
 |===
 
-[glossary]
-== 术语定义
-UML:: 统一建模语言（UML），目前版本为 2.5，本文档中的用例图、活动图、状态图、类图等，均以 UML 进行描述，符合国标 \`GB/T 28174-2011\`。
-等宽字体:: 文档中对具体文案、参数的描述所用的字体，如 \`${user_id}\`、\`登录失败，请稍后再试\`。
+[appendix]
+==  相关材料
+设计资源:: $62
 
 endsnippet
 

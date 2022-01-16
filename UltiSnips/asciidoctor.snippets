@@ -842,7 +842,7 @@ endsnippet
 #                      UML,Mermaid .etc
 # -------------------------------------------------------------------------
 
-snippet uml_UseCase,usecase,uc "PlantUML UseCase" b
+snippet uml_UseCaseDiagram,usecase,uc "PlantUML UseCase Diagram" b
 .${1:用例图}
 [plantuml]
 ....
@@ -940,6 +940,50 @@ ${9:s1.2} --> [*]
 $0
 endsnippet
 
+snippet uml_MindMapDiagram,mindmap,mm "PlantUML MindMap Diagram" b
+.${1:结构脑图}
+[plantuml]
+....
+@startmindmap
+${2:+ root
+**:right_1.1
+right_1.2;
+++ right_2
+
+left side
+
+-- left_1
+-- left_2
+**:left_3.1
+left_3.2;}
+@endmindmap
+....
+endsnippet
+
+snippet uml_WBS,wbs "PlantUML WBS Diagram" b
+.${1:WBS 拆解}
+[plantuml]
+....
+@startwbs
+${2:+ New Job
+++ Decide on Job Requirements
++++ Review JDs
+++++ Sign-Up for courses
+++- Checklist
++++- Responsibilities
++++-: Location
+asass;
+
+++ CV Upload Done
++++ CV Updated
+++++ Spelling & Grammar
+++++ Check dates
+---- Skills
++++ Recruitment sites chosen}
+@endwbs
+....
+endsnippet
+
 # -------------------------------------------------------------------------
 #                      PRD Template
 # -------------------------------------------------------------------------
@@ -1013,12 +1057,18 @@ then [部署与发布] as [t6] lasts 1 day
 ....
 
 === WBS
-$22
+[plantuml]
+....
+@startwbs
+* $22
+@endwbs
+....
+
 == 业务建模
 
 === 术语定义
 UML:: 统一建模语言（UML），目前版本为 2.5，本文档中的用例图、活动图、状态图、类图等，均以 UML 进行描述，符合国标 \`GB/T 28174-2011\`。
-等宽字体:: 文档中对具体文案、参数的描述所用的字体，如 \`${user_id}\`、\`登录失败，请稍后再试\`。
+等宽字体:: 文档中对具体文案、参数的描述所用的字体，如 \`\$\{user_id\}\`、\`登录失败，请稍后再试\`。
 
 === 领域模型
 $23

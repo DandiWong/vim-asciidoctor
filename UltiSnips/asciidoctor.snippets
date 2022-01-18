@@ -880,9 +880,9 @@ collections ${8:集合} as cc1
 queue ${9:队列} as q1
 
 p1 -> a1 : ${10:描述} 
-a1 -> b1 : $success(""success: hello B."")
-b1 -x c1 : $failure(""failure"")
-c1 ->> e1: $warning(""warning"")
+a1 -> b1 : \$success(""success: hello B."")
+b1 -x c1 : \$failure(""failure"")
+c1 ->> e1: \$warning(""warning"")
 ....
 
 $0
@@ -961,7 +961,7 @@ left_3.2;}
 endsnippet
 
 snippet uml_WBS,wbs "PlantUML WBS Diagram" b
-.${1:WBS 拆解}
+.${1:WBS拆解}
 [plantuml]
 ....
 @startwbs
@@ -985,7 +985,7 @@ asass;
 endsnippet
 
 # -------------------------------------------------------------------------
-#                      PRD Template
+#                   Templates for PM or PDM
 # -------------------------------------------------------------------------
 
 snippet prd_FullTemplate "full PRD Template" b
@@ -1002,15 +1002,15 @@ snippet prd_FullTemplate "full PRD Template" b
 :imagesdir: images
 :title-logo-image: {imagesdir}/logo.png
 :toc: left
-:toc-title: 目录
+:toc-title: 目录/Table of Content
 :toclevels: 3
 :sectnums:
 :sectnumlevels: 2
 :sectanchors:
-:figure-caption: 图
-:table-caption: 表格
-:appendix-caption: 附录
-:chapter-signifier: 章节
+:figure-caption: 图/Figure
+:table-caption: 表格/Table
+:appendix-caption: 附录/Appendix
+:chapter-signifier: 章节/Chapter
 :pdf-theme: custom
 :doctype: ${1:article}
 :author: `!v g:username`
@@ -1019,35 +1019,271 @@ snippet prd_FullTemplate "full PRD Template" b
 :revdate: `!v g:current_time`
 :revnumber: 0.1
 :revremark: Alpha
-= ${3:`!v expand('%:r')`}
-$0
-== 项目信息
-$4
-=== 业务信息
-业务背景:: ${5:为什么要做这个项目}
-业务目标:: ${6:立个 flag}
+= ${3:`!v expand('%:r')`}需求文档
 
-=== 参与人员
+== 版本记录/Revision History
+[frame=all,grid=all,width=100%,role=center,cols="2,2,7a,2",options=header]
+|===
+^.^| 日期/Date ^.^| 版本/Version ^.^| 描述/Description ^.^| 作者/Author
+.^| ${4:2022-01-18} .^| ${5:0.1} | ${6:Draft} | ${7:Dandi}
+|===
+
+== 项目信息/Project Information
+
+=== 业务信息/Business Information
+业务背景/Background:: ${8:为什么要做这个项目/Why do this}
+业务目标/Objectives:: ${9:要达成的目标/Goals}
+
+=== 参与人员/Participants
 [horizontal]
-项目经理:: ${7:A}
-业务经理:: ${8:B}
-产品经理:: ${9:C}
-设计师:: ${10:D}
-研发工程师:: ${11:E}
-测试工程师:: ${12:F}
+项目经理/Project Manager:: ${10:/}
+业务经理/Business Manager:: ${11:/}
+产品经理/Prodcut Manager:: ${12:/}
+设计师/Designers:: ${13:/}
+研发工程师/Develop Engineers:: ${14:/}
+测试工程师/Test Engineers:: ${15:/}
 
-=== 项目规划
-.项目规划
+=== 术语约定/Terminology Standard
+UML:: 统一建模语言（UML），目前版本为 2.5，本文档中的用例图、活动图、状态图、类图等，均以 UML 进行描述，符合国标 \`GB/T 28174-2011\`。
+等宽字体:: 文档中对具体文案、参数的描述所用的字体，如 \`\$\{user_id\}\`、\`登录失败，请稍后再试\`。
+
+== ${16:S1:账号系统}
+
+=== 业务模型/Business Model
+.系统用例/Use Case
+[plantuml]
+....
+actor "${17:产品经理}" as a1
+package "${18:需求评审}" as p1 {
+  usecase "${19:画原型}" as uc1
+}
+usecase "${20:写文档}" as uc2
+
+${21:a1 -right-> uc1
+a1 -right-> uc2
+uc2 -down-> uc1 : include
+uc1 -right-> a2
+uc2 -right-> a2}
+....
+
+.消息时序/Sequence Diagram
+[plantuml]
+....
+autonumber
+skinparam responseMessageBelowArrow true
+
+${22:participant 组件 as p1}
+${23:actor 身份 as a1}
+${24:boundary 边界 as b1}
+${25:control 控制器 as c1}
+${26:entity 实体 as e1}
+${27:database 数据库 as d1}
+${28:collections 集合 as cc1}
+${29:queue 队列 as q1}
+
+${30:p1 -> a1 : 描述 
+a1 -> b1 : \$success(""success: hello B."")
+b1 -x c1 : \$failure(""failure"")
+c1 ->> e1: \$warning(""warning"")}
+....
+
+.活动状态/Activity States
+[plantuml]
+....
+hide empty description
+
+${31:state "未上线" as s0}
+${32:state "参与期" as s1} {
+  ${33:state "开奖期" as s1.1}
+}
+${34:state "公示期" as s1.2}
+
+${35:[*] -right-> s0
+s0 : 不可见
+
+s0 -right-> s1.1 : 2022/01/10
+s1.1 : 可见
+s1.1 : 审核通过后即可参与
+s1.1 : 可抽奖
+
+s1.1 -right-> s1.2 : 待定
+s1.2 : 不可抽奖
+
+s1.2 --> [*]}
+....
+
+=== ${36:P1:注册登录}
+[#${38:id},title="${38:title}"]
+image::$37[]
+
+.结构/View
+[frame=all,grid=all,width=100%,role=center,cols="2,3,3,5",options=header]
+|===
+^.^| 版块/Block ^.^| 控件/Component ^.^| 元素/Element ^.^| 属性/Attribute 
+| B1 | ${39:NavigationBar} | \`${40:\$\{title_p1\}}\` | \`${41:页面标题}\`
+$42
+|===
+
+.交互/Interactivity
+[frame=all,grid=all,width=100%,role=center,cols="3,3,5a",options=header]
+|===
+^.^| 控件/Component ^.^| 行为/Action ^.^| 反馈/Feedback
+| \`${43:\$\{btn_p1_submit\}}\` | ${44:click} | ${45:提交成功或失败}
+$46
+|===
+
+$0
+== 运营部署/Operation Management
+
+=== 运营计划/Operation Plan
+
+== 质量管理/Quality Assurance
+
+=== 资源管控/Resources Control
+.依赖清单/Requirements List
+[frame=all,grid=all,width=100%,role=center,cols="2,5,5,3,2",options=header]
+|===
+^.^| 编号/ID ^.^| 资源描述/Description ^.^| 支持功能/Function ^.^| 交付节点/Timing ^.^| 负责人/Responsible Person 
+| $47 | $48 | $49 | $50 | $51
+$52
+|===
+
+=== 性能指标/Performance Indicator
+[frame=all,grid=all,width=100%,role=center,cols="2,3,5,2",options=header]
+|===
+^.^| 系统/System ^.^| 评估点/Function ^.^| 指标要求/Requirement ^.^| 负责人/Responsible Person
+| $53 | $54 | $55 | $56
+$57
+|===
+
+=== 风险管控/Risk Management
+.风险清单/Risk List
+[frame=all,grid=all,width=100%,role=center,cols="2,6,3,5,3,3",options=header]
+|===
+^.^| 编号/ID ^.^| 风险描述/Description ^.^| 影响程度/Effect ^.^| 后备方案/Backup ^.^| 跟进情况/Status ^.^| 责任人/Responsible Person 
+| ${58:S1-R1} | ${59:标题有可能无法自定义} | ${60:低} | ${61:用系统标题} | ${62:跟进中} | ${63:Dandi} 
+|===
+
+=== 变更记录/Change List
+[frame=all,grid=all,width=100%,role=center,cols="1,1,3,1",options=header]
+|===
+^.^| 编号/ID ^.^| 类型/Type ^.^| 事项/Description ^.^| 接受状态/Status
+|===
+
+[appendix]
+== 相关材料/Appendix
+设计资源/Design Resource:: $64
+endsnippet
+
+snippet pmd_FullTemplate "full PMD Template" b
+:encoding: utf-8
+:scripts: cjk
+:icons: font
+:stem: latexmath
+:source-highlighter: pygments
+:pygments-css: class
+:pygments-style: material
+:pygments-linenums-mode: inline
+:sourcedir: src
+:includedir: includes
+:imagesdir: images
+:title-logo-image: {imagesdir}/logo.png
+:toc: left
+:toc-title: 目录/Table of Content
+:toclevels: 3
+:sectnums:
+:sectnumlevels: 2
+:sectanchors:
+:figure-caption: 图/Figure
+:table-caption: 表格/Table
+:appendix-caption: 附录/Appendix
+:chapter-signifier: 章节/Chapter
+:pdf-theme: custom
+:doctype: ${1:article}
+:author: `!v g:username`
+:email: `!v g:email`
+:organization: ${2:`!v g:organization`}
+:revdate: `!v g:current_time`
+:revnumber: 0.1
+:revremark: Alpha
+= ${3:`!v expand('%:r')`}项目管理文档
+
+== 版本记录/Revision History
+
+[frame=all,grid=all,width=100%,role=center,cols="2,2,7a,2",options=header]
+|===
+^.^| 日期/Date ^.^| 版本/Version ^.^| 描述/Description ^.^| 作者/Author
+.^| ${4:`!v strftime('%Y-%m-%d', localtime())`} .^| ${5:0.1} | ${6:Draft} | ${7:Dandi}
+|===
+
+== 项目信息/Project Information
+
+=== 业务信息/Business Information
+业务背景/Background:: ${8:为什么要做这个项目/Why do this}
+业务目标/Objectives:: ${9:要达成的目标/Goals}
+
+=== 性能指标/Performance Indicator
+
+[frame=all,grid=all,width=100%,role=center,cols="2,3,5,2",options=header]
+|===
+^.^| 系统/System ^.^| 评估点/Function ^.^| 指标要求/Requirement ^.^| 负责人/Responsible Person
+| $10 | $11 | $12 | $13
+$14
+|===
+
+== 项目规划/Project Plan
+
+=== 参与人员/Participants
+[horizontal]
+项目经理/Project Manager:: ${15:A}
+业务经理/Business Manager:: ${16:B}
+产品经理/Prodcut Manager:: ${17:C}
+设计师/Designers:: ${18:D}
+研发工程师/Develop Engineers:: ${19:E}
+测试工程师/Test Engineers:: ${20:F}
+运营经理/Operation Manager:: ${21:F}
+客服经理/Custom Manager:: ${22:F}
+
+=== 资源管控/Resources Control
+.依赖清单/Requirements List
+[frame=all,grid=all,width=100%,role=center,cols="2,5,5,3,2",options=header]
+|===
+^.^| 编号/ID ^.^| 资源描述/Description ^.^| 支持功能/Function ^.^| 交付节点/Timing ^.^| 负责人/Responsible Person 
+| $23 | $24 | $25 | $26 | $27
+$28
+|===
+
+=== 工作拆解/WBS
+[plantuml]
+....
+${29:+ New Job
+++ Decide on Job Requirements
++++ Review JDs
+++++ Sign-Up for courses
+++- Checklist
++++- Responsibilities
++++-: Location
+asass;
+
+++ CV Upload Done
++++ CV Updated
+++++ Spelling & Grammar
+++++ Check dates
+---- Skills
++++ Recruitment sites chosen}
+....
+
+=== 计划安排/Arrangement
 [plantuml,width=100%]
 ....
 saturday are closed
 sunday are closed
-${13:2022-01-29} to ${14:2022-01-30} is open 
-${15:2022-01-31} to ${16:2022-02-06} are closed
+${30:2022-01-29} to ${31:2022-01-30} is open 
+${32:2022-01-31} to ${33:2022-02-06} are closed
 
-Project starts ${17:2022-01-01}
-[${18:业务需求讨论}] as [t1] starts ${17:2022-01-01} and ends ${19:2022-01-05} and is ${20:100}% complete
-${21:[需求确认] as [t2] starts 2022-01-02 and ends 2022-01-06 and is 80% complete
+Project starts ${34:2022-01-01}
+[${35:业务需求讨论}] as [t1] starts ${36:2022-01-01} and ends ${37:2022-01-05} and is ${38:100}% complete
+${39:[需求确认] as [t2] starts 2022-01-02 and ends 2022-01-06 and is 80% complete
 [需求冻结] happens at [t2]'s end
 [设计] as [t3] starts 2022-01-05 and ends 2022-01-10 and is 20% complete
 [开发] as [t4] starts at [t2]'s end and ends 2022-01-20 and is 5% complete
@@ -1056,149 +1292,149 @@ then [部署与发布] as [t6] lasts 1 day
 [迭代一结束] happens at [t6]'s end}
 ....
 
-=== WBS
-[plantuml]
-....
-@startwbs
-* $22
-@endwbs
-....
-
-== 业务建模
-
-=== 术语定义
+=== 术语约定/Terminology Standard
 UML:: 统一建模语言（UML），目前版本为 2.5，本文档中的用例图、活动图、状态图、类图等，均以 UML 进行描述，符合国标 \`GB/T 28174-2011\`。
 等宽字体:: 文档中对具体文案、参数的描述所用的字体，如 \`\$\{user_id\}\`、\`登录失败，请稍后再试\`。
 
-=== 领域模型
-$23
-=== 业务用例
-$24
-=== 业务流程
-$25
-== ${26:S1F1:登录注册}
+== 业务信息
 
-=== ${27:P1:注册}
-image::$28[]
+=== 业务模型/Business Model
 
-.结构
-[frame=all,grid=all,width=100%,role=center,cols="2,3,3,5",options=header]
-|===
-^.^| 版块 ^.^| 控件 ^.^| 元素 ^.^| 属性 
-| B1 | ${29:NavigationBar} | \`${30:\$\{title_p1\}}\` | \`${31:页面标题}\`
-$32
-|===
+${40:.系统用例/Use Case
+[plantuml]
+....
+actor "产品经理" as a1
+package "需求评审" as p1 {
+  usecase "画原型" as uc1
+}
+usecase "写文档" as uc2
 
-.交互
-[frame=all,grid=all,width=100%,role=center,cols="3,3,5",options=header]
-|===
-^.^| 元素 ^.^| 行为 ^.^| 预期结果 
-| \`${33:\$\{btn_p1_submit\}}\` | ${34:click} | ${35:提交成功或失败}
-$36
-|===
+a1 -right-> uc1
+a1 -right-> uc2
+uc2 -down-> uc1 : include
+uc1 -right-> a2
+uc2 -right-> a2
+....}
 
-== 运营部署
+${41:.消息时序/Sequence Diagram
+[plantuml]
+....
+autonumber
+skinparam responseMessageBelowArrow true
 
-=== 运营计划
-$37
-== 质量管理
+participant 组件 as p1
+actor 身份 as a1
+boundary 边界 as b1
+control 控制器 as c1
+entity 实体 as e1
+database 数据库 as d1
+collections 集合 as cc1
+queue 队列 as q1
 
-=== 资源管控
+p1 -> a1 : 描述 
+a1 -> b1 : \$success(""success: hello B."")
+b1 -x c1 : \$failure(""failure"")
+c1 ->> e1: \$warning(""warning"")
+....}
 
-.资源清单
-[frame=all,grid=all,width=100%,role=center,cols="2,5,5,3,2",options=header]
-|===
-^.^| 编号 ^.^| 资源描述 ^.^| 支持功能 ^.^| 交付节点 ^.^| 管控人 
-| $38 | $39 | $40 | $41 | $42
+${42:.活动状态/Activity States
+[plantuml]
+....
+hide empty description
+
+state "未上线" as s0
+state "参与期" as s1 {
+  state "开奖期" as s1.1
+}
+state "公示期" as s1.2
+
+[*] -right-> s0
+s0 : 不可见
+
+s0 -right-> s1.1 : 2022/01/10
+s1.1 : 可见
+s1.1 : 审核通过后即可参与
+s1.1 : 可抽奖
+
+s1.1 -right-> s1.2 : 待定
+s1.2 : 不可抽奖
+
+s1.2 --> [*]
+....}
+
+=== 运营计划/Operation Plan
 $43
-|===
+== 质量管理/Quality Assurance
 
-=== 性能指标
-.性能指标
-[frame=all,grid=all,width=100%,role=center,cols="2,3,5,2",options=header]
-|===
-^.^| 系统 ^.^| 评估点 ^.^| 指标要求 ^.^| 负责人
-| $44 | $45 | $46 | $47
-$48
-|===
-
-=== 风险管控
-.风险清单
+=== 风险管控/Risk Management
+.风险清单/Risk List
 [frame=all,grid=all,width=100%,role=center,cols="2,6,3,5,3,3",options=header]
 |===
-^.^| 编号 ^.^| 风险描述 ^.^| 影响程度 ^.^| 后备方案 ^.^| 跟进情况 ^.^| 管控人 
-| ${49:S1-R1} | ${50:标题有可能无法自定义} | ${51:低} | ${52:用系统标题} | ${53:跟进中} | ${54:Dandi} 
-$55
-|===
-
-=== 版本变更
-==== ${56:20220112会议}
-.变更内容
-[frame=all,grid=all,width=100%,role=center,cols="1,1,3,1",options=header]
-|===
-^.^| 编号 ^.^| 类型 ^.^| 事项 ^.^| 状态
-.^| ${57:C1} .^| ${58:文案变更} | ${59:\`登陆\` -> \`登录\`} | ${60:已完成}
-$61
+^.^| 编号/ID ^.^| 风险描述/Description ^.^| 影响程度/Effect ^.^| 后备方案/Backup ^.^| 跟进情况/Status ^.^| 责任人/Responsible Person 
+| ${44:S1-R1} | ${45:标题有可能无法自定义} | ${46:低} | ${47:用系统标题} | ${48:跟进中} | ${49:Dandi} 
+$50
 |===
 
 [appendix]
-==  相关材料
-设计资源:: $62
+== 相关材料/Appendix
+设计资源/Design Resource:: $51
 endsnippet
 
-snippet prd_PageStructure,page,requirement,feature "requirement form by page for PRD" b
-=== ${1:P1: 页面1}
-image::${VISUAL}[]
+snippet prd_NewPage,new,page,np "Add new page for PRD" b
+=== ${1:P1:注册登录}
+[#${3:id},title="${3:title}"]
+image::$2[]
 
-.信息结构
-[frame=all,grid=all,width=100%,role=center,cols="1,2,2,5",options=header]
+.结构/View
+[frame=all,grid=all,width=100%,role=center,cols="2,3,3,5",options=header]
 |===
-^.^| 版块 ^.^| 控件 ^.^| 元素 ^.^| 属性 
-| ${2:B1} | ${3:NavigationBar} | ${4:title_p1} | ${5:页面标题}
+^.^| 版块/Block ^.^| 控件/Component ^.^| 元素/Element ^.^| 属性/Attribute 
+| B1 | ${4:NavigationBar} | \`${5:\$\{title_p1\}}\` | \`${6:页面标题}\`
+$7
 |===
 
-.交互
-[frame=all,grid=all,width=100%,role=center,cols="3,2,5",options=header]
+.交互/Interactivity
+[frame=all,grid=all,width=100%,role=center,cols="3,3,5a",options=header]
 |===
-^.^| 元素 ^.^| 行为 ^.^| 预期结果 
-| ${6:title_p1} | ${7:double_click} | ${8:back to top} 
+^.^| 控件/Component ^.^| 行为/Action ^.^| 反馈/Feedback
+| \`${8:\$\{btn_p1_submit\}}\` | ${9:click} | ${10:提交成功或失败}
+$11
 |===
 
 $0
 endsnippet
 
 snippet prd_ResourceList,resource "Resource List" b
-.依赖清单
-[frame=all,grid=all,width=100%,role=center,cols="1,3,3,2,1",options=header]
+=== 资源管控/Resources Control
+.依赖清单/Requirements List
+[frame=all,grid=all,width=100%,role=center,cols="2,5,5,3,2",options=header]
 |===
-^.^| 编号 ^.^| 资源描述 ^.^| 支持功能 ^.^| 交付节点 ^.^| 管控人 
+^.^| 编号/ID ^.^| 资源描述/Description ^.^| 支持功能/Function ^.^| 交付节点/Timing ^.^| 负责人/Responsible Person 
 | $1 | $2 | $3 | $4 | $5
+$6
 |===
 
 $0
 endsnippet
 
 snippet prd_RiskManagement,risk "Risk Management List" b
-=== 风险管控
-.风险清单
-[frame=all,grid=all,width=100%,role=center,cols="1,5,1,5,1,1",options=header]
+=== 风险管控/Risk Management
+.风险清单/Risk List
+[frame=all,grid=all,width=100%,role=center,cols="2,6,3,5,3,3",options=header]
 |===
-^.^| 编号 ^.^| 风险描述 ^.^| 影响程度 ^.^| 后备方案 ^.^| 跟进情况 ^.^| 管控人 
-| $1 | $2 | $3 | $4 | $5 | $6
+^.^| 编号/ID ^.^| 风险描述/Description ^.^| 影响程度/Effect ^.^| 后备方案/Backup ^.^| 跟进情况/Status ^.^| 责任人/Responsible Person 
+| ${1:S1-R1} | ${2:标题有可能无法自定义} | ${3:低} | ${4:用系统标题} | ${5:跟进中} | ${6:Dandi} 
+$7
 |===
-
 $0
 endsnippet
 
 snippet prd_ChangeManagement,change "Change List" b
-==== `!v strftime('%Y-%m-%d', localtime())`
-.变更内容
+=== ${1:`!v strftime('%Y-%m-%d', localtime())`}变更记录/Change List
 [frame=all,grid=all,width=100%,role=center,cols="1,1,3,1",options=header]
 |===
-^.^| 编号 ^.^| 类型 ^.^| 事项 ^.^| 状态
-| $1 | $2 | $3 | $4
+^.^| 编号/ID ^.^| 类型/Type ^.^| 事项/Description ^.^| 接受状态/Status
+.^| ${2:C1} .^| ${3:新增} | ${4:增加xx功能} | ${5:下一迭代}
 |===
-
 $0
 endsnippet
-

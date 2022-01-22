@@ -497,7 +497,7 @@ link:$1[${2:${VISUAL}}]$0
 endsnippet
 
 # include files
-snippet include "Description" b
+snippet include "Description" i
 
 endsnippet
 \ainclude,include::file[],
@@ -509,7 +509,7 @@ mailto:$1[${2:${VISUAL}}]$0
 endsnippet
 
 # inline image:
-snippet imagei "Inline Image"
+snippet imagei "Inline Image" i
 image:${1:target}[${2:alt="$3"}]
 endsnippet
 
@@ -915,7 +915,7 @@ ${10:[需求确认] as [t2] starts 2022-01-02 and ends 2022-01-06 and is 80% com
 [开发] as [t4] starts at [t2]'s end and ends 2022-01-20 and is 5% complete
 then [测试与修复缺陷] as [t5] lasts 12 days
 then [部署与发布] as [t6] lasts 1 day
-then [迭代一结束] happens}
+[迭代一结束] happens at [t6]'s end}
 ....
 
 $0
@@ -1064,6 +1064,8 @@ UML:: 统一建模语言（UML），目前版本为 2.5，本文档中的用例�
 == ${12:S1:账号系统}
 
 === 业务模型
+
+==== 用例图
 .系统用例
 [plantuml]
 ....
@@ -1081,6 +1083,7 @@ uc1 -right-> a2
 uc2 -right-> a2}
 ....
 
+==== 时序图
 .消息时序
 [plantuml]
 ....
@@ -1102,6 +1105,7 @@ b1 -x c1 : ""failure""
 c1 ->> e1: ""warning""}
 ....
 
+==== 状态图
 .活动状态
 [plantuml]
 ....
@@ -1131,6 +1135,7 @@ s1.2 --> [*]}
 [#${35:id},title="${35:title}"]
 image::$34[]
 
+==== 页面信息
 .结构
 [frame=all,grid=all,width=100%,role=center,cols="2,3,3,5",options=header]
 |===
@@ -1139,6 +1144,7 @@ image::$34[]
 $40
 |===
 
+==== 元素交互
 .交互
 [frame=all,grid=all,width=100%,role=center,cols="3,3,5a",options=header]
 |===
@@ -1146,6 +1152,8 @@ $40
 ^| \`${41:\$\{btn_p1_submit\}}\` ^| ${42:click} | ${43:提交成功或失败}
 $44
 |===
+
+==== 策略规则
 
 $0
 == 运营部署
@@ -1254,7 +1262,9 @@ UML:: 统一建模语言（UML），目前版本为 2.5，本文档中的用例�
 == ${12:S1:Authority System}
 
 === Business Model
-.UseCase
+
+==== Use Case Diagram
+.UseCaseDiagram
 [plantuml]
 ....
 actor "${13:Prodcut Manager}" as a1
@@ -1271,6 +1281,7 @@ uc1 -right-> a2
 uc2 -right-> a2}
 ....
 
+==== Sequence Diagram
 .SequenceDiagram
 [plantuml]
 ....
@@ -1292,7 +1303,8 @@ b1 -x c1 : ""failure""
 c1 ->> e1 : ""warning""}
 ....
 
-.Activity States
+==== Activity States Diagram
+.ActivityStatesDiagram
 [plantuml]
 ....
 hide empty description
@@ -1321,6 +1333,7 @@ s1.2 --> [*]}
 [#${35:id},title="${35:title}"]
 image::$34[]
 
+==== Page View
 .View
 [frame=all,grid=all,width=100%,role=center,cols="2,3,3,5",options=header]
 |===
@@ -1329,6 +1342,7 @@ image::$34[]
 $40
 |===
 
+==== Interactivity
 .Interactivity
 [frame=all,grid=all,width=100%,role=center,cols="3,3,5a",options=header]
 |===
@@ -1336,6 +1350,8 @@ $40
 ^| \`${41:\$\{btn_p1_submit\}}\` ^| ${42:click} | ${43:success or failure}
 $44
 |===
+
+==== Rules
 
 $0
 == Operation Management
@@ -1595,6 +1611,7 @@ snippet prd_NewPage,new,page,np "Add new page for PRD" b
 [#${3:id},title="${3:title}"]
 image::$2[]
 
+==== 页面信息
 .结构/View
 [frame=all,grid=all,width=100%,role=center,cols="2,3,3,5",options=header]
 |===
@@ -1603,6 +1620,7 @@ image::$2[]
 $8
 |===
 
+==== 元素交互
 .交互/Interactivity
 [frame=all,grid=all,width=100%,role=center,cols="3,3,5a",options=header]
 |===
@@ -1610,6 +1628,8 @@ $8
 ^| \`${9:\$\{btn_p1_submit\}}\` ^| ${10:click} | ${11:提交成功或失败}
 $12
 |===
+
+==== 策略规则
 $0
 endsnippet
 

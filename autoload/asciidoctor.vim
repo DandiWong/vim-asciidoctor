@@ -6,11 +6,7 @@ if exists("g:loaded_asciidoctor_autoload")
 endif
 let g:loaded_asciidoctor_autoload = 1
 
-" if exists("g:asciidoctor_browser_executable")
-    " finish
-" else
-  " let g:asciidoctor_browser_executable = g:asciidoctor_opener
-" endif
+let g:asciidoctor_assets_dir = expand('<sfile>:p:h:h') . '/assets/'
 
 "" Trim string
 " Unfortunately built-in trim is not widely available yet

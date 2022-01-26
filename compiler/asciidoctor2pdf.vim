@@ -24,16 +24,21 @@ for line in getline(1, 50)
     endif
 endfor
 
-if get(g:, 'asciidoctor_pdf_themes_path', '') == '' || !get(s:, 'use_pdf_paths', 0)
+" use my configure
+let s:asciidoctor_pdf_themes_path = get(g:, 'asciidoctor_assets_dir', '') . '/themes'
+let s:asciidoctor_pdf_fonts_path = get(g:, 'asciidoctor_assets_dir', '') . '/fonts'
+
+" here i change the themes_path and fonts_path from global(g:) to script(s:)
+if get(s:, 'asciidoctor_pdf_themes_path', '') == '' || !get(s:, 'use_pdf_paths', 0)
     let s:pdf_themes_path = ""
 else
-    let s:pdf_themes_path = '-a pdf-themesdir='.shellescape(fnamemodify(g:asciidoctor_pdf_themes_path, ':p:h'))
+    let s:pdf_themes_path = '-a pdf-themesdir='.shellescape(fnamemodify(s:asciidoctor_pdf_themes_path, ':p:h'))
 endif
 
-if get(g:, 'asciidoctor_pdf_fonts_path', '') == '' || !get(s:, 'use_pdf_paths', 0)
+if get(s:, 'asciidoctor_pdf_fonts_path', '') == '' || !get(s:, 'use_pdf_paths', 0)
     let s:pdf_fonts_path = ""
 else
-    let s:pdf_fonts_path = '-a pdf-fontsdir='.shellescape(fnamemodify(g:asciidoctor_pdf_fonts_path, ':p:h'))
+    let s:pdf_fonts_path = '-a pdf-fontsdir='.shellescape(fnamemodify(s:asciidoctor_pdf_fonts_path, ':p:h'))
 endif
 
 if get(g:, 'asciidoctor_pdf_extensions', []) == []

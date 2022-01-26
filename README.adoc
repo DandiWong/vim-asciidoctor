@@ -31,18 +31,27 @@
 
 == 介绍
 
-此插件是在 link:https://github.com/habamax/vim-asciidoctor[Vim-Asciidoctor] 项目基础上 fork 而来，原版介绍看 xref:README_Origin.adoc[README_Origin]，本项目改进如下：
+此插件是在 link:https://github.com/habamax/vim-asciidoctor[Vim-Asciidoctor] 项目基础上 fork 而来，原版介绍看 xref:README_EN.adoc[README_EN.adoc]，本项目改进如下：
 
-* [x] 新增 asciidoc 向 markdown 转换方法 `:Asciidoctor2MARKDOWN`。
-* [x] 新增使用系统默认程序打开转换后的 markdown 方法 `:AsciidoctorOpenMARKDOWN`。
-* [x] 新增 UltiSnips 格式的 snippets，辅助进行快速插入各种版式。
-* [x] 搭配作者本人配置的 asciidoctor-pdf 主题+字体，可直接生成论文与书籍，开箱即用。 详情见 link:https://github.com/DandiWong/asciidoctor-pdf-config#readme[我的文档工具链: 基于 asciidoc 的文档编辑、排版与转换]
-* [ ] 给 pygments 搞一套 asciidoc 语法高亮的配置文件。
+* markdown 支持：
+** [x] 新增 asciidoc 向 markdown 转换方法 `:Asciidoctor2MARKDOWN`。
+** [x] 新增使用系统默认程序打开转换后的 markdown 方法 `:AsciidoctorOpenMARKDOWN`。
+* snippets 支持：
+** [x] 新增 UltiSnips 风格的 snippets，辅助进行快速插入各种记不住的 asciidoc 语法。
+** [x] 新增文件头预设，快速支持 CJK/TOC/作者/文档日期/版本描述/代码高亮风格/图片与表格标题等一堆。
+** [x] 新增产品经理/项目经理使用的 prd_templates 和 pmd_templates。
+* 内置作者自行配置的 assets
+** [x] 生成 pdf 文件时 :doctype: book 有惊喜，快速出书不是梦。
+** [x] 生成 docx 文件时使用了作者调整过的样式（但还不够完善）。
+** [x] 生成 html 文件时使用了作者调整过的样式。
+* 使用方法
+** [ ] 完善本文档。
+** [ ] PRD 模板和 PMD 模板的使用方法。
 
 == 面向人群
 
-* 日常工作有大量文本编辑与格式化输出需要的角色，比如产品经理、文档整理员、博客与书籍作者等。
-* 掌握 vim/neovim 和终端命令行的基本使用。如进入退出 vim 和编辑文件、使用命令行复制粘贴、clone 代码库等基本操作。
+* 日常工作有大量文本编辑与格式化输出需要的角色，比如 技术文档维护员、产品经理、项目经理、博客与书籍作者等。
+* vim/neovim 用户。
 
 == 环境安装
 
@@ -50,25 +59,38 @@
 
 . 安装各种包和依赖
 
-  git nodejs(version >= 12) ruby ruby-dev gcc make neovim
+[source%linenums,shell]
+....
+$ brew/apt/pacman git nodejs(version >= 12) ruby ruby-dev gcc make neovim
+....
 
 . 安装 neovim 的 python3 支持
 
- $ python3 -m pip install neovim pynvim
+[source%linenums,shell]
+....
+$ python3 -m pip install neovim pynvim notedown
+....
 
 . 安装 asciidoctor 与 pdf/docx 转换器、语法高亮依赖、neovim 支持
 
- $ gem install asciidoctor asciidoctor-pdf asciidoctor-diagram pygments.rb neovim
+[source%linenums,shell]
+....
+$ gem install asciidoctor asciidoctor-pdf asciidoctor-diagram pygments.rb neovim
+....
 
 === 推荐：基于 SpaceVim
 
 . 安装 SpaceVim： 
 
-  $ curl -sLf https://spacevim.org/cn/install.sh | bash
+[source%linenums,shell]
+....
+$ curl -sLf https://spacevim.org/cn/install.sh | bash
+....
 
 . kbd:[Space + f + v + d] 打开 `init.toml` 文件，启用以下配置：
 
-```toml
+[source%linenums,toml]
+....
 [options]
 autocomplete_method = "coc"
 snippet_engine = "neosnippet"
@@ -84,7 +106,7 @@ merged = false
 [[custom_plugins]]
 repo = "DandiWong/vim-asciidoctor"
 merged = false
-```
+....
 
 [start=3]
 . 启动 nvim 后将自动安装
@@ -93,40 +115,36 @@ merged = false
 
 * 安装 coc.nvim
 
-  $ mkdir -p ~/.local/share/nvim/site/pack/coc/start && cd ~/.local/share/nvim/site/pack/coc/start && git clone --branch release https://github.com/neoclide/coc.nvim.git --depth=1
+[source%linenums,shell]
+....
+$ mkdir -p ~/.local/share/nvim/site/pack/coc/start && cd ~/.local/share/nvim/site/pack/coc/start && git clone --branch release https://github.com/neoclide/coc.nvim.git --depth=1
+....
 
 * 安装本插件
 
- $ mkdir -p ~/.local/share/nvim/site/pack/DandiWong/start && cd ~/.local/share/nvim/site/pack/DandiWong/start && git clone https://github.com/DandiWong/vim-asciidoctor.git --depth=1
+[source%linenums,shell]
+....
+$ mkdir -p ~/.local/share/nvim/site/pack/DandiWong/start && cd ~/.local/share/nvim/site/pack/DandiWong/start && git clone https://github.com/DandiWong/vim-asciidoctor.git --depth=1
+....
 
 == 环境配置
-
-=== asciidoctor-pdf 主题配置
-
-完成环境安装部分后，在使用 Vim 编辑 asciidoc 文件时可以通过 `:Asciidoctor2PDF`/`:Asciidoctor2DOCX`/`:Asciidoctor2MARKDOWN`/`:Asciidoctor2HTML` 这些 `vim-asciidoctor` 插件构建的命令来调用 `asciidoctor-pdf` 完成格式的转换。但是默认的主题与字体配置对多语种混排、CJK 字体、Nerd Fonts 的支持都很差，所以作者也自定义了一套配置，你可以直接使用：
-
-  $ mkdir -p ~/.config && cd ~/.config/ && git clone https://github.com/DandiWong/asciidoctor-pdf-config.git
 
 === neovim 配置
 
 如果您使用的是 SpaceVim，那么配置文件为 `~/.SpaceVim/init.vim`，如果您使用的是原生 neovim，那么配置文件为 `~/.config/nvim/init.vim`，木有的话请自行创建。
 
-[source%linenums,vim]
 .init.vim
-----
+[source%linenums,VimScript]
+....
 let g:username = 'Your name'
 let g:email = 'Your email'
-let g:current_time = strftime('%Y-%m-%d %H:%M:%S', localtime())
+let g:current_time = strftime('%Y-%m-%d', localtime())
 
 let g:python3_host_prog = '/usr/bin/python3'
 let g:asciidoctor_executable = 'asciidoctor'
 let g:asciidoctor_extensions = ['asciidoctor-diagram']
 let g:asciidoctor_pdf_executable = 'asciidoctor-pdf'
-let g:asciidoctor_pdf_extensions = ['asciidoctor-diagram']
-" let g:asciidoctor_css_path = '~/docs/AsciiDocThemes'
-let g:asciidoctor_pdf_themes_path = '~/.config/asciidoctor-pdf-config/themes'
-let g:asciidoctor_pdf_fonts_path = '~/.config/asciidoctor-pdf-config/fonts'
-let g:asciidoctor_pandoc_data_dir = '~/.config/asciidoctor-pdf-config/reference'
+let g:asciidoctor_pdf_extensions = g:asciidoctor_extensions
 let g:asciidoctor_pandoc_executable = 'pandoc'
 let g:asciidoctor_pandoc_other_params = '--toc --quiet'
 let g:asciidoctor_fenced_languages = ['python', 'c', 'javascript', 'cpp', 'go', 'java', 'ruby', 'sh', 'typescript', 'markdown', 'html', 'css', 'rust', 'arduino', 'asciidoc']
@@ -157,15 +175,15 @@ endif
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-----
+....
 
 === coc.nvim 配置
 
 安装 coc.nvim 后，启动 neovim 并在命令模式下 `:CocConfig` 打开配置文件，将下方配置项复制进去。
 
-[source,json,linenums]
 .coc-settings.json
-----
+[source%linenums,json]
+....
 {
   "snippets.ultisnips.enable": true,
   "snippets.priority": 90,
@@ -178,7 +196,7 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
       "UltiSnips"
   ]
 }
-----
+....
 
 == 用起来吧！
 
@@ -194,9 +212,9 @@ image::snippets-header.png[]
 
 作用见注释
 
-[source%linenums,asciidoc]
 .snippets-header
-----
+[source%linenums,asciidoc]
+....
 :encoding: utf-8 // 使用标准编码
 :experimental:
 :scripts: cjk // 支持中日韩文字与西文混排
@@ -228,7 +246,7 @@ image::snippets-header.png[]
 :revdate: `!v g:current_time` // 文档创建时间
 :revremark: Initial
 = ${1:`!v expand('%:r')`} // 使用去除路径和扩展的文件名作为标题
-----
+....
 
 === CSV 格式表格
 
@@ -288,10 +306,6 @@ s| C1R3 e| C3R3
 |===
 ```
 
-=== 更多版式
-
-参看作者自定义主题项目的效果 link:https://github.com/DandiWong/asciidoctor-pdf-config#readme[我的文档工具链: 基于 asciidoc 的文档编辑、排版与转换]
-
 == 多种格式输出
 
 `asciidoctor` 只是一个 asciidoc 的底层运行时，还需要搭配其他工具来进行格式化输出（如 word/pdf/markdown/html 等格式），在这里我们主要用到的是 `asciidoctor-pdf` 和 Chrome 浏览器插件 `Asciidoctor.js Live Preview`。
@@ -302,17 +316,17 @@ s| C1R3 e| C3R3
 
 === word 输出
 
-命令为 `:Asciidoctor2DOCX`，注意它的版式也是可以自定义的，版式文件从 `asciidoctor-pdf-config/reference` 中查找前缀为 `:pdf-theme:` 参数的文件，如 `:pdf-theme: custom` 则版式文件为 `asciidoctor-pdf-config/reference/custom-reference.docx`。
+命令为 `:Asciidoctor2DOCX`，注意它的版式也是可以自定义的，默认使用前缀为 `:pdf-theme:` 参数的 reference 文件，如 `:pdf-theme: custom` 则版式文件为 `/path/to/vim-asciidoctor/assets/reference/custom-reference.docx`，业已内置。
 
 === markdown 输出
 
-命令为 `:Asciidoctor2MARKDOWN`，由于 asciidoc 支持的版式超过了 markdown，所以转换为 markdown 时会遇到一些版式丢失的情况。
+命令为 `:Asciidoctor2MARKDOWN`，由于 asciidoc 支持的版式超过了 markdown，所以转换为 markdown 时会遇到一些版式丢失的情况，比如合并单元格的表格、页眉页脚、引用等。
 
 === 浏览器预览及 html 输出
 
-安装 Chrome 插件 `Asciidoctor.js Live Preview` 并在插件选项中设置为可读取本地文件，将 asciidoc 文件拖入浏览器（Mac 下可以在命令模式中使用 `:!Google-Chrome -a %`）即可看到实时预览。
+安装 Chrome 插件 `Asciidoctor.js Live Preview` 并在插件选项中设置为可读取本地文件，使用 `:AsciidoctorOpenInBrowser` 命令即可实时预览。
 
-使用 `:Asciidoctor2HTML` 导出为 html 文件。
+使用 `:Asciidoctor2HTML` 命令导出为 html 文件。
 
 <<<
 == LICENSE

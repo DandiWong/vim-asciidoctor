@@ -20,12 +20,16 @@ let s:asciidoctor_executable = get(g:, 'asciidoctor_executable', 'asciidoctor')
 
 let s:asciidoctor_pandoc_executable = get(g:, 'asciidoctor_pandoc_executable', 'pandoc')
 
-let s:asciidoctor_pandoc_data_dir = get(g:, 'asciidoctor_pandoc_data_dir', '')
-if s:asciidoctor_pandoc_data_dir != ''
-    let data_dir_param = " --data-dir=" . shellescape(fnamemodify(s:asciidoctor_pandoc_data_dir, ':p:h'))
-else
-    let data_dir_param = ''
-endif
+" let s:asciidoctor_pandoc_data_dir = get(g:, 'asciidoctor_pandoc_data_dir', '')
+" if s:asciidoctor_pandoc_data_dir != ''
+    " let data_dir_param = " --data-dir=" . shellescape(fnamemodify(s:asciidoctor_pandoc_data_dir, ':p:h'))
+" else
+    " let data_dir_param = ''
+" endif
+
+" use my configure
+let s:asciidoctor_pandoc_data_dir = get(g:, 'asciidoctor_assets_dir', '') . '/reference/'
+let data_dir_param = " --data-dir=" . shellescape(fnamemodify(s:asciidoctor_pandoc_data_dir, ':p:h'))
 
 let s:asciidoctor_pandoc_reference_doc = get(g:, 'asciidoctor_pandoc_reference_doc', '')
 if s:asciidoctor_pandoc_reference_doc != ''

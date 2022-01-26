@@ -6,6 +6,11 @@ if exists("g:loaded_asciidoctor_autoload")
 endif
 let g:loaded_asciidoctor_autoload = 1
 
+" if exists("g:asciidoctor_browser_executable")
+    " finish
+" else
+  " let g:asciidoctor_browser_executable = g:asciidoctor_opener
+" endif
 
 "" Trim string
 " Unfortunately built-in trim is not widely available yet
@@ -271,6 +276,20 @@ func! asciidoctor#open_file(filename)
         else
             exe g:asciidoctor_opener . ' ' . shellescape(a:filename)
         endif
+    else
+        echom a:filename . " doesn't exist!"
+    endif
+endfunc
+
+" OpenInBrowser by Dandi Wong
+func! asciidoctor#open_in_browser(filename)
+    if filereadable(a:filename)
+       if exists("$WSLENV")
+            exe g:asciidoctor_browser_executable . ' '
+                        \ . shellescape(s:wsl_to_windows_path(a:filename))
+       else
+            exe g:asciidoctor_browser_executable . ' ' . shellescape(a:filename)
+       endif
     else
         echom a:filename . " doesn't exist!"
     endif

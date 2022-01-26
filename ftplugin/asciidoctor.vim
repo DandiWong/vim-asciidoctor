@@ -19,6 +19,7 @@ let s:undo_cmds = "| delcommand Asciidoctor2PDF"
       \. "| delcommand AsciidoctorOpenHTML"
       \. "| delcommand AsciidoctorOpenDOCX"
       \. "| delcommand AsciidoctorOpenMARKDOWN"
+      \. "| delcommand AsciidoctorOpenInBrowser"
       \. "| delcommand AsciidoctorPasteImage"
 let s:undo_maps = "| execute 'nunmap <buffer> ]]'"
       \. "| execute 'nunmap <buffer> [['"
@@ -98,8 +99,8 @@ command! -buffer AsciidoctorOpenPDF  call asciidoctor#open_file(s:get_fname(".pd
 command! -buffer AsciidoctorOpenHTML call asciidoctor#open_file(s:get_fname(".html"))
 command! -buffer AsciidoctorOpenDOCX call asciidoctor#open_file(s:get_fname(".docx"))
 command! -buffer AsciidoctorOpenMARKDOWN call asciidoctor#open_file(s:get_fname(".md"))
-
-command! -buffer AsciidoctorPasteImage :call asciidoctor#pasteImage()
+command! -buffer AsciidoctorOpenInBrowser call asciidoctor#open_in_browser(s:get_fname())
+command! -buffer AsciidoctorPasteImage call asciidoctor#pasteImage()
 
 
 

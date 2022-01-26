@@ -41,6 +41,7 @@
 ** [x] 新增文件头预设，快速支持 CJK/TOC/作者/文档日期/版本描述/代码高亮风格/图片与表格标题等一堆。
 ** [x] 新增产品经理/项目经理使用的 prd_templates 和 pmd_templates。
 * 内置作者自行配置的 assets
+** [x] asciidoctor-pdf 样式和字体配置直接内置，不用花一年折腾了。
 ** [x] 生成 pdf 文件时 :doctype: book 有惊喜，快速出书不是梦。
 ** [x] 生成 docx 文件时使用了作者调整过的样式（但还不够完善）。
 ** [x] 生成 html 文件时使用了作者调整过的样式。
@@ -331,4 +332,4 @@ s| C1R3 e| C3R3
 <<<
 == LICENSE
 
-include::LICENSE[leveloffset=+1]
+include::LICENSE[]

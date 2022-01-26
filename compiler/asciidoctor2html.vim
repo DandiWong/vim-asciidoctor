@@ -24,7 +24,7 @@ endif
 " let s:css_path = '-a stylesdir='.shellescape(fnamemodify(g:asciidoctor_css_path, ":p:h"))
 
 " use my configure
-let s:asciidoctor_css_path = get(g:, 'asciidoctor_assets_dir', '') . '/css/'
+let s:asciidoctor_css_path = get(g:, 'asciidoctor_assets_dir', '') . '/css'
 let s:css_path = '-a stylesdir='.shellescape(fnamemodify(s:asciidoctor_css_path, ":p:h"))
 
 if get(g:, 'asciidoctor_css', '') == ''

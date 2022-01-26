@@ -28,7 +28,7 @@ let s:asciidoctor_pandoc_executable = get(g:, 'asciidoctor_pandoc_executable', '
 " endif
 
 " use my configure
-let s:asciidoctor_pandoc_data_dir = get(g:, 'asciidoctor_assets_dir', '') . '/reference/'
+let s:asciidoctor_pandoc_data_dir = get(g:, 'asciidoctor_assets_dir', '') . '/reference'
 let data_dir_param = " --data-dir=" . shellescape(fnamemodify(s:asciidoctor_pandoc_data_dir, ':p:h'))
 
 let s:asciidoctor_pandoc_reference_doc = get(g:, 'asciidoctor_pandoc_reference_doc', '')

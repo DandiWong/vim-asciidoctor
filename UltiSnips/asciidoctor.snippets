@@ -56,7 +56,7 @@ snippet header "Document Blockheader"
 :sourcedir: src
 :includedir: includes
 :imagesdir: images
-:title-logo-image: {imagesdir}/logo.png
+:title-logo-image: image:logo.png[]
 :toc: left
 :toc-title: 目录
 :toclevels: 3
@@ -75,6 +75,9 @@ snippet header "Document Blockheader"
 :revdate: `!v g:current_time`
 :revnumber: 0.1
 :revremark: Alpha
+//:title-page-background-image: image:cover.png[]
+//:page-background-image: image:bg.png[]
+//:page-foreground-image: image:watermark.svg[]
 = ${VISUAL}${3:`!v expand('%:r')`}
 
 $0
@@ -1014,7 +1017,7 @@ snippet prd_FullTemplate_CN "full PRD Template Chinese Version" b
 :sourcedir: src
 :includedir: includes
 :imagesdir: images
-:title-logo-image: {imagesdir}/logo.png
+:title-logo-image: image:logo.png[]
 :toc: left
 :toc-title: 目录
 :toclevels: 3
@@ -1033,6 +1036,9 @@ snippet prd_FullTemplate_CN "full PRD Template Chinese Version" b
 :revdate: `!v strftime('%Y-%m-%d', localtime())`
 :revnumber: 0.1
 :revremark: Alpha
+//:title-page-background-image: image:cover.png[]
+//:page-background-image: image:bg.png[]
+//:page-foreground-image: image:watermark.svg[]
 = ${3:`!v expand('%:r')`}需求文档
 
 == 版本记录
@@ -1212,7 +1218,7 @@ snippet prd_FullTemplate_EN "full PRD Template English Version" b
 :sourcedir: src
 :includedir: includes
 :imagesdir: images
-:title-logo-image: {imagesdir}/logo.png
+:title-logo-image: image:logo.png[]
 :toc: left
 :toc-title: Table of Content
 :toclevels: 3
@@ -1231,6 +1237,9 @@ snippet prd_FullTemplate_EN "full PRD Template English Version" b
 :revdate: `!v strftime('%Y-%m-%d', localtime())`
 :revnumber: 0.1
 :revremark: Alpha
+//:title-page-background-image: image:cover.png[]
+//:page-background-image: image:bg.png[]
+//:page-foreground-image: image:watermark.svg[]
 = ${3:`!v expand('%:r')`} Requirements Document
 
 == Revision History
@@ -1409,7 +1418,7 @@ snippet pmd_FullTemplate "full PMD Template" b
 :sourcedir: src
 :includedir: includes
 :imagesdir: images
-:title-logo-image: {imagesdir}/logo.png
+:title-logo-image: image:logo.png[]
 :toc: left
 :toc-title: 目录
 :toclevels: 3
@@ -1428,6 +1437,9 @@ snippet pmd_FullTemplate "full PMD Template" b
 :revdate: `!v strftime('%Y-%m-%d', localtime())`
 :revnumber: 0.1
 :revremark: Alpha
+//:title-page-background-image: image:cover.png[]
+//:page-background-image: image:bg.png[]
+//:page-foreground-image: image:watermark.svg[]
 = ${3:`!v expand('%:r')`}项目管理文档
 
 == 版本记录/Revision History

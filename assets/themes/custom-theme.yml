@@ -1,10 +1,18 @@
 font:
   catalog:
     CN:
-      normal: CN-Song-Regular.ttf
+      # normal: CN-Song-Regular.ttf
+      # italic: CN-Kaiti.ttf
+      # bold: CN-Heiti.ttf
+      # bold_italic: CN-Song-Bold.ttf
+      # normal: SourceHanSerifCN-Regular.ttf
+      # italic: CN-Kaiti.ttf
+      # bold: SourceHanSansCN-Bold.ttf
+      # bold_italic: SourceHanSerifCN-Bold.ttf
+      normal: msyh.ttf
       italic: CN-Kaiti.ttf
-      bold: CN-Heiti.ttf
-      bold_italic: CN-Song-Bold.ttf
+      bold: msyhbd.ttf
+      bold_italic: msyhbd.ttf
     Sans-Serif:
       normal: Roboto-Regular.ttf
       italic: Roboto-Italic.ttf
@@ -41,7 +49,7 @@ page:
   layout: portrait
   initial_zoom: FitH
   # margin: [0.5in, 0.67in, 0.67in, 0.67in]
-  margin: [0.6in, 0.67in, 0.67in, 0.67in]
+  margin: [0.5in, 0.67in, 0.67in, 0.55in]
   # margin_inner and margin_outer keys are used for recto/verso print margins when media=prepress
   margin_inner: 0.75in
   margin_outer: 0.59in
@@ -57,20 +65,8 @@ base:
   #font_color: [0, 0, 0, 92%]
   # font_family: Noto Sans CJK SC
   font_family: CN
-  # choose one of these font_size/line_height_length combinations
-  font_size: 14
-  # line_height_length: 16.8
-  # line_height_length: 20
-  #font_size: 11.25
-  #line_height_length: 18
-  #font_size: 11.2
-  line_height_length: 16
-  # font_size: 10.5
-  # line_height_length: 15
-  # correct line height for Noto Serif metrics
-  # line_height_length: 12
-  #font_size: 11.25
-  #line_height_length: 18
+  font_size: 12
+  line_height_length: 15
   line_height: $base_line_height_length / $base_font_size
   font_size_large: round($base_font_size * 1.25)
   font_size_small: round($base_font_size * 0.85)
@@ -103,6 +99,7 @@ link:
   font_color: #428BCA
 # literal is currently used for inline monospaced in prose and table cells
 literal:
+  # font_size: $base_font_size_small
   font_color: #B12146
   font_family: Sans-Serif
 button:
@@ -127,12 +124,12 @@ heading:
   font_family: CN
   font_color: $base_font_color
   font_style: bold
-  # h1_font_size: 22
-  # h2_font_size: 19
-  # h3_font_size: 16
-  # h4_font_size: 15
-  # h5_font_size: 14
-  # h6_font_size: 13
+  h1_font_size: 20
+  h2_font_size: 18
+  h3_font_size: 16
+  h4_font_size: 14
+  h5_font_size: 12
+  h6_font_size: 12
   # h1 is used for part titles (book doctype) or the doctitle (article doctype)
   # h1_font_size: floor($base_font_size * 2.6)
   # h2 is used for chapter titles (book doctype only)
@@ -141,21 +138,17 @@ heading:
   # h4_font_size: $base_font_size_large
   # h5_font_size: $base_font_size
   # h6_font_size: $base_font_size_small
-  line_height: 1.2
-  # correct line height for Noto Serif metrics (comes with built-in line height)
-  # line_height: 1
-  # margin_top: $vertical_rhythm * 0.4
-  # margin_bottom: $vertical_rhythm * 0.9
-  margin_top: $vertical_rhythm * 0.4
-  margin_bottom: $vertical_rhythm * 0.5
+  line_height: 1.3
+  margin_top: $vertical_rhythm * 0.7
+  margin_bottom: $vertical_rhythm * 0.3
   min_height_after: $base_line_height_length * 1.5
 title_page:
   align: right
   logo:
-    top: 10%
+    top: 15%
   title:
-    top: 55%
-    font_size: $heading_h1_font_size * 1.5
+    top: 60%
+    font_size: $heading_h1_font_size * 1.8
     font_color: $role_title_font_color
     font_style: bold
     line_height: 1.2 # 0.9
@@ -163,7 +156,7 @@ title_page:
     font_size: $heading_h3_font_size
     font_color: $role_subtitle_font_color
     font_style: bold_italic
-    line_height: 1
+    line_height: 1.2
   authors:
     margin_top: $base_font_size * 1.25
     font_size: $base_font_size_large
@@ -245,13 +238,10 @@ code:
   # font_family: $literal_font_family
   # font_size: ceil($base_font_size)
   font_size: $base_font_size_small
-  # font_size: $base_font_size * 0.5
   padding: $code_font_size
-  # line_height: 1
   line_height: 1.25
   # line_gap is an experimental property to control how a background color is applied to an inline block element
   line_gap: 1
-  # line_gap: 3.8
   background_color: #F5F5F5
   border_color: #CCCCCC
   border_radius: $base_border_radius
@@ -278,7 +268,8 @@ prose:
   margin_top: $block_margin_bottom * 0.05
   margin_bottom: $block_margin_bottom * 0.25
   # margin_bottom: $base_line_height * 3
-  text_indent: $horizontal_rhythm
+  # text_indent: $horizontal_rhythm
+  # text_indent_inner: $horizontal_rhythm
 sidebar:
   background_color: #EEEEEE
   border_color: #E1E1E1
@@ -308,6 +299,7 @@ outline_list:
   # NOTE outline_list_item_spacing applies to list items that do not have complex content
   item_spacing: $vertical_rhythm / 8
 table:
+  font_size: $base_font_size_small
   background_color: $page_background_color
   border_color: #DDDDDD
   border_width: $base_border_width
@@ -323,11 +315,11 @@ table:
     background_color: #F0F0F0
 toc:
   indent: $horizontal_rhythm
-  line_height: 1.3
+  line_height: 1.5
   dot_leader:
     content: ". "
     font_color: #A9A9A9
-    #levels: 2 3
+    # levels: 2 3
 footnotes:
   font_size: round($base_font_size * 0.75)
   item_spacing: $outline_list_item_spacing / 2
@@ -335,7 +327,7 @@ header:
   border_color: #DDDDDD
   border_width: 0.25
   height: $base_line_height_length * 2
-  line_height: 1
+  # line_height: 1
   padding: [$base_line_height_length / 2, 1, 0, 1]
   vertical_align: bottom
   font_size: $base_font_size_small

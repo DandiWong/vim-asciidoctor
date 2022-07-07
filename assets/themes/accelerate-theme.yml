@@ -1,5 +1,6 @@
 font:
   catalog:
+<<<<<<< HEAD
     CN:
       normal: CN-Song-Regular.ttf
       italic: CN-Kaiti.ttf
@@ -9,6 +10,18 @@ font:
       # italic: CN-Kaiti.ttf
       # bold: SourceHanSansCN-Bold.ttf
       # bold_italic: SourceHanSerifCN-Bold.ttf
+=======
+    # CN:
+    # normal: CN-Song-Regular.ttf
+    # italic: CN-Kaiti.ttf
+    # bold: CN-Heiti.ttf
+    # bold_italic: CN-Song-Bold.ttf
+    CN:
+      normal: SourceHanSerifCN-Regular.ttf
+      italic: CN-Kaiti.ttf
+      bold: SourceHanSansCN-Bold.ttf
+      bold_italic: SourceHanSerifCN-Bold.ttf
+>>>>>>> 0bf728a1257fe6814820ed42bca67ed2f5629c9c
     Sans-Serif:
       normal: Roboto-Regular.ttf
       italic: Roboto-Italic.ttf
@@ -68,7 +81,11 @@ base:
   #font_size: 11.25
   #line_height_length: 18
   #font_size: 11.2
+<<<<<<< HEAD
   line_height_length: 13
+=======
+  line_height_length: 15
+>>>>>>> 0bf728a1257fe6814820ed42bca67ed2f5629c9c
   # font_size: 10.5
   # line_height_length: 15
   # correct line height for Noto Serif metrics

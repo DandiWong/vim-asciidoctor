@@ -56,7 +56,7 @@ snippet header "Document Blockheader"
 :sourcedir: src
 :includedir: includes
 :imagesdir: images
-:title-logo-image: {imagesdir}/logo.png
+:title-logo-image: image:logo.png[]
 :toc: left
 :toc-title: 目录
 :toclevels: 3
@@ -75,6 +75,9 @@ snippet header "Document Blockheader"
 :revdate: `!v g:current_time`
 :revnumber: 0.1
 :revremark: Alpha
+//:title-page-background-image: image:cover.png[]
+//:page-background-image: image:bg.png[]
+//:page-foreground-image: image:watermark.svg[]
 = ${VISUAL}${3:`!v expand('%:r')`}
 
 $0
@@ -515,7 +518,9 @@ endsnippet
 
 # Block image:
 snippet imageb "Block Image" !b
-image::$1[${2:${VISUAL}}]$0
+[#${1:id},title="${1:title}"]
+image::${1:filename}.png
+$0
 endsnippet
 
 # Video:
@@ -1014,7 +1019,7 @@ snippet prd_FullTemplate_CN "full PRD Template Chinese Version" b
 :sourcedir: src
 :includedir: includes
 :imagesdir: images
-:title-logo-image: {imagesdir}/logo.png
+:title-logo-image: image:logo.png[]
 :toc: left
 :toc-title: 目录
 :toclevels: 3
@@ -1033,6 +1038,9 @@ snippet prd_FullTemplate_CN "full PRD Template Chinese Version" b
 :revdate: `!v strftime('%Y-%m-%d', localtime())`
 :revnumber: 0.1
 :revremark: Alpha
+//:title-page-background-image: image:cover.png[]
+//:page-background-image: image:bg.png[]
+//:page-foreground-image: image:watermark.svg[]
 = ${3:`!v expand('%:r')`}需求文档
 
 == 版本记录
@@ -1212,7 +1220,7 @@ snippet prd_FullTemplate_EN "full PRD Template English Version" b
 :sourcedir: src
 :includedir: includes
 :imagesdir: images
-:title-logo-image: {imagesdir}/logo.png
+:title-logo-image: image:logo.png[]
 :toc: left
 :toc-title: Table of Content
 :toclevels: 3
@@ -1231,6 +1239,9 @@ snippet prd_FullTemplate_EN "full PRD Template English Version" b
 :revdate: `!v strftime('%Y-%m-%d', localtime())`
 :revnumber: 0.1
 :revremark: Alpha
+//:title-page-background-image: image:cover.png[]
+//:page-background-image: image:bg.png[]
+//:page-foreground-image: image:watermark.svg[]
 = ${3:`!v expand('%:r')`} Requirements Document
 
 == Revision History
@@ -1311,7 +1322,7 @@ hide empty description
 
 ${28:state "unavailable" as s0}
 ${29:state "available" as s1} {
-  ${30:state "lottery period" as s1.1}
+${30:state "lottery period" as s1.1}
 }
 ${31:state "show band period" as s1.2}
 
@@ -1409,7 +1420,7 @@ snippet pmd_FullTemplate "full PMD Template" b
 :sourcedir: src
 :includedir: includes
 :imagesdir: images
-:title-logo-image: {imagesdir}/logo.png
+:title-logo-image: image:logo.png[]
 :toc: left
 :toc-title: 目录
 :toclevels: 3
@@ -1428,6 +1439,9 @@ snippet pmd_FullTemplate "full PMD Template" b
 :revdate: `!v strftime('%Y-%m-%d', localtime())`
 :revnumber: 0.1
 :revremark: Alpha
+//:title-page-background-image: image:cover.png[]
+//:page-background-image: image:bg.png[]
+//:page-foreground-image: image:watermark.svg[]
 = ${3:`!v expand('%:r')`}项目管理文档
 
 == 版本记录/Revision History
@@ -1608,28 +1622,24 @@ endsnippet
 
 snippet prd_NewPage,new,page,np "Add new page for PRD" b
 === ${1:P1:注册登录}
-[#${3:id},title="${3:title}"]
-image::$2[]
+[#${1:id},title="${1:title}"]
+image::$2.png[]
 
 ==== 页面信息
-.结构/View
-[frame=all,grid=all,width=100%,role=center,cols="2,3,3,5",options=header]
+.${1:启动页}页面信息
+[frame=all,grid=all,width=100%,role=center,cols="2,2,4,3,4",options=header]
 |===
-^.^| 版块/Block ^.^| 控件/Component ^.^| 元素/Element ^.^| 属性/Attribute 
-^| ${4:B1} | ${5:NavigationBar} ^| \`${6:\$\{title_p1\}}\` ^| \`${7:页面标题}\`
-$8
-|===
-
-==== 元素交互
-.交互/Interactivity
-[frame=all,grid=all,width=100%,role=center,cols="3,3,5a",options=header]
-|===
-^.^| 控件/Component ^.^| 行为/Action ^.^| 反馈/Feedback
-^| \`${9:\$\{btn_p1_submit\}}\` ^| ${10:click} | ${11:提交成功或失败}
-$12
+^.^| 元素 ^.^| 预设内容 ^.^| 接收内容 ^.^| 交互 ^.^| 反馈
+^| $3 | $4 | $5
 |===
 
-==== 策略规则
+==== 存档内容
+.${1:启动页}存档内容
+[frame=all,grid=all,width=100%,role=center,cols="2,2,4,3,4",options=header]
+|===
+^.^| 字段名称 ^.^| 数据类型 ^.^| 是否必需 ^.^| 校验规则
+^| $6 | $7 | $8 | $9
+|===
 $0
 endsnippet
 
@@ -1640,7 +1650,6 @@ snippet prd_ResourceList,resource "Resource List" b
 |===
 ^.^| 编号/ID ^.^| 资源描述/Description ^.^| 支持功能/Function ^.^| 交付节点/Timing ^.^| 负责人/Responsible Person 
 ^| $1 | $2 | $3 ^| $4 ^| $5
-$6
 |===
 $0
 endsnippet
@@ -1652,7 +1661,6 @@ snippet prd_RiskManagement,risk "Risk Management List" b
 |===
 ^.^| 编号/ID ^.^| 风险描述/Description ^.^| 影响程度/Effect ^.^| 后备方案/Backup ^.^| 跟进情况/Status ^.^| 责任人/Responsible Person 
 ^| ${1:S1-R1} | ${2:标题有可能无法自定义} ^| ${3:低} | ${4:用系统标题} ^| ${5:跟进中} ^| ${6:Dandi} 
-$7
 |===
 $0
 endsnippet
@@ -1663,7 +1671,20 @@ snippet prd_ChangeManagement,change "Change List" b
 |===
 ^.^| 编号/ID ^.^| 类型/Type ^.^| 事项/Description ^.^| 接受状态/Status
 ^| ${2:C1} ^| ${3:新增} | ${4:增加xx功能} ^| ${5:下一迭代}
-$6
 |===
 $0
+endsnippet
+
+snippet PRD_Form,form,prd "需求文档表单模块" b
+.$1表单
+[frame=all,grid=all,width=100%,role=center,cols="2,3,3,5,2,3,5,3",options=header]
+|===
+^.^| 序号 ^.^| 题目 ^.^| 题目类型 ^.^| 预设内容 ^.^| 默认值 ^.^| 是否必做 ^.^| 校验规则 ^.^| 校验逻辑 ^.^| 存档内容
+| 1 | $2 | $3 | $4 | $5 | $6 | $7 | $8 | $9
+|===
+$0
+endsnippet
+
+snippet / "填入 ^| / " b
+^| / $0
 endsnippet

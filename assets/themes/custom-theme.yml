@@ -1,12 +1,6 @@
 font:
   catalog:
-    # CN:
-    # normal: CN-Song-Regular.ttf
-    # italic: CN-Kaiti.ttf
-    # bold: CN-Heiti.ttf
-    # bold_italic: CN-Song-Bold.ttf
     CN:
-<<<<<<< HEAD
       # normal: CN-Song-Regular.ttf
       # italic: CN-Kaiti.ttf
       # bold: CN-Heiti.ttf
@@ -19,12 +13,10 @@ font:
       italic: CN-Kaiti.ttf
       bold: msyhbd.ttf
       bold_italic: msyhbd.ttf
-=======
-      normal: SourceHanSerifCN-Regular.ttf
-      italic: CN-Kaiti.ttf
-      bold: SourceHanSansCN-Bold.ttf
-      bold_italic: SourceHanSerifCN-Bold.ttf
->>>>>>> 0bf728a1257fe6814820ed42bca67ed2f5629c9c
+      # normal: SourceHanSerifCN-Regular.ttf
+      # italic: CN-Kaiti.ttf
+      # bold: SourceHanSansCN-Bold.ttf
+      # bold_italic: SourceHanSerifCN-Bold.ttf
     Sans-Serif:
       normal: Roboto-Regular.ttf
       italic: Roboto-Italic.ttf

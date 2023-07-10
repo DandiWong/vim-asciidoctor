@@ -513,13 +513,13 @@ endsnippet
 
 # inline image:
 snippet imagei "Inline Image" i
-image:${1:target}[${2:alt="$3"}]
+image:${1:filename}.png[${2:alt="$3"}]$0
 endsnippet
 
 # Block image:
 snippet imageb "Block Image" !b
 [#${1:id},title="${1:title}"]
-image::${1:filename}.png
+image::${1:filename}.png[${2:alt="$1"}]
 $0
 endsnippet
 
@@ -999,8 +999,41 @@ asass;
 ....
 endsnippet
 
-snippet <&,icon "PlantUML openiconic" i
-<&${1}>$0
+snippet mmd_Flowchart "Mermaid Flowchart Diagram" b
+.${1:流程图}
+[mermaid]
+....
+flowchart TB
+    c1-->a2
+    subgraph one
+    a1-->a2
+    end
+    subgraph two
+    b1-->b2
+    end
+    subgraph three
+    c1-->c2
+    end
+    one --> two
+    three --> two
+    two --> c2
+....
+endsnippet
+
+snippet mmd_UserJourney "Mermaid UserJourney Diagram" b
+.${1:用户旅程}
+[mermaid]
+....
+journey
+    title My working day
+    section Go to work
+      Make tea: 5: Me
+      Go upstairs: 3: Me
+      Do work: 1: Me, Cat
+    section Go home
+      Go downstairs: 5: Me
+      Sit down: 5: Me
+....
 endsnippet
 
 # -------------------------------------------------------------------------
@@ -1031,7 +1064,7 @@ snippet prd_FullTemplate_CN "full PRD Template Chinese Version" b
 :appendix-caption: 附录
 :!chapter-signifier: 章节
 :pdf-theme: custom
-:doctype: ${1:article}
+:doctype: ${1:book}
 :author: `!v g:username`
 :email: `!v g:email`
 :organization: ${2:`!v g:organization`}
@@ -1041,7 +1074,7 @@ snippet prd_FullTemplate_CN "full PRD Template Chinese Version" b
 //:title-page-background-image: image:cover.png[]
 //:page-background-image: image:bg.png[]
 //:page-foreground-image: image:watermark.svg[]
-= ${3:`!v expand('%:r')`}需求文档
+= ${3:`!v expand('%:r')`}需求分析设计与规格说明书
 
 == 版本记录
 [frame=all,grid=all,width=100%,role=center,cols="2,2,4,2",options=header]
@@ -1069,30 +1102,16 @@ snippet prd_FullTemplate_CN "full PRD Template Chinese Version" b
 UML:: 统一建模语言（UML），目前版本为 2.5，本文档中的用例图、活动图、状态图、类图等，均以 UML 进行描述，符合国标 \`GB/T 28174-2011\`。
 等宽字体:: 文档中对具体文案、参数的描述所用的字体，如 \`\$\{user_id\}\`、\`登录失败，请稍后再试\`。
 
-== ${12:S1:账号系统}
+== ${12:业务分析与需求建模}
 
-=== 业务模型
+=== 组织架构与关系人
 
-==== 用例图
-.系统用例
-[plantuml]
-....
-actor "${13:产品经理}" as a1
-actor "${14:技术经理}" as a2
-package "${15:需求评审}" as p1 {
-  usecase "${16:画原型}" as uc1
-}
-usecase "${17:写文档}" as uc2
+=== 业务流程
 
-${18:a1 -right-> uc1
-a1 -right-> uc2
-uc2 -down-> uc1 : include
-uc1 -right-> a2
-uc2 -right-> a2}
-....
+=== 需求建模
 
-==== 时序图
-.消息时序
+==== 业务序列
+.业务序列
 [plantuml]
 ....
 autonumber
@@ -1113,8 +1132,26 @@ b1 -x c1 : ""failure""
 c1 ->> e1: ""warning""}
 ....
 
-==== 状态图
-.活动状态
+==== 分系统用例
+.分系统用例
+[plantuml]
+....
+actor "${13:产品经理}" as a1
+actor "${14:技术经理}" as a2
+package "${15:需求评审}" as p1 {
+  usecase "${16:画原型}" as uc1
+}
+usecase "${17:写文档}" as uc2
+
+${18:a1 -right-> uc1
+a1 -right-> uc2
+uc2 -down-> uc1 : include
+uc1 -right-> a2
+uc2 -right-> a2}
+....
+
+==== 业务活动与状态
+.业务状态
 [plantuml]
 ....
 hide empty description

@@ -69,10 +69,6 @@ base:
   #font_color: [0, 0, 0, 92%]
   # font_family: Noto Sans CJK SC
   font_family: CN
-<<<<<<< HEAD
-  font_size: 12
-  line_height_length: 15
-=======
   # choose one of these font_size/line_height_length combinations
   font_size: 14
   # line_height_length: 16.8
@@ -87,7 +83,6 @@ base:
   # line_height_length: 12
   #font_size: 11.25
   #line_height_length: 18
->>>>>>> 0bf728a1257fe6814820ed42bca67ed2f5629c9c
   line_height: $base_line_height_length / $base_font_size
   font_size_large: round($base_font_size * 1.25)
   font_size_small: round($base_font_size * 0.85)
@@ -145,21 +140,12 @@ heading:
   font_family: CN
   font_color: $base_font_color
   font_style: bold
-<<<<<<< HEAD
   h1_font_size: 20
   h2_font_size: 18
   h3_font_size: 16
   h4_font_size: 14
   h5_font_size: 12
   h6_font_size: 12
-=======
-  h1_font_size: 22
-  h2_font_size: 20
-  h3_font_size: 18
-  h4_font_size: 16
-  h5_font_size: 14
-  h6_font_size: 13
->>>>>>> 0bf728a1257fe6814820ed42bca67ed2f5629c9c
   # h1 is used for part titles (book doctype) or the doctitle (article doctype)
   # h1_font_size: floor($base_font_size * 2.6)
   # h2 is used for chapter titles (book doctype only)
@@ -329,7 +315,7 @@ outline_list:
   # NOTE outline_list_item_spacing applies to list items that do not have complex content
   item_spacing: $vertical_rhythm / 8
 table:
-  font_size: $base_font_size_small
+  font_size: $base_font_size_small * 0.85
   background_color: $page_background_color
   border_color: #DDDDDD
   border_width: $base_border_width
@@ -337,6 +323,7 @@ table:
   head:
     background_color: #DDDDDD
     font_family: CN
+    font_size: $base_font_size_small * 0.9
     font_style: bold
     border_bottom_width: $base_border_width * 2.5
   body:
